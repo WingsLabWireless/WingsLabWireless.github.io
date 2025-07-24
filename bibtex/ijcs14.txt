@@ -1,0 +1,10 @@
+@article{IJCS14,
+    author = "Zhangyu Guan and Dongfeng Yuan and Haixia Zhang and Lei Ding",
+    title = "{Cooperative bargaining solution for efficient and fair spectrum management in cognitive wireless networks}",
+    journal ="International Journal of Communication Systems",
+    volume = "27",
+    number = "11",
+    month = "Nov.",
+    year = "2014",
+    pages = "3441–3459"
+    }

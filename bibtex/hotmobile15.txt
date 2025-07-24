@@ -1,0 +1,14 @@
+@inproceedings{hotmobile15,
+
+Author = {J. Shi and Z. Guan and C. Qiao and T. Melodia and D. Koutsonikolas and G. Challen},
+
+Title = "{Crowdsourcing Access Network Spectrum Allocation Using Smartphones}",
+
+booktitle = {Poster in ACM International Workshop on Mobile Computing Systems and Applications (HotMobile)},
+
+address = "Santa Fe, New Mexico",
+Pages = {},
+
+month = "Feb.",
+
+Year = {2015}}

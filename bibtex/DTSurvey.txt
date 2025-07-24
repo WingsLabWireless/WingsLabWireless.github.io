@@ -1,0 +1,8 @@
+@article{DTSurvey,
+    author = "M. McManus and Y. Cui and J. Zhang and J. Hu and S. K. Moorthy and N. Mastronarde and E. S. Bentley and M. Medley and Z. Guan",
+    title = "{Digital Twin-Enabled Domain Adaptation for Zero-Touch UAV Networks: Survey and Challenges}",
+    journal ="Elsevier Journal of Computer Networks",
+    month = "November",
+    vol = '236',
+    year = "2023"
+    }

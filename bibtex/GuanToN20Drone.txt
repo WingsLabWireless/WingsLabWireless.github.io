@@ -1,0 +1,10 @@
+@article{GuanToN20Drone,
+    author = "Zhangyu Guan and Nan Cen and Tommaso Melodia and Scott Pudlewski",
+    title = "{Joint Power, Association and Flight Control for Massive-MIMO Self-Organizing Flying Drones}",
+    journal ="IEEE/ACM Transactions on Networking",
+    month = "August",
+    volume = "28",
+    number = "4", 
+    pages = "1491-1505",
+    year = "2020"
+    }

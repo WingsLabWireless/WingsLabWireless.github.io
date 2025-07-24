@@ -1,0 +1,8 @@
+@inproceedings{Guan11ICC,
+Author = {Z. Guan and L. Ding and T. Melodia and D. Yuan},
+Title = "{On the Effect of Cooperative Relaying on the Performance of Video Streaming Applications in Cognitive Radio Networks}",
+booktitle = {Proc. of IEEE Intl. Conf. on Communications (ICC)},
+address = "Kyoto, Japan",
+Pages = {},
+month = "June",
+Year = {2011}}

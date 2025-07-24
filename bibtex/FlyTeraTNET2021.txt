@@ -1,0 +1,10 @@
+@article{FlyTeraTNET2021,
+    author = "Sabarish Krishna Moorthy and Maxwell McManus and Zhangyu Guan",
+    title = "{ESN Reinforcement Learning for Spectrum and Flight Control in THz-Enabled Drone Networks}",
+    journal ="IEEE/ACM Transactions on Networking",
+    month = "April",
+    year = "2022",
+    volume = "30",
+    number = "2",
+    pages = "782-795"
+    }

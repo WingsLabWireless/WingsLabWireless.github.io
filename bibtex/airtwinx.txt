@@ -1,0 +1,8 @@
+@inproceedings{AirTwinX24,
+    author = "Annoy Dey and Maxwell McManus and Josh (Zhaoxi) Zhang and Guanying Sun and Nicholas Mastronarde and Elizabeth Serena Bentley and Zhangyu Guan",
+    title = "{AirTwinX: A High-Fidelity Digital Twin for Advanced Air Mobility with Ray Tracing}",
+    booktitle = "Proc. of IEEE Consumer Communications and Networking Conference (CCNC)",
+    address = "Las Vegas, NV",
+    month = "January",
+    year = "2025"
+    }

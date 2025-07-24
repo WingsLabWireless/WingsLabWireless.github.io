@@ -1,0 +1,7 @@
+@inproceedings{HotNets14,
+Author = {J. Shi and Z. Guan and C. Qiao and T. Melodia and D. Koutsonikolas and G. Challen},
+Title = "{Crowdsourcing Access Network Spectrum Allocation Using Smartphones}",
+booktitle = {Proc. of ACM Workshop on Hot Topics in Networks (HotNets)},
+address = "Los Angeles, California, USA",
+month = "October",
+Year = {2014}}

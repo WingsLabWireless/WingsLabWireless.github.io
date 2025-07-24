@@ -1,0 +1,8 @@
+@inproceedings{flytera,
+    author = "Sabarish Krishna Moorthy and Zhangyu Guan",
+    title = "{FlyTera: Echo State Learning for Joint Access and Flight Control in THz-enabled Drone Networks}",
+    booktitle = "Proc. of IEEE International Conference on Sensing, Communication and Networking (SECON)",
+    address = "Como, Italy",
+    month = "June",
+    year = "2020"
+    }

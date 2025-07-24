@@ -1,0 +1,8 @@
+@inproceedings{FlyBeam,
+    author = "S. K. Moorthy, Z. Guan, S. Pudlewski, E. S. Bentley",
+    title = "{FlyBeam: Echo State Learning for Joint Flight and Beamforming Control in Wireless UAV Networks}",
+    booktitle = "Proc. of IEEE International Conference on Communications (ICC)",
+    address = "Virtual/Montreal, Canada",
+    month = "June",
+    year = "2021"
+    }

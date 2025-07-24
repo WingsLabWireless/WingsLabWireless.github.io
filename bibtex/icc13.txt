@@ -1,0 +1,8 @@
+@inproceedings{Guan13ICC,
+    author = "Zhangyu Guan and Tommaso Melodia and Gesualdo Scutari",
+    title = "{Distributed Queuing Games in Interference-limited Wireless Networks}",
+    booktitle = "Proc. of IEEE International Conference on Communications (ICC)",
+    address = "Budapest, Hungary",
+    month = "June",
+    year = "2013"
+    }

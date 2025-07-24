@@ -1,0 +1,8 @@
+@inproceedings{Guan09ICC,
+Author = {Z. Guan and D. Yuan and H. Zhang},
+Title = "{Co-opetition Strategy for Collaborative Multiuser Multimedia Resource Allocation}",
+booktitle = {Proc. of IEEE Intl. Conf. on Communications (ICC)},
+address = "Dresden, Germany",
+Pages = {},
+month = "June",
+Year = {2009}}

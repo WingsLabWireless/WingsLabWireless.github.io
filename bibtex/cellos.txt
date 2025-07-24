@@ -1,0 +1,8 @@
+@article{bonati2020cellos,
+  author = {Bonati, Leonardo and D'Oro, Salvatore and Bertizzolo, Lorenzo and Demirors, Emrecan and Guan, Zhangyu and Basagni, Stefano and Melodia, Tommaso},
+  title = {{CellOS}: Zero-touch Softwarized Open Cellular Networks},
+  journal = {Computer Networks (COMNET)},
+  volume = {180},
+  month = {October},
+  year = {2020}
+}

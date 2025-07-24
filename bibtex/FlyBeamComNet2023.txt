@@ -1,0 +1,8 @@
+@article{FlyBeamComNet2023,
+    author = "S. K. Moorthy and N. Mastronarde and S. Pudlewski and E. S. Bentley and Z. Guan",
+    title = "{Swarm UAV Networking With Collaborative Beamforming and Automated ESN Learning in the Presence of Unknown Blockages}",
+    journal ="Computer Networks (Elsevier)",
+    volume = "231",
+    month = July,
+    year = "2023"
+    }

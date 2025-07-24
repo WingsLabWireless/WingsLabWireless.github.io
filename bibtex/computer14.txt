@@ -1,0 +1,10 @@
+@article{Guan14Computer,
+    author = "Z. Guan and T. Melodia",
+    title = "{Cloud-assisted Smart-camera Networks for Energy-efficient 3D Video Streaming}",
+    journal ="IEEE Computer",
+    volume = "47",
+    number = "5",
+    month = "May",
+    year = "2014",
+    pages = "60-66"
+    }

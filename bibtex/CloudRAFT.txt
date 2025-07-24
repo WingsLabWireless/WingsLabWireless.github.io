@@ -1,0 +1,8 @@
+@inproceedings{CloudRAFT,
+    author = "S. K. Moorthy and C. Lu and Z. Guan and N. Mastronarde and G. Sklivanitis and D. Pados and E. S. Bentley and M. Medley",
+    title = "{CloudRAFT: A Cloud-based Framework for Remote Experimentation for Mobile Networks}",
+    booktitle = "Proc. of IEEE International Workshop on Communication and Networking for Swarms Robotics (RoboCom)",
+    address = "Virtual Conference",
+    month = "January",
+    year = "2022"
+    }
