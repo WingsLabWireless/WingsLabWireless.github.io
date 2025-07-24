@@ -1,0 +1,8 @@
+@inproceedings{MedHocNet18,
+    author = "Z. Guan and Nan Cen and T. Melodia and Scott Pudlewski",
+    title = "{Self-Organizing Flying Drones with Massive MIMO Networking}",
+    booktitle = "Proc. of Mediterranean Ad Hoc Networking Workshop (Med-Hoc-Net)",
+    address = "Capri, Italy",
+    month = "June",
+    year = "2018"
+    }

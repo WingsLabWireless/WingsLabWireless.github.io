@@ -1,0 +1,8 @@
+@inproceedings{Zhang14INFOCOM,
+    author = "L. Zhang, Z. Guan, T. Melodia",
+    title = "{Cooperative Anti-jamming for Infrastructure-less Wireless Networks with Stochastic Relaying}",
+    booktitle = "Proc. of IEEE Conference on Computer Communications (INFOCOM)",
+    address = "Toronto, Canada",
+    month = "April",
+    year = "2014"
+    }

@@ -1,0 +1,8 @@
+@inproceedings{SwarmControlInfocom20,
+    author = "L. Bertizzolo, S. D'Oro, L. Ferranti, L. Bonati, E. Demirors, Z. Guan, T. Melodia, and S. Pudlewski",
+    title = "{SwarmControl: An Automated Distributed Control Framework for Self-Optimizing Drone Networks}",
+    booktitle = "Proc. of IEEE International Conference on Computer Communications (INFOCOM)",
+    address = "Toronto, Canada",
+    month = "July",
+    year = "2020"
+    }

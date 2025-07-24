@@ -1,0 +1,8 @@
+@inproceedings{INFOCOM19wksp,
+    author = "Z. Guan and Tejas Kulkarni",
+    title = "{On the Effects of Mobility Uncertainties on Wireless Communications Between Flying Drones in the mmWave/THz Bands}",
+    booktitle = "Proc. of IEEE INFOCOM Workshop on Wireless Communications and Networking in Extreme Environments (WCNEE)",
+    address = "Paris, France",
+    month = "April",
+    year = "2019"
+    }

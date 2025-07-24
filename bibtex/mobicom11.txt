@@ -1,0 +1,8 @@
+@inproceedings{Guan11MobiCom,
+Author = {Z. Guan and T. Melodia and D. Yuan and Dimitris A. Pados},
+Title = "{Distributed Spectrum Management and Relay Selection in Interference-Limited Cooperative Wireless Networks}",
+booktitle = {Proc. of ACM International Conference on Mobile Computing and Networking (MobiCom)},
+address = "Las Vegas, Nevada, USA",
+Pages = {},
+month = "September",
+Year = {2011}}

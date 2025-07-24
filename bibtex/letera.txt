@@ -1,0 +1,8 @@
+@inproceedings{letera,
+    author = "Sabarish Krishna Moorthy and Zhangyu Guan",
+    title = "{LeTera: Stochastic Beam Control Through ESN Learning in Terahertz-Band Wireless UAV Networks}",
+    booktitle = "Proc. of IEEE INFOCOM Workshop on Wireless Communications and Networking in Extreme Environments (WCNEE)",
+    address = "Toronto, Canada",
+    month = "July",
+    year = "2020"
+    }

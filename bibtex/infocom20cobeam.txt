@@ -1,0 +1,8 @@
+@inproceedings{CoBeamInfocom20,
+    author = "L. Bertizzolo, E. Demirors, Z. Guan, and T. Melodia",
+    title = "{CoBeam: Beamforming-based Spectrum Sharing With Zero Cross-Technology Signaling for 5G Wireless Networks}",
+    booktitle = "Proc. of IEEE International Conference on Computer Communications (INFOCOM)",
+    address = "Toronto, Canada",
+    month = "July",
+    year = "2020"
+    }

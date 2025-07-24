@@ -1,0 +1,8 @@
+@inproceedings{GuanINFOCOM18,
+    author = "Z. Guan and L. Bertizzolo and E. Demirors and T. Melodia",
+    title = "{Demo Abstract: WNOS: Software-defined Generation of Distributed Optimal Control Programs for Wireless Networks}",
+    booktitle = "Proc. of IEEE International Conference on Computer Communications (INFOCOM)",
+    address = "Honolulu, HI",
+    month = "April",
+    year = "2018"
+    }

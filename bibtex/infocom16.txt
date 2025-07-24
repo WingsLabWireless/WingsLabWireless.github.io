@@ -1,0 +1,8 @@
+@inproceedings{GuanINFOCOM16,
+    author = "Z. Guan and T. Melodia",
+    title = "{U-LTE: Spectrally-Efficient and Fair Coexistence Between LTE and Wi-Fi in Unlicensed Bands}",
+    booktitle = "Proc. of IEEE Conference on Computer Communications (INFOCOM)",
+    address = "San Francisco, CA, USA",
+    month = "April",
+    year = "2016"
+    }

@@ -1,0 +1,8 @@
+@inproceedings{LiBeamINFOCOM19,
+    author = "N. Cen and N. Dave and E. Demirors and Z. Guan and T. Melodia",
+    title = "{LiBeam: Throughput-Optimal Cooperative Beamforming for Indoor Visible Light Networks}",
+    booktitle = "Proc. of IEEE International Conference on Computer Communications (INFOCOM)",
+    address = "Paris, France",
+    month = "April",
+    year = "2019"
+    }

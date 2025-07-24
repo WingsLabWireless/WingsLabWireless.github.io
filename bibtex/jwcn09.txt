@@ -1,0 +1,10 @@
+@article{JWCN09,
+    author = "Zhangyu Guan and Dongfeng Yuan and Haixia Zhang",
+    title = "{Optimal and Fair Resource Allocation for Multiuser Wireless Multimedia Transmissions}",
+    journal ="EURASIP Journal on Wireless Communications and Networking",
+    volume = "",
+    number = "",
+    month = "",
+    year = "2009",
+    pages = "1-10"
+    }

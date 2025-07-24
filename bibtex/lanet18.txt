@@ -1,0 +1,10 @@
+@article{NancyADH18,
+title = "{LANET: Visible-Light Ad Hoc Networks}",
+journal = "Ad Hoc Networks ",
+volume = "84",
+number = "",
+pages = " 107-123 ",
+year = "2019",
+issn = "",
+author = "Nan Cen and Jithin Jagannath and Simone Moretti and Zhangyu Guan and Tommaso Melodia",
+}

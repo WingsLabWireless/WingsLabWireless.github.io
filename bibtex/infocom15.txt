@@ -1,0 +1,8 @@
+@inproceedings{Guan15INFOCOM,
+    author = "Z. Guan and G. E. Santagati and T. Melodia",
+    title = "{Ultrasonic Intra-body Networking: Interference Modeling, Stochastic Channel Access and Rate Control}",
+    booktitle = "Proc. of IEEE Conference on Computer Communications (INFOCOM)",
+    address = "Hong Kong S.A.R., PRC",
+    month = "April",
+    year = "2015"
+    }

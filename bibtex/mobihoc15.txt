@@ -1,0 +1,8 @@
+@inproceedings{NancyMobiHoc15,
+    author = "N. Cen and Z. Guan and T. Melodia",
+    title = "{Multi-view Wireless Video Streaming Based on Compressed Sensing: Architecture and Network Optimization}",
+    booktitle = "Proc. of ACM Intl. Symposium on Mobile Ad Hoc Networking and Computing (MobiHoc)",
+    address = "Hangzhou, China",
+    month = "June",
+    year = "2015"
+    }

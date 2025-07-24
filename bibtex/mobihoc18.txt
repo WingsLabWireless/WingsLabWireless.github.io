@@ -1,0 +1,8 @@
+@inproceedings{WNOSMobiHoc18,
+    author = "Z. Guan and L. Bertizzolo and E. Demirors and T. Melodia",
+    title = "{WNOS: An Optimization-based Wireless Network Operating System}",
+    booktitle = "Proc. of ACM International Symposium on Mobile Ad Hoc Networking and Computing (MobiHoc)",
+    address = "Los Angeles, USA",
+    month = "June",
+    year = "2018"
+    }
