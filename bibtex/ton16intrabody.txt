@@ -1,0 +1,10 @@
+@article{UltrasonicToNGuan16,
+    author = "Z. Guan and G. E. Santagati and T. Melodia",
+    title = "{Distributed Algorithms for Joint Channel Access and Rate Control in Ultrasonic Intra-body Networks}",
+    journal ="IEEE/ACM Transactions on Networking",
+    volume = "24",
+    number = "5",
+    month = "Oct.",
+    year = "2016",
+    pages = "3109-3122"
+    }

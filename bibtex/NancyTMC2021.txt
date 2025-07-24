@@ -1,0 +1,10 @@
+@article{NancyTMC2021,
+    author = "Nan Cen and Zhangyu Guan and Tommaso Melodia",
+    title = "{Compressed Sensing based Low-PowerMulti-view Video Coding and Transmission inWireless Multi-path Multi-hop Networks}",
+    journal ="IEEE Transactions on Mobile Computing",
+    volume = "21",
+    number = "9",
+    month = "Sept.",
+    year = "2022",
+    pages = "3122 - 3137"
+    }

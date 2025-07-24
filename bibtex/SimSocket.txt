@@ -1,0 +1,8 @@
+@inproceedings{SimSocket,
+    author = "S. K. Moorthy and A. Harindranath and M. McManus and Z. Guan and N. Mastronarde and E. S. Bentley and M. Medley",
+    title = "{A Middleware for Digital Twin-Enabled Flying Network Simulations Using UBSim and UB-ANC}",
+    booktitle = "Proc. of IEEE DCOSS Workshop on Wireless Communications and Networking in Extreme Environments (WCNEE)",
+    address = "LA, California",
+    month = "June",
+    year = "2022"
+    }

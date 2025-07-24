@@ -1,0 +1,8 @@
+@inproceedings{SPIE22,
+    author = "M. McManus and Z. Guan and N. Mastronarde and S. Zou",
+    title = "{On the Source-to-Target Gap of Robust Double Deep Q-Learning in Digital Twin-Enabled Wireless Networks}",
+    booktitle = "Proc. of SPIE Conference Big Data IV: Learning, Analytics, and Applications",
+    address = "Orlando, Florida",
+    month = "April",
+    year = "2022"
+    }

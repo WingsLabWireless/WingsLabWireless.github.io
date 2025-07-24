@@ -1,0 +1,7 @@
+@inproceedings{rfid23,
+Author = {I. Dhopeshwar and M. McManus and D. Harrison and B. Ralston and C. Janson and A. Rae and A. Levesque and Z. Guan},
+Title = "{Antenna Design and Measurements for Conductive Thermal Transfer Printing Based RFID Production}",
+booktitle = {Proc. of IEEE Personal, Indoor and Mobile Radio Communications Symposium (PIMRC)},
+address = "Toronto, Canada",
+month = "Sept.",
+Year = {2023}}

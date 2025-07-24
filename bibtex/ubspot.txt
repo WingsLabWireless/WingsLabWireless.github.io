@@ -1,0 +1,8 @@
+@inproceedings{ubspot,
+    author = "A. Anand and R. S. Suresh Kumar and F. Malandra and Z. Sun and Z. Guan",
+    title = "{UBSpot: A Universal Broadband Flying Hotspot Experimental Testbed Toward Programmable Aerial-Ground Wireless Networks}",
+    booktitle = "Proc. of IEEE Radio & Wireless Symposium (RWS): Internet of Things (IoT) and the mmWave Frontier",
+    address = "San Antonio, Texas, USA",
+    month = "January",
+    year = "2020"
+    }

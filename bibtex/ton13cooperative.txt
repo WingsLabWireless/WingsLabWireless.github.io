@@ -1,0 +1,10 @@
+@article{ToNGuan2013,
+    author = "Zhangyu Guan and Tommaso Melodia and Dongfeng Yuan",
+    title = "{Jointly Optimal Rate Control and Relay Selection for Cooperative Wireless Video Streaming}",
+    journal ="IEEE/ACM Transactions on Networking",
+    volume = "21",
+    number = "4",
+    month = "August",
+    year = "2013",
+    pages = "1173-1186"
+    }

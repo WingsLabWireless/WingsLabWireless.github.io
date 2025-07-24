@@ -1,0 +1,8 @@
+@inproceedings{RFSITL,
+    author = "N. Mastronarde and D. Russell and Z. Guan and G. Sklivanitis and E. S. Bentley and M. Medley",
+    title = "{RF-SITL: A Software-in-the-loop Channel Emulator for UAV Swarm Networks}",
+    booktitle = "Proc. of IEEE WoWMoM Workshop on Wireless Networking, Planning, and Computing for UAV Swarms (SwarmNet)",
+    address = "Belfast, United Kingdom",
+    month = "June",
+    year = "2022"
+    }

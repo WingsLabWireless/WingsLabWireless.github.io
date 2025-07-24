@@ -1,0 +1,10 @@
+@article{CenTMM17,
+    author = "Nan Cen and Zhangyu Guan and Tommaso Melodia",
+    title = "{Inter-view Motion Compensated Joint Decoding of Compressive-Sampled Multi-view Video Streaming}",
+    journal ="IEEE Transactions on Multimedia",
+    volume = "19",
+    number = "6",
+    month = "June",
+    year = "2016",
+    pages = "1117-1126"
+    }

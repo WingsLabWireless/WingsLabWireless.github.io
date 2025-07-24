@@ -1,0 +1,8 @@
+@inproceedings{Guan09ICC,
+Author = {Z. Guan and D. Yuan and H. Zhang},
+Title = "{Distributed Geometric-Programming-Based Power Control in Cellular Cognitive Radio Networks}",
+booktitle = {Proc. of IEEE Vehicular Technology Conference (VTC-Spring)},
+address = "Barcelona, Spain",
+Pages = {},
+month = "April",
+Year = {2009}}

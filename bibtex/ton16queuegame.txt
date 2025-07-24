@@ -1,0 +1,10 @@
+@article{Guan15TON,
+    author = "Z. Guan, T. Melodia, G. Scutari",
+    title = "{To Transmit or Not to Transmit? Distributed Queueing Games for Infrastructureless Wireless Networks}",
+    journal =" IEEE/ACM Transactions on Networking",
+    volume = "24",
+    number = "2",
+    month = "April",
+    year = "2016",
+    pages = "1153-1166"
+    }

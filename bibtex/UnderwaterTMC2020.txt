@@ -1,0 +1,10 @@
+@article{UnderwaterTMC2020,
+    author = "Z. Guan and H. Kulhandjian and T. Melodia",
+    title = "{Stochastic Channel Access in Underwater Networks With Statistical Interference Modeling}",
+    journal ="IEEE Transactions on Mobile Computing",
+    volume = "20",
+    number = "10",
+    month = "Oct.",
+    year = "2021",
+    pages = "3020-3033"
+    }

@@ -1,0 +1,10 @@
+@article{SwarmShareTNET,
+    author = "J. Hu and S. K. Moorthy and A. Harindranath and J. Zhang and Z. Zhao and N. Mastronarde and E. S. Bentley and S. Pudlewski and Z. Guan",
+    title = "{A Mobility-Resilient Spectrum Sharing Framework for Operating Wireless UAVs in the 6 GHz Band}",
+    journal ="IEEE/ACM Transactions on Networking",
+    volume = "31",
+    number = "6",
+    month = "December",
+    year = "2023",
+    pages = "3128-3142"
+    }

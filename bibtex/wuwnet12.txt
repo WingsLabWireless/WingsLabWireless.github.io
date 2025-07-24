@@ -1,0 +1,8 @@
+@inproceedings{Guan12WUWNet,
+Author = {Z. Guan and T. Melodia and D. Yuan},
+Title = "{Stochastic Channel Access for Underwater Acoustic Networks with Spatial and Temporal Interference Uncertainty}",
+booktitle = {Proc. of ACM Intl. Conf. on UnderWater Networks and Systems (WUWNet)},
+address = "Los Angeles, CA, USA",
+Pages = {},
+month = "November",
+Year = {2012}}

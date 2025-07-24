@@ -1,0 +1,8 @@
+@inproceedings{NancyPCS2013,
+    author = "Cen Nan and Zhangyu Guan and Tommaso Melodia",
+    title = "{Joint Decoding of Independently Encoded Compressive Multi-view Video Streams}",
+    booktitle = "Proc. of Picture Coding Symposium (PCS)",
+    address = "San Jose, CA",
+    month = "December",
+    year = "2013"
+    }

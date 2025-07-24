@@ -1,0 +1,11 @@
+@article{guan2017value,
+  title={The value of cooperation: Minimizing user costs in multi-broker mobile cloud computing networks},
+  author={Guan, Zhangyu and Melodia, Tommaso},
+  journal={IEEE Transactions on Cloud Computing},
+  publisher={IEEE}
+  volume = {5},
+  number = {4},
+  month = {October-December},
+  year={2017},
+  pages = {780-791}
+}

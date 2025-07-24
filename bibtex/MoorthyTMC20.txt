@@ -1,0 +1,10 @@
+@article{MoorthyTMC20,
+    author = "S. K. Moorthy and Z. Guan",
+    title = "{Beam Learning in MmWave/THz-band Drone Networks Under In-Flight Mobility Uncertainties}",
+    journal ="IEEE Transactions on Mobile Computing",
+    volume = "21",
+    number = "6",
+    month = "June",
+    year = "2022",
+    pages = "1945-1957"
+    }

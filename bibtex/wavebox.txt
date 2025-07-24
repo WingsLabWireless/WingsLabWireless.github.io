@@ -1,0 +1,8 @@
+@inproceedings{WaveBox24,
+    author = "Yuqing Cui and Maxwell McManus and Zhaoxi (Josh) Zhang and Hatef Nouri and George Sklivanitis and Dimitris Pados and Elizabeth Serena Bentley and Nicholas Mastronarde and Zhangyu Guan",
+    title = "{WaveBox: Software-Defined RF Generator with Seamless Waveform Switching and Open Integration}",
+    booktitle = "Proc. of IEEE Consumer Communications and Networking Conference (CCNC)",
+    address = "Las Vegas, NV",
+    month = "January",
+    year = "2025"
+    }

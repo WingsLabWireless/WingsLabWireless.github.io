@@ -1,0 +1,8 @@
+@inproceedings{mpsoc24,
+    author = "Sidharth Santhinivas and Prem Sagar Pattanshetty Vasanth Kumar and Maxwell McManus and Hatef Nouri and George Sklivanitis and Dimitris Pados and Elizabeth Serena Bentley and Nicholas Mastronarde and Zhangyu Guan",
+    title = "{Resilient Communications with Lightweight Signature Synchronization on MPSoC Radios}",
+    booktitle = "Proc. of IEEE Consumer Communications and Networking Conference (CCNC)",
+    address = "Las Vegas, NV",
+    month = "January",
+    year = "2025"
+    }

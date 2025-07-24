@@ -1,0 +1,8 @@
+@inproceedings{Guan11SECON,
+Author = {Z. Guan and T. Melodia and D. Yuan},
+Title = "{Optimizing Cooperative Video Streaming in Wireless Networks}",
+booktitle = {Proc. of IEEE Intl. Conf. on Sensor, Mesh and Ad Hoc Communications and Networks (SECON)},
+address = "Salt Like City, Utah, USA",
+Pages = {},
+month = "June",
+Year = {2011}}

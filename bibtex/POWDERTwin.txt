@@ -1,0 +1,8 @@
+@inproceedings{GLOBECOM24,
+    author = "Maxwell McManus and Yuqing Cui and Zhaoxi (Josh) Zhang and Elizabeth Serena Bentley and Michael Medley and Nicholas Mastronarde and Zhangyu Guan",
+    title = "{On the Effects of Modeling on the Sim-to-Real Transfer Gap in Twinning the POWDER Platform}",
+    booktitle = "Proc. of IEEE International Workshop on Testbeds as a Service for Future Networks: Challenges \& State of the Art, colocated with IEEE GLOBECOM 2024",
+    address = "Cape Town, South Africa",
+    month = "December",
+    year = "2024"
+}

@@ -1,0 +1,8 @@
+@article{NEXTCOMCOM,
+    author = "J. Hu and Z. Zhao and M. McManus and S. K. Moorthy and Y. Cui and N. Mastronarde and E. S. Bentley and M. Medley and Z. Guan",
+    title = "{NeXT: Architecture, Prototyping and Measurement of a Software-Defined Testing Framework for Integrated RF Network Simulation, Experimentation and Optimization}",
+    journal ="Elsevier Journal of Computer Communications",
+    month = "October",
+    vol = '210',
+    year = "2023"
+    }

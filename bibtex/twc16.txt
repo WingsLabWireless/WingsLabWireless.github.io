@@ -1,0 +1,9 @@
+@ARTICLE{LiyangTWC16, 
+author="Liyang Zhang and Zhangyu Guan and Tommaso Melodia", 
+journal="IEEE Transactions on Wireless Communications", 
+title="{United Against the Enemy: Anti-Jamming Based on Cross-Layer Cooperation in Wireless Networks}", 
+year="2016", 
+volume="15", 
+number="8", 
+pages="5733-5747", 
+month="Aug."}

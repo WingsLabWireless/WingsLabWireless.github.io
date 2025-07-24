@@ -1,0 +1,8 @@
+@inproceedings{wisarn21,
+    author = "M. McManus and Z. Guan and E. S. Bentley and S. Pudlewski",
+    title = "{Experimental Analysis of Cross-Layer Sensing for Protocol-Agnostic Packet Boundary Recognition}",
+    booktitle = "Proc. of IEEE INFOCOM Workshop on Wireless Sensor, Robot and UAV Networks (WiSARN)",
+    address = "Virtual Conference",
+    month = "May",
+    year = "2021"
+    }

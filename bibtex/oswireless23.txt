@@ -1,0 +1,8 @@
+@article{OSWireless23,
+    author = "S. K. Moorthy and N. Mastronarde and E. S. Bentley and M. Medley, and Z. Guan",
+    title = "{OSWireless: Hiding the Specification Complexity for Zero-Touch Software-Defined Wireless Networks}",
+    journal ="Computer Networks (Elsevier)",
+    volume = "237",
+    month = "December",
+    year = "2023"
+    }

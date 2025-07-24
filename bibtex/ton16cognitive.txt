@@ -1,0 +1,10 @@
+@article{ToNCognitive2016,
+    author = "Zhangyu Guan and Tommaso Melodia and Dongfeng Yuan and Dimitris A. Pados",
+    title = "{Distributed Resource Management for Cognitive Ad Hoc Networks with Cooperative Relays}",
+    journal ="IEEE/ACM Transactions on Networking",
+    volume = "24",
+    number = "3",
+    month = "June",
+    year = "2016",
+    pages = "1675-1689"
+    }

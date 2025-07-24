@@ -1,0 +1,8 @@
+@inproceedings{Guan08pimrc,
+Author = {Z. Guan and D. Yuan and H. Zhang},
+Title = "{Novel Coopetition Paradigm Based on Bargaining Theory for Collaborative Multimedia Resource Management}",
+booktitle = {Proc. of IEEE Personal, Indoor and Mobile Radio Communications Symposium (PIMRC)},
+address = "Cannes, France",
+Pages = {},
+month = "Sept.",
+Year = {2008}}
