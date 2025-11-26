@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>WINGS Lab Open UAV User Manual</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.5;
+      color: #222;
+    }
+
+    .layout {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    nav {
+      width: 260px;
+      background-color: #f3f4f6;
+      border-right: 1px solid #ddd;
+      padding: 1rem;
+      box-sizing: border-box;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    nav h1 {
+      font-size: 1.2rem;
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
+
+    nav .subtitle {
+      font-size: 0.85rem;
+      color: #555;
+      margin-bottom: 1rem;
+    }
+
+    nav .search-box {
+      margin-bottom: 1rem;
+    }
+
+    nav .search-box input {
+      width: 100%;
+      padding: 0.4rem 0.5rem;
+      font-size: 0.9rem;
+      box-sizing: border-box;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    nav ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+      font-size: 0.9rem;
+    }
+
+    nav li {
+      margin-bottom: 0.25rem;
+    }
+
+    nav li.section-title {
+      font-weight: bold;
+      margin-top: 0.6rem;
+      margin-bottom: 0.2rem;
+    }
+
+    nav a {
+      color: #1f4f8b;
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* Main content */
+    main {
+      flex: 1;
+      padding: 1.5rem 2rem;
+      box-sizing: border-box;
+      max-width: 900px;
+    }
+
+    main h1 {
+      font-size: 1.8rem;
+      margin-top: 0;
+    }
+
+    main h2 {
+      font-size: 1.3rem;
+      margin-top: 2rem;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 0.25rem;
+    }
+
+    main h3 {
+      font-size: 1.1rem;
+      margin-top: 1.2rem;
+    }
+
+    p {
+      margin-top: 0.4rem;
+      margin-bottom: 0.6rem;
+    }
+
+    ul {
+      margin-top: 0.4rem;
+      margin-bottom: 0.8rem;
+      padding-left: 1.4rem;
+    }
+
+    code {
+      background-color: #f5f5f5;
+      padding: 0.15rem 0.35rem;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+
+    .note {
+      background-color: #eef6ff;
+      border-left: 4px solid #1f4f8b;
+      padding: 0.6rem 0.8rem;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+    }
+
+    .small {
+      font-size: 0.85rem;
+      color: #555;
+    }
+
+    @media (max-width: 800px) {
+      .layout {
+        flex-direction: column;
+      }
+      nav {
+        width: 100%;
+        height: auto;
+        position: static;
+      }
+      main {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <nav>
+      <h1>WINGS Lab Open UAV</h1>
+      <div class="subtitle">User Manual (Draft)</div>
+
+      <div class="search-box">
+        <!-- Placeholder search box (no JS yet) -->
+        <input type="text" placeholder="Search this manual…" />
+      </div>
+
+      <ul>
+        <li class="section-title">1) WINGS Lab Overview</li>
+        <li><a href="#overview">1.1) Platform Vision</a></li>
+        <li><a href="#deployment-areas">1.2) Deployment Areas & Test Sites</a></li>
+        <li><a href="#entities">1.3) Main Entities & Interactions</a></li>
+
+        <li class="section-title">2) Hardware Design</li>
+        <li><a href="#hardware-design">2.1) UAV & Ground Assets</a></li>
+
+        <li class="section-title">3) Software Design</li>
+        <li><a href="#software-design">3.1) Experiment Software Stack</a></li>
+
+        <li class="section-title">4) Field Testing</li>
+        <li><a href="#field-testing">4.1) Datasets & Acknowledgment</a></li>
+
+        <li class="section-title">5) User Resources & Policies</li>
+        <li><a href="#resources">5.1) User Resources</a></li>
+        <li><a href="#policies">5.2) Acceptable Use & Safety</a></li>
+
+        <li class="section-title">6) Sample Experiments</li>
+        <li><a href="#samples">6.1) Example Experiment Types</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <header id="overview">
+        <h1>WINGS Lab Open UAV Overview</h1>
+        <p>
+          Welcome to the <strong>WINGS Lab Open UAV User Manual</strong>. This manual
+          provides a central reference for researchers, students, and collaborators
+          using the WINGS Lab’s open, software-defined UAV platforms.
+        </p>
+
+        <ul>
+          <li>Use the navigation menu on the left to jump directly to specific topics.</li>
+          <li>The sections are organized around infrastructure, design, testing, policies, and examples.</li>
+          <li>You can adapt this page as the front door to a richer multi-page manual if needed.</li>
+        </ul>
+
+        <div class="note">
+          <strong>Note:</strong> This is a template document. Replace the placeholder text with
+          site-specific information about the WINGS Lab facilities, equipment, and procedures.
+        </div>
+      </header>
+
+      <section id="deployment-areas">
+        <h2>1.1) Deployment Areas & Test Sites</h2>
+        <p>
+          The WINGS Lab Open UAV platform supports experiments across multiple
+          test sites (for example: outdoor flight ranges, rooftop nodes, and
+          indoor labs). Each deployment area may have its own access rules,
+          safety procedures, and supported frequencies.
+        </p>
+        <ul>
+          <li><strong>Primary flight range:</strong> Describe the main UAV test field, size, and typical operations.</li>
+          <li><strong>Rooftop / fixed nodes:</strong> Document locations, height, and available radios or sensors.</li>
+          <li><strong>Indoor facilities:</strong> Summarize motion capture, small-scale UAV test spaces, and lab access rules.</li>
+        </ul>
+      </section>
+
+      <section id="entities">
+        <h2>1.2) Main Entities & Interactions</h2>
+        <p>
+          The platform usually involves several key entities and how they interact:
+        </p>
+        <ul>
+          <li><strong>Experimenters:</strong> Users who design, schedule, and run experiments.</li>
+          <li><strong>Platform operators:</strong> Staff responsible for operations, safety checks, and system maintenance.</li>
+          <li><strong>UAV & ground assets:</strong> Aircraft, vehicles, radios, and sensors participating in experiments.</li>
+          <li><strong>Control & data backend:</strong> Portals, orchestration services, and data storage systems that support automation and logging.</li>
+        </ul>
+        <p>
+          In your final manual, consider adding a high-level architecture figure
+          showing how these entities communicate (e.g., UAV ↔ ground station ↔ cloud).
+        </p>
+      </section>
+
+      <!-- 2) Hardware Design -->
+      <section id="hardware-design">
+        <h2>2) Hardware Design</h2>
+        <h3>2.1) UAV & Ground Assets</h3>
+        <p>
+          Describe the UAV fleet and ground assets provided by the platform:
+        </p>
+        <ul>
+          <li>Types of airframes and their key specs (payload, endurance, max speed).</li>
+          <li>Integrated radios (e.g., SDRs, Wi-Fi/NR modems, telemetry links).</li>
+          <li>Ground stations, fixed nodes, and any mobile ground vehicles.</li>
+        </ul>
+      </section>
+
+      <!-- 3) Software Design -->
+      <section id="software-design">
+        <h2>3) Software Design</h2>
+        <h3>3.1) Experiment Software Stack</h3>
+        <p>
+          Summarize the main software components used for control and communications:
+        </p>
+        <ul>
+          <li>Flight control stack (e.g., PX4/ArduPilot, QGroundControl-based workflows).</li>
+          <li>Wireless stack (e.g., srsRAN, OAI, GNU Radio, custom SDR code).</li>
+          <li>Utilities for logging, monitoring, and data post-processing.</li>
+        </ul>
+      </section>
+
+      <!-- 4) Field Testing -->
+      <section id="field-testing">
+        <h2>4) Field Testing</h2>
+        <h3>4.1) Datasets & Acknowledgment</h3>
+        <p>
+          If the platform provides public datasets or structured field test campaigns,
+          document them here, including:
+        </p>
+        <ul>
+          <li>Descriptions of field test scenarios (e.g., RF captures, telemetry, images).</li>
+          <li>How to access and cite the datasets.</li>
+          <li>Any license or data use agreements.</li>
+        </ul>
+        <p class="small">
+          Example placeholder: “If you publish work using data collected on the
+          WINGS Lab Open UAV platform, please acknowledge the facility using the
+          following text: <code>TODO: add acknowledgment sentence and award numbers.</code>”
+        </p>
+      </section>
+
+      <!-- 5) User Resources & Policies -->
+      <section id="resources">
+        <h2>5) User Resources & Policies</h2>
+
+        <h3>5.1) User Resources</h3>
+        <p>
+          Here you can list resources that help users be productive on the platform:
+        </p>
+        <ul>
+          <li>Links to self-paced tutorials, code repositories, and example configs.</li>
+          <li>Portal URLs for scheduling experiments or reserving hardware.</li>
+          <li>Support channels (mailing lists, issue trackers, Slack/Teams, etc.).</li>
+        </ul>
+
+        <h3 id="policies">5.2) Acceptable Use & Safety Policies</h3>
+        <p>
+          Summarize the main rules for using the testbed, including both
+          cyber-security and physical safety aspects:
+        </p>
+        <ul>
+          <li>Research-only usage, compliance with UAV and spectrum regulations.</li>
+          <li>Restrictions on transmitting signals, logging data, and sharing results.</li>
+          <li>Pre-flight checklists and on-site safety briefing requirements.</li>
+        </ul>
+      </section>
+
+      <!-- 6) Sample Experiments -->
+      <section id="samples">
+        <h2>6) Sample Experiments</h2>
+        <p>
+          This section can list ready-made experiment templates. Each template
+          can have a short description, goals, and links to scripts or configs.
+        </p>
+        <ul>
+          <li><strong>SE1:</strong> Single-UAV downlink coverage experiment to ground UEs.</li>
+          <li><strong>SE2:</strong> Air-to-ground channel sounding using SDR payloads.</li>
+          <li><strong>SE3:</strong> Multi-UAV cooperative networking with relaying.</li>
+          <li><strong>SE4:</strong> Interference-aware UAV communication with adaptive waveforms.</li>
+        </ul>
+        <p>
+          You can expand each item into its own page later, mirroring the structure
+          of a full user manual.
+        </p>
+      </section>
+
+      <footer style="margin-top: 3rem; font-size: 0.8rem; color: #777;">
+        Last updated: <!-- TODO: add date -->
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
