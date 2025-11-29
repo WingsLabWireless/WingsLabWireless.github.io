@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Open USUAV Association</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    :root {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Helvetica, Arial, sans-serif;
+      color-scheme: light;
+    }
+
+    body {
+      margin: 0;
+      color: #1f2933;
+      background-color: #f9fafb;
+      line-height: 1.6;
+    }
+
+    .layout {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    nav {
+      width: 260px;
+      background-color: #f3f4f6;
+      border-right: 1px solid #d0d7de;
+      padding: 1.25rem 1rem;
+      box-sizing: border-box;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    nav h1 {
+      font-size: 1.25rem;
+      margin: 0 0 0.25rem;
+      color: #111827;
+    }
+
+    nav .subtitle {
+      font-size: 0.85rem;
+      color: #4b5563;
+      margin-bottom: 1rem;
+    }
+
+    nav .search-box {
+      margin-bottom: 1rem;
+    }
+
+    nav .search-box input {
+      width: 100%;
+      padding: 0.4rem 0.5rem;
+      font-size: 0.9rem;
+      box-sizing: border-box;
+      border-radius: 4px;
+      border: 1px solid #cbd5f5;
+      outline: none;
+    }
+
+    nav .search-box input:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.25);
+    }
+
+    nav ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+      font-size: 0.9rem;
+    }
+
+    nav li {
+      margin-bottom: 0.25rem;
+    }
+
+    nav li.section-title {
+      font-weight: 600;
+      margin-top: 0.75rem;
+      margin-bottom: 0.25rem;
+      color: #111827;
+    }
+
+    nav a {
+      color: #1f4f8b;
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* Main content */
+    main {
+      flex: 1;
+      padding: 1.5rem 2rem;
+      box-sizing: border-box;
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    main h1 {
+      font-size: 1.8rem;
+      margin-top: 0;
+      margin-bottom: 0.4rem;
+      color: #111827;
+    }
+
+    main h2 {
+      font-size: 1.3rem;
+      margin-top: 2rem;
+      margin-bottom: 0.4rem;
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 0.25rem;
+      color: #111827;
+    }
+
+    main h3 {
+      font-size: 1.05rem;
+      margin-top: 1.2rem;
+      margin-bottom: 0.25rem;
+      color: #111827;
+    }
+
+    p {
+      margin-top: 0.25rem;
+      margin-bottom: 0.6rem;
+    }
+
+    ul {
+      margin-top: 0.25rem;
+      margin-bottom: 0.8rem;
+      padding-left: 1.25rem;
+    }
+
+    li {
+      margin-bottom: 0.25rem;
+    }
+
+    .tagline {
+      font-size: 0.95rem;
+      color: #4b5563;
+      margin-bottom: 1rem;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 0.15rem 0.55rem;
+      font-size: 0.75rem;
+      border-radius: 999px;
+      background-color: #e5f0ff;
+      color: #1d4ed8;
+      margin-right: 0.4rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .note {
+      background-color: #eef6ff;
+      border-left: 4px solid #1f4f8b;
+      padding: 0.6rem 0.8rem;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+      border-radius: 3px;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.9rem;
+      margin: 0.75rem 0 1rem;
+    }
+
+    .card {
+      background-color: white;
+      border-radius: 6px;
+      border: 1px solid #e5e7eb;
+      padding: 0.75rem 0.9rem;
+      box-sizing: border-box;
+      font-size: 0.9rem;
+    }
+
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 0.35rem;
+      font-size: 0.98rem;
+    }
+
+    .small {
+      font-size: 0.85rem;
+      color: #555;
+    }
+
+    footer {
+      margin-top: 3rem;
+      font-size: 0.8rem;
+      color: #6b7280;
+      border-top: 1px solid #e5e7eb;
+      padding-top: 0.75rem;
+    }
+
+    @media (max-width: 800px) {
+      .layout {
+        flex-direction: column;
+      }
+      nav {
+        width: 100%;
+        height: auto;
+        position: static;
+      }
+      main {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <nav>
+      <h1>Open USUAV Association</h1>
+      <div class="subtitle">Community for Open Research-Grade UAV Platforms</div>
+
+      <div class="search-box">
+        <!-- Placeholder search box (no JS yet) -->
+        <input type="text" placeholder="Search this site…" />
+      </div>
+
+      <ul>
+        <li class="section-title">1) About</li>
+        <li><a href="#about">1.1) Overview</a></li>
+        <li><a href="#vision-mission">1.2) Vision & Mission</a></li>
+
+        <li class="section-title">2) What We Do</li>
+        <li><a href="#ecosystem">2.1) WINGS Open USUAV Ecosystem</a></li>
+        <li><a href="#activities">2.2) Core Activities</a></li>
+
+        <li class="section-title">3) Community & Governance</li>
+        <li><a href="#governance">3.1) Governance Model</a></li>
+        <li><a href="#membership">3.2) Membership</a></li>
+
+        <li class="section-title">4) Resources</li>
+        <li><a href="#resources">4.1) Technical Resources</a></li>
+        <li><a href="#events">4.2) Events & Training</a></li>
+
+        <li class="section-title">5) Get Involved</li>
+        <li><a href="#join">5.1) How to Join</a></li>
+        <li><a href="#contact">5.2) Contact</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <!-- 1) ABOUT -->
+      <section id="about">
+        <h1>Open USUAV Association</h1>
+        <p class="tagline">
+          Advancing open, research-grade UAV platforms for U.S. leadership, university-scale experimentation, and hands-on education.
+        </p>
+
+        <div>
+          <span class="pill">Open Source</span>
+          <span class="pill">Research-Grade UAVs</span>
+          <span class="pill">Education & Workforce</span>
+          <span class="pill">Testbed Integration</span>
+        </div>
+
+        <p>
+          The <strong>Open USUAV Association</strong> is a community-driven organization dedicated to maintaining and
+          advancing the <strong>WINGS Open USUAV Ecosystem</strong>—a family of open, software-defined, AI-enabled UAV
+          platforms designed for research, education, and real-world deployment.
+        </p>
+        <p>
+          The name <strong>USUAV</strong> reflects our dual mission:
+        </p>
+        <ul>
+          <li>
+            to strengthen the <strong>United States’ leadership</strong> in uncrewed aerial systems (UAS) development and applications; and
+          </li>
+          <li>
+            to provide a <strong>university-scale, fully open-source UAV platform</strong> that can be adopted, replicated, and extended by
+            academic, industrial, and government partners.
+          </li>
+        </ul>
+
+        <div class="note">
+          <strong>Relationship to WINGS Aerial Systems:</strong>
+          The Open USUAV Association focuses on the community, standards, and open-source ecosystem.
+          <strong>WINGS Aerial Systems</strong>, a startup founded by Dr.~Zhangyu Guan, provides manufacturing, integration,
+          and professional support for organizations that need turnkey hardware based on the open designs.
+        </div>
+      </section>
+
+      <section id="vision-mission">
+        <h2>1.2) Vision & Mission</h2>
+        <h3>Vision</h3>
+        <p>
+          A world where any university, lab, or agency can deploy safe, research-grade UAV platforms
+          using open designs, interoperable standards, and a vibrant community of contributors.
+        </p>
+
+        <h3>Mission</h3>
+        <p>
+          The Open USUAV Association exists to:
+        </p>
+        <ul>
+          <li>steward the open hardware, software, and documentation of the WINGS Open USUAV Ecosystem;</li>
+          <li>enable reproducible, university-scale UAV experimentation and education nationwide;</li>
+          <li>strengthen the domestic open-source UAV supply chain and workforce pipeline;</li>
+          <li>coordinate interoperability across testbeds (e.g., UMore Park, SOAR, UnionLabs);</li>
+          <li>promote safe, standards-based UAV deployment in research, education, and field applications.</li>
+        </ul>
+      </section>
+
+      <!-- 2) WHAT WE DO -->
+      <section id="ecosystem">
+        <h2>2) WINGS Open USUAV Ecosystem</h2>
+        <p>
+          The Association’s primary technical focus is the <strong>WINGS Open USUAV Ecosystem</strong>, which includes:
+        </p>
+        <ul>
+          <li>
+            <strong>Open hardware designs</strong> for multiple UAV classes (lightweight to heavy-lift), including frames,
+            power systems, carrier boards, payload mounts, and environmental protection features.
+          </li>
+          <li>
+            <strong>Software-defined flight and networking stack</strong> built on COTS autopilots (e.g., Cube flight controllers),
+            PX4/ArduPilot, MAVLink, multi-modal wireless (RC, Wi-Fi, 4G/5G, SDR), and AI-enabled autonomy layers.
+          </li>
+          <li>
+            <strong>Tuning and safety methodology</strong>, including open-source parameter sets, tuning procedures, and
+            safety checklists adapted to each WINGS airframe.
+          </li>
+          <li>
+            <strong>Integration with testbeds and ranges</strong> such as UMore Park (UMN) and SOAR (UB).
+          </li>
+          <li>
+            <strong>Educational and training resources</strong> used in conjunction with UnionLabs and UAV courses, camps, and workshops.
+          </li>
+        </ul>
+      </section>
+
+      <section id="activities">
+        <h2>2.2) Core Activities</h2>
+
+        <div class="card-grid">
+          <div class="card">
+            <h3>Open-Source Stewardship</h3>
+            <p>
+              The Association maintains GitHub repositories for hardware designs, software stacks,
+              tuning files, and documentation, ensuring high-quality releases and long-term sustainability.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Technical Standards</h3>
+            <p>
+              We define and update standards for airframes, power-distribution, connectors, wiring,
+              payload interfaces, autonomy modules, and safety practices to support reproducible deployments.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Tutorials & Training</h3>
+            <p>
+              The Association curates tutorials, step-by-step guides, and example experiments to help new
+              users adopt the ecosystem and to support workforce development and education.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Community Events</h3>
+            <p>
+              We coordinate summits, workshops, and student-focused events to share best practices, research
+              results, and lessons learned from field deployments across the country.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Testbed Interoperability</h3>
+            <p>
+              By aligning control interfaces and APIs, the Association ensures that Open USUAV platforms can be
+              deployed on testbeds such as SOAR, and UMore Park without modifying existing infrastructure.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Domestic Innovation & Supply Chain</h3>
+            <p>
+              Working with partners like WINGS Aerial Systems, we support a healthy domestic ecosystem for
+              manufacturing, supporting, and deploying open, research-grade UAV platforms.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3) COMMUNITY & GOVERNANCE -->
+      <section id="governance">
+        <h2>3) Community & Governance</h2>
+
+        <h3>3.1) Governance Model</h3>
+        <p>
+          The Open USUAV Association follows a lightweight, transparent governance structure inspired by
+          successful open-source projects:
+        </p>
+        <ul>
+          <li>
+            <strong>Steering Committee:</strong> oversees the roadmap, standards, and major releases. Members include representatives
+            from universities, testbeds, industry, and key maintainers.
+          </li>
+          <li>
+            <strong>Technical Working Groups:</strong> focus on hardware, software, wireless networking, safety/autonomy, and education.
+          </li>
+          <li>
+            <strong>Community Contributors:</strong> students, researchers, engineers, and educators who submit issues, pull requests,
+            documentation, and example experiments.
+          </li>
+        </ul>
+
+        <p>
+          Decisions are recorded publicly, and discussions are held via open online channels to ensure community visibility and participation.
+        </p>
+
+        <h3 id="membership">3.2) Membership</h3>
+        <p>
+          Membership in the Open USUAV Association is open to:
+        </p>
+        <ul>
+          <li>universities and research labs,</li>
+          <li>government agencies and testbed operators,</li>
+          <li>industry partners, startups, and integrators,</li>
+          <li>individual students, educators, and hobbyists.</li>
+        </ul>
+        <p>
+          Members may participate in working groups, propose improvements, and help shape the technical and educational roadmap.
+        </p>
+      </section>
+
+      <!-- 4) RESOURCES -->
+      <section id="resources">
+        <h2>4) Resources</h2>
+
+        <h3>4.1) Technical Resources</h3>
+        <p>
+          The Association maintains a set of open resources (hosted on public repositories and documentation sites), including:
+        </p>
+        <ul>
+          <li>hardware CAD models, schematics, PCB layouts, and bills of materials;</li>
+          <li>firmware and software repositories for flight control, networking, and autonomy;</li>
+          <li>flight-controller tuning files and safety checklists for each WINGS airframe;</li>
+          <li>datasets and reference experiments for research and coursework.</li>
+        </ul>
+
+        <h3 id="events">4.2) Events & Training</h3>
+        <p>
+          The Open USUAV Association plans to organize:
+        </p>
+        <ul>
+          <li>online tutorials and webinars on building, tuning, and flying USUAV platforms;</li>
+          <li>hands-on workshops at partner testbeds and flight ranges;</li>
+          <li>student competitions, hackathons, and capstone project themes;</li>
+          <li>an annual Open USUAV Summit to share research and best practices.</li>
+        </ul>
+      </section>
+
+      <!-- 5) GET INVOLVED -->
+      <section id="join">
+        <h2>5) Get Involved</h2>
+
+        <h3>5.1) How to Join</h3>
+        <p>
+          There are several ways to participate in the Open USUAV Association:
+        </p>
+        <ul>
+          <li>
+            <strong>Technical contributions:</strong> submit pull requests, bug reports, and documentation improvements
+            to the WINGS Open USUAV repositories.
+          </li>
+          <li>
+            <strong>Deployment sites:</strong> adopt and deploy USUAV platforms at your flight range, lab, or testbed and share
+            lessons learned with the community.
+          </li>
+          <li>
+            <strong>Education & outreach:</strong> integrate USUAV platforms into courses, workshops, and camps and contribute
+            teaching materials back to the ecosystem.
+          </li>
+          <li>
+            <strong>Partnerships:</strong> collaborate on joint experiments, proposals, and workforce development initiatives.
+          </li>
+        </ul>
+
+        <h3 id="contact">5.2) Contact</h3>
+        <p>
+          For collaboration inquiries, membership questions, or technical discussions, please contact the
+          Open USUAV Association via the primary coordination team (e.g., WINGS Lab at the University of Minnesota).
+        </p>
+        <p class="small">
+          Placeholder: <em>add email address, mailing list, and repository links here.</em>
+        </p>
+      </section>
+
+      <footer>
+        Last updated: <!-- TODO: add date -->  
+        &middot; Open USUAV Association &middot; WINGS Open USUAV Ecosystem
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
