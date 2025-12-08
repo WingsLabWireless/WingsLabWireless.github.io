@@ -1,0 +1,8 @@
+@inproceedings{Nivas2026BenchLink,
+  author    = {Santhi Nivas, Sidharth and Pattanshetty Vasanth Kumar, Prem Sagar and Zhang, Zhaoxi and Zhao, Chenzhi and McManus, Maxwell and Mastronarde, Nicholas and Bentley, Elizabeth Serena and Sklivanitis, George and Pados, Dimitris A. and Guan, Zhangyu},
+  title     = {BenchLink: An {SoC}-Based Benchmark for Resilient Communication Links in {GPS}-Denied Environments},
+  booktitle = {Proc. of the IEEE International Conference on Computer Communications (INFOCOM)},
+  address   = {Tokyo, Japan},
+  month     = may,
+  year      = {2026}
+}
