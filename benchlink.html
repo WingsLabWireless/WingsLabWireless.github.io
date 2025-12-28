@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>BenchLink | WINGS Lab Open Source</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body { margin:0; font-family:Arial, Helvetica, sans-serif; line-height:1.55; color:#222; }
+    .layout { display:flex; min-height:100vh; }
+    nav {
+      width:260px; background:#f3f4f6; border-right:1px solid #ddd;
+      padding:1rem; box-sizing:border-box; position:sticky; top:0;
+      height:100vh; overflow-y:auto;
+    }
+    nav h1 { font-size:1.1rem; margin:0 0 .6rem 0; }
+    nav ul { list-style:none; padding:0; margin:0; font-size:.9rem; }
+    nav li.section-title { font-weight:bold; margin:.9rem 0 .3rem; }
+    nav li { margin-bottom:.35rem; }
+    nav a { color:#1f4f8b; text-decoration:none; }
+    nav a:hover { text-decoration:underline; }
+    main { flex:1; padding:1.6rem 2rem; box-sizing:border-box; max-width:980px; }
+    main h1 { font-size:1.9rem; margin-top:0; }
+    main h2 {
+      font-size:1.35rem; margin-top:2.1rem;
+      border-bottom:1px solid #eee; padding-bottom:.3rem;
+    }
+    p { margin:.45rem 0 .7rem; }
+    ul { margin:.4rem 0 .9rem; padding-left:1.4rem; }
+    .pill {
+      display:inline-block; font-size:.78rem; padding:.12rem .45rem;
+      border-radius:999px; background:#f5f5f5; border:1px solid #e6e6e6;
+      color:#444; margin-right:.35rem; margin-bottom:.25rem;
+    }
+    .note {
+      background:#eef6ff; border-left:4px solid #1f4f8b;
+      padding:.7rem .9rem; margin:1.2rem 0; font-size:.9rem;
+    }
+    @media (max-width:900px) {
+      .layout { flex-direction:column; }
+      nav { width:100%; height:auto; position:static; }
+      main { padding:1rem; }
+    }
+  </style>
+</head>
+
+<body>
+<div class="layout">
+  <nav>
+    <h1>BenchLink</h1>
+    <ul>
+      <li class="section-title">Contents</li>
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#hardware">Hardware</a></li>
+      <li><a href="#software">Software</a></li>
+      <li><a href="#testing">Testing</a></li>
+      <li><a href="#license">License</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <header>
+      <h1>BenchLink</h1>
+      <div>
+        <span class="pill">Experiment orchestration</span>
+        <span class="pill">Reproducibility</span>
+        <span class="pill">Edge & UAV systems</span>
+      </div>
+    </header>
+
+    <section id="overview">
+      <h2>Overview</h2>
+      <p>
+        BenchLink is an open-source experiment orchestration and integration framework
+        that bridges algorithm development, real hardware, and field deployments.
+        It provides a structured layer for configuring experiments, managing execution,
+        and collecting synchronized results across heterogeneous platforms.
+      </p>
+      <p>
+        BenchLink emphasizes portability and repeatability, enabling researchers to
+        move seamlessly from lab-based testing to outdoor and field experiments.
+      </p>
+    </section>
+
+    <section id="hardware">
+      <h2>Hardware</h2>
+      <ul>
+        <li>UAV platforms with onboard compute and SDR payloads</li>
+        <li>Ground-based radios, spectrum sensors, and edge servers</li>
+        <li>Heterogeneous compute nodes (x86, ARM, SoC-based systems)</li>
+      </ul>
+      <p>
+        Hardware dependencies are abstracted through adapters so that experiment
+        definitions remain portable across platforms.
+      </p>
+    </section>
+
+    <section id="software">
+      <h2>Software</h2>
+      <ul>
+        <li>Declarative experiment configuration and parameter management</li>
+        <li>Pluggable backends for radios, UAV controllers, and edge services</li>
+        <li>Structured logging and artifact collection for post-analysis</li>
+      </ul>
+      <p>
+        BenchLink integrates with existing research code and control software rather
+        than imposing a monolithic framework.
+      </p>
+    </section>
+
+    <section id="testing">
+      <h2>Testing</h2>
+      <ul>
+        <li>Local and lab-based functional testing</li>
+        <li>Hardware-in-the-loop experiments</li>
+        <li>Outdoor and field deployments with repeatable configurations</li>
+      </ul>
+      <p>
+        Consistent experiment descriptions and logging enable fair comparison across
+        runs, platforms, and environments.
+      </p>
+    </section>
+
+    <section id="license">
+      <h2>License</h2>
+      <p>
+        BenchLink is released under the <strong>MIT License</strong>.
+      </p>
+      <div class="note">
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files, to deal in the Software
+        without restriction, including without limitation the rights to use, copy,
+        modify, merge, publish, distribute, sublicense, and/or sell copies of the
+        Software.
+      </div>
+    </section>
+
+    <footer style="margin-top:3rem; font-size:.8rem; color:#777;">
+      WINGS Lab Open Source • BenchLink
+    </footer>
+  </main>
+</div>
+</body>
+</html>
