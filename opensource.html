@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>WINGS Lab Open Source</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.5;
+      color: #222;
+    }
+
+    .layout {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    nav {
+      width: 280px;
+      background-color: #f3f4f6;
+      border-right: 1px solid #ddd;
+      padding: 1rem;
+      box-sizing: border-box;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    nav h1 {
+      font-size: 1.15rem;
+      margin-top: 0;
+      margin-bottom: 0.4rem;
+    }
+
+    nav .subtitle {
+      font-size: 0.85rem;
+      color: #555;
+      margin-bottom: 1rem;
+    }
+
+    nav .search-box {
+      margin-bottom: 1rem;
+    }
+
+    nav .search-box input {
+      width: 100%;
+      padding: 0.4rem 0.5rem;
+      font-size: 0.9rem;
+      box-sizing: border-box;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    nav ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+      font-size: 0.9rem;
+    }
+
+    nav li {
+      margin-bottom: 0.25rem;
+    }
+
+    nav li.section-title {
+      font-weight: bold;
+      margin-top: 0.7rem;
+      margin-bottom: 0.2rem;
+    }
+
+    nav a {
+      color: #1f4f8b;
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* Main content */
+    main {
+      flex: 1;
+      padding: 1.5rem 2rem;
+      box-sizing: border-box;
+      max-width: 960px;
+    }
+
+    main h1 {
+      font-size: 1.8rem;
+      margin-top: 0;
+    }
+
+    main h2 {
+      font-size: 1.3rem;
+      margin-top: 2rem;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 0.25rem;
+    }
+
+    main h3 {
+      font-size: 1.1rem;
+      margin-top: 1.2rem;
+    }
+
+    p {
+      margin-top: 0.4rem;
+      margin-bottom: 0.6rem;
+    }
+
+    ul {
+      margin-top: 0.4rem;
+      margin-bottom: 0.8rem;
+      padding-left: 1.4rem;
+    }
+
+    code {
+      background-color: #f5f5f5;
+      padding: 0.15rem 0.35rem;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+
+    .note {
+      background-color: #eef6ff;
+      border-left: 4px solid #1f4f8b;
+      padding: 0.6rem 0.8rem;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+    }
+
+    .pill {
+      display: inline-block;
+      font-size: 0.78rem;
+      padding: 0.12rem 0.45rem;
+      border-radius: 999px;
+      background: #f5f5f5;
+      border: 1px solid #e6e6e6;
+      color: #444;
+      margin-right: 0.35rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .project-card {
+      border: 1px solid #eee;
+      border-radius: 10px;
+      padding: 1rem 1rem 0.8rem 1rem;
+      margin-top: 0.9rem;
+      background: #fff;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    }
+
+    .project-meta {
+      margin-top: 0.25rem;
+      color: #555;
+      font-size: 0.92rem;
+    }
+
+    .cta {
+      margin-top: 0.6rem;
+      display: inline-block;
+      color: #1f4f8b;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 0.92rem;
+    }
+
+    .cta:hover { text-decoration: underline; }
+
+    .small {
+      font-size: 0.85rem;
+      color: #555;
+    }
+
+    @media (max-width: 900px) {
+      .layout { flex-direction: column; }
+      nav {
+        width: 100%;
+        height: auto;
+        position: static;
+      }
+      main { padding: 1rem; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="layout">
+    <nav>
+      <h1>WINGS Lab Open Source</h1>
+      <div class="subtitle">Projects, code, and reusable research artifacts</div>
+
+      <div class="search-box">
+        <!-- Placeholder search box (no JS yet) -->
+        <input type="text" placeholder="Search projects…" />
+      </div>
+
+      <ul>
+        <li class="section-title">Projects</li>
+        <li><a href="#benchlink">BenchLink</a></li>
+        <li><a href="#wings-4039">WINGS-4039</a></li>
+
+        <li class="section-title">About</li>
+        <li><a href="#about">Why we open-source</a></li>
+        <li><a href="#how-to-use">How to use & cite</a></li>
+        <li><a href="#policies">Licensing & policies</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <header id="about">
+        <h1>WINGS Lab Open Source</h1>
+        <p>
+          This page collects open-source projects from the <strong>WINGS Lab</strong>,
+          including hardware designs, software stacks, and reusable experimental assets.
+          Each project below includes a short overview and a link to its dedicated page.
+        </p>
+
+        <div class="note">
+          <strong>Note:</strong> The “Project page” links are placeholders for now
+          (e.g., <code>benchlink.html</code>). You can later replace them with your
+          actual website routes or GitHub pages.
+        </div>
+      </header>
+
+      <section id="projects">
+        <h2>Projects</h2>
+
+        <div class="project-card" id="benchlink">
+          <h3>BenchLink</h3>
+          <div>
+            <span class="pill">Experiment orchestration</span>
+            <span class="pill">Edge systems</span>
+            <span class="pill">Reproducibility</span>
+          </div>
+          <p class="project-meta">
+            <strong>Overview:</strong> BenchLink is a reusable workflow layer for
+            connecting experiments to real hardware and test sites, supporting repeatable
+            runs, configuration management, and structured data capture.
+          </p>
+          <ul>
+            <li>Unified experiment configuration and run logging.</li>
+            <li>Pluggable backends for different radios, UAVs, and edge devices.</li>
+            <li>Designed to support “sim-to-real” and field-test repeatability.</li>
+          </ul>
+          <a class="cta" href="benchlink.html">Project page (placeholder) →</a>
+        </div>
+
+        <div class="project-card" id="wings-4039">
+          <h3>WINGS-4039</h3>
+          <div>
+            <span class="pill">Open UAV platform</span>
+            <span class="pill">Modular payload</span>
+            <span class="pill">Deep programmability</span>
+          </div>
+          <p class="project-meta">
+            <strong>Overview:</strong> WINGS-4039 is an open, modular UAV platform that
+            targets research-grade experimentation across communications, networking, and autonomy.
+            The platform emphasizes payload capacity, integration flexibility, and reproducible
+            field testing workflows.
+          </p>
+          <ul>
+            <li>Modular avionics + payload bays for SDR / compute / sensing modules.</li>
+            <li>Interfaces for experiment control, telemetry, and synchronized logging.</li>
+            <li>Designed as part of a larger WINGS open UAV ecosystem.</li>
+          </ul>
+          <a class="cta" href="wings-4039.html">Project page (placeholder) →</a>
+        </div>
+      </section>
+
+      <section id="how-to-use">
+        <h2>How to use & cite</h2>
+        <p>
+          Recommended (editable) guidance for project pages and repositories:
+        </p>
+        <ul>
+          <li><strong>Quick start:</strong> provide a minimal install + run example.</li>
+          <li><strong>Reproducibility:</strong> document versions, hardware assumptions, and config templates.</li>
+          <li><strong>Citation:</strong> include a BibTeX entry or DOI when available.</li>
+          <li><strong>Contact:</strong> issue tracker + maintainer list for questions.</li>
+        </ul>
+        <p class="small">
+          Placeholder citation text: <code>TODO: add WINGS Lab acknowledgment sentence and grant numbers.</code>
+        </p>
+      </section>
+
+      <section id="policies">
+        <h2>Licensing & policies</h2>
+        <p>
+          Add per-project licensing information on each project page. On this landing page,
+          you may include general lab-wide policies:
+        </p>
+        <ul>
+          <li><strong>Licensing:</strong> MIT/BSD/Apache-2.0 recommended for most software; CERN-OHL / TAPR for hardware (as applicable).</li>
+          <li><strong>Responsible use:</strong> comply with UAV safety rules and spectrum regulations; no harmful deployment.</li>
+          <li><strong>Security:</strong> disclose vulnerabilities responsibly via the repository security policy.</li>
+        </ul>
+      </section>
+
+      <footer style="margin-top: 3rem; font-size: 0.8rem; color: #777;">
+        Last updated: <!-- TODO: add date -->
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
