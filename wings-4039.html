@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>WINGS-4039 | WINGS Lab Open Source</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body { margin:0; font-family:Arial, Helvetica, sans-serif; line-height:1.55; color:#222; }
+    .layout { display:flex; min-height:100vh; }
+    nav {
+      width:260px; background:#f3f4f6; border-right:1px solid #ddd;
+      padding:1rem; box-sizing:border-box; position:sticky; top:0;
+      height:100vh; overflow-y:auto;
+    }
+    nav h1 { font-size:1.1rem; margin:0 0 .6rem 0; }
+    nav ul { list-style:none; padding:0; margin:0; font-size:.9rem; }
+    nav li.section-title { font-weight:bold; margin:.9rem 0 .3rem; }
+    nav li { margin-bottom:.35rem; }
+    nav a { color:#1f4f8b; text-decoration:none; }
+    nav a:hover { text-decoration:underline; }
+    main { flex:1; padding:1.6rem 2rem; box-sizing:border-box; max-width:980px; }
+    main h1 { font-size:1.9rem; margin-top:0; }
+    main h2 {
+      font-size:1.35rem; margin-top:2.1rem;
+      border-bottom:1px solid #eee; padding-bottom:.3rem;
+    }
+    p { margin:.45rem 0 .7rem; }
+    ul { margin:.4rem 0 .9rem; padding-left:1.4rem; }
+    .pill {
+      display:inline-block; font-size:.78rem; padding:.12rem .45rem;
+      border-radius:999px; background:#f5f5f5; border:1px solid #e6e6e6;
+      color:#444; margin-right:.35rem; margin-bottom:.25rem;
+    }
+    .note {
+      background:#eef6ff; border-left:4px solid #1f4f8b;
+      padding:.7rem .9rem; margin:1.2rem 0; font-size:.9rem;
+    }
+    @media (max-width:900px) {
+      .layout { flex-direction:column; }
+      nav { width:100%; height:auto; position:static; }
+      main { padding:1rem; }
+    }
+  </style>
+</head>
+
+<body>
+<div class="layout">
+  <nav>
+    <h1>WINGS-4039</h1>
+    <ul>
+      <li class="section-title">Contents</li>
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#hardware">Hardware</a></li>
+      <li><a href="#software">Software</a></li>
+      <li><a href="#testing">Testing</a></li>
+      <li><a href="#license">License</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <header>
+      <h1>WINGS-4039</h1>
+      <div>
+        <span class="pill">Open UAV platform</span>
+        <span class="pill">Modular payload</span>
+        <span class="pill">Research-grade</span>
+      </div>
+    </header>
+
+    <section id="overview">
+      <h2>Overview</h2>
+      <p>
+        WINGS-4039 is an open, modular UAV platform designed for research and field experimentation
+        across wireless communications, networking, autonomy, and edge AI. The platform emphasizes
+        payload capacity, integration flexibility, and repeatable test workflows, enabling evaluation
+        beyond simulation-only studies.
+      </p>
+      <p>
+        As part of the broader WINGS open UAV ecosystem, WINGS-4039 supports rapid payload swaps
+        (e.g., SDR + compute + sensors) and standardized interfaces for command, telemetry, and
+        experiment control.
+      </p>
+    </section>
+
+    <section id="hardware">
+      <h2>Hardware</h2>
+      <ul>
+        <li><strong>Airframe:</strong> modular structure designed to support multiple payload configurations</li>
+        <li><strong>Payload bay:</strong> mechanical and power interfaces for SDR/compute/sensing modules</li>
+        <li><strong>Compute:</strong> onboard compute options (x86/ARM/SoC-class), depending on mission needs</li>
+        <li><strong>RF payloads:</strong> support for SDR-class radios and external RF front-ends</li>
+        <li><strong>Power:</strong> battery and power-distribution design to accommodate research payload draw</li>
+      </ul>
+      <div class="note">
+        TODO: Replace the bullets above with the finalized WINGS-4039 specs (mass, payload, battery,
+        flight time, interfaces, mechanical drawings, etc.).
+      </div>
+    </section>
+
+    <section id="software">
+      <h2>Software</h2>
+      <ul>
+        <li>Flight-control stack integration (autopilot + safety/autonomy layer)</li>
+        <li>Experiment control and telemetry interfaces (logging, time sync, health monitoring)</li>
+        <li>Payload software hooks for radio/edge-AI applications</li>
+        <li>Optional integration with orchestration tooling (e.g., BenchLink) for repeatable campaigns</li>
+      </ul>
+      <p>
+        The software architecture prioritizes separation between safe flight operations and experimental payloads,
+        so failures in research code do not compromise flight safety.
+      </p>
+      <div class="note">
+        TODO: Add repository links, setup steps, and the exact artifacts you plan to open-source (e.g., avionics carrier,
+        logging agent, time-sync, bench scripts).
+      </div>
+    </section>
+
+    <section id="testing">
+      <h2>Testing</h2>
+      <ul>
+        <li>Bench validation of avionics, power, and payload integration</li>
+        <li>Ground and tether tests for safety checks and telemetry verification</li>
+        <li>Outdoor flight tests for end-to-end data collection and experiment repeatability</li>
+        <li>Campaign-style evaluation across different RF environments and mission profiles</li>
+      </ul>
+      <p>
+        WINGS-4039 is designed to support structured test campaigns with consistent configuration and logging,
+        enabling fair comparison across runs and experimental conditions.
+      </p>
+    </section>
+
+    <section id="license">
+      <h2>License</h2>
+      <p>
+        WINGS-4039 documentation and software artifacts will be released under the <strong>MIT License</strong>.
+      </p>
+      <div class="note">
+        Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+        documentation files, to deal in the Software without restriction, including without limitation the rights to
+        use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software.
+      </div>
+      <p>
+        <strong>Note:</strong> If you later open-source hardware design files (CAD, PCB, mechanical drawings),
+        you can keep MIT for consistency or switch to a hardware-focused license on a per-artifact basis.
+      </p>
+    </section>
+
+    <footer style="margin-top:3rem; font-size:.8rem; color:#777;">
+      WINGS Lab Open Source • WINGS-4039
+    </footer>
+  </main>
+</div>
+</body>
+</html>
