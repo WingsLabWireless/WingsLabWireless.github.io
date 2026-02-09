@@ -1,0 +1,10 @@
+@inproceedings{dey2026cpod,
+  author    = {Annoy Dey and Vineet Sreeram and Gokkul Eraivan Arutkani Aiyanathan and Maxwell McManus and Yuqing Cui and Guanying Sun and Elizabeth Serena Bentley and Nicholas Mastronarde and Zhangyu Guan},
+  title     = {{C-POD: An AWS Cloud Framework for Edge Pod Automation and Remote Wireless Testbed Sharing}},
+  booktitle = {Proceedings of the IEEE International Conference on Computer Communications (INFOCOM) Workshops, CNC: Cloud-Network Convergence},
+  year      = {2026},
+  address   = {Tokyo, Japan},
+  month     = may,
+  pages     = {1-6},
+  publisher = {IEEE}
+}
