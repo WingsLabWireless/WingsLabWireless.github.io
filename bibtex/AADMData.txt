@@ -1,0 +1,7 @@
+@article{hossen2026aerpaw,
+  author = {Md Sharif Hossen and Cole Dickerson and Ozgur Ozdemir and Anil Gurses and Mohamed Rabeek Sarbudeen and Thomas Zajkowski and Ahmed Manavi Alam and Everett Tucker and William Bjorndahl and Fred Solis and Sadaf Javed and Anirudh Kamath and Xiangyao Tang and Joarder Jafor Sadique and Mahfizur Rahman Khan and Kevin Liu Hermstein and Kaies Al Mahmud and Jose Angel Sanchez Viloria and Skyler Hawkins and Yuqing Cui and Annoy Dey and Yuchen Liu and Ali Gurbuz and Joseph Camp and Rizwan Ahmad and Jacobus van der Merwe and Gil Zussman and Mehmet Kurum and Namuduri Kamesh and :contentReference[oaicite:0]{index=0} and Dimitris Pados and George Sklivanitis and Ismail Guvenc and Mihail Sichitiu and Magreth Mushi and Rudra Dutta},
+  title = {Collection: UAV-Based Wireless Multi-modal Measurements from AERPAW Autonomous Data Mule (AADM) Challenge in Digital Twin and Real-World Environments},
+  journal = {IEEE Data Descriptions},
+  month = apr,
+  year = {2026}
+}
