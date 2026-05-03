@@ -1,0 +1,9 @@
+@inproceedings{cui2026stormwave,
+  author    = {Yuqing Cui and Zhaoxi (Josh) Zhang and Sidharth Santhi Nivas and Prem Sagar Pattanshetty Vasanth Kumar and Maxwell McManus and Chenzhi Zhao and Guanying Sun and Nicholas Mastronarde and George Sklivanitis and Dimitris A. Pados and Elizabeth Serena Bentley and Zhangyu Guan},
+  title     = {StormWave: An Open-Source Portable SDR Platform for Over-the-Air Resilience Evaluation of Terrestrial and Aerial Communications},
+  booktitle = {Proceedings of the IEEE International Conference on Smart Applications, Communications and Networking (SmartNets)},
+  address   = {Rome, Italy},
+  month     = july,
+  year      = {2026},
+  pages     = {1-6},
+}
