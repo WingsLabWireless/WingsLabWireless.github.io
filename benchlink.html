@@ -18,14 +18,20 @@
     nav li { margin-bottom:.35rem; }
     nav a { color:#1f4f8b; text-decoration:none; }
     nav a:hover { text-decoration:underline; }
+    nav a.sub { padding-left:1rem; font-size:.85rem; color:#4a6fa5; }
     main { flex:1; padding:1.6rem 2rem; box-sizing:border-box; max-width:980px; }
     main h1 { font-size:1.9rem; margin-top:0; }
     main h2 {
       font-size:1.35rem; margin-top:2.1rem;
       border-bottom:1px solid #eee; padding-bottom:.3rem;
     }
+    main h3 { font-size:1.1rem; margin-top:1.5rem; margin-bottom:.3rem; }
+    main h4 { font-size:.95rem; margin-top:1.1rem; margin-bottom:.3rem; }
     p { margin:.45rem 0 .7rem; }
-    ul { margin:.4rem 0 .9rem; padding-left:1.4rem; }
+    ul, ol { margin:.4rem 0 .9rem; padding-left:1.4rem; }
+    li { margin-bottom:.3rem; }
+    a { color:#1f4f8b; text-decoration:none; }
+    a:hover { text-decoration:underline; }
     .pill {
       display:inline-block; font-size:.78rem; padding:.12rem .45rem;
       border-radius:999px; background:#f5f5f5; border:1px solid #e6e6e6;
@@ -35,6 +41,53 @@
       background:#eef6ff; border-left:4px solid #1f4f8b;
       padding:.7rem .9rem; margin:1.2rem 0; font-size:.9rem;
     }
+    .warning {
+      background:#fff8f0; border-left:4px solid #c4600c;
+      padding:.7rem .9rem; margin:1.2rem 0; font-size:.9rem;
+    }
+    .success {
+      background:#f0faf4; border-left:4px solid #1a7a3a;
+      padding:.7rem .9rem; margin:1.2rem 0; font-size:.9rem;
+    }
+    code {
+      font-family:Consolas, Monaco, 'Courier New', monospace;
+      font-size:.88em; background:#f0f0f0; padding:.1em .3em;
+      border-radius:3px;
+    }
+    pre {
+      background:#1e1e1e; color:#d4d4d4; padding:1rem 1.2rem;
+      border-radius:5px; overflow-x:auto; font-size:.85rem;
+      line-height:1.55; margin:.7rem 0 1.1rem;
+    }
+    pre code { background:none; padding:0; color:inherit; font-size:inherit; }
+    table {
+      width:100%; border-collapse:collapse; margin:.7rem 0 1.1rem;
+      font-size:.9rem;
+    }
+    th {
+      background:#1f4f8b; color:#fff; font-weight:bold; text-align:left;
+      padding:.45rem .7rem; font-size:.85rem;
+    }
+    td { padding:.4rem .7rem; border-bottom:1px solid #eee; }
+    tr:hover { background:#fafafa; }
+    .img-placeholder {
+      background:#f0f0f0; border:2px dashed #ccc; border-radius:5px;
+      padding:2rem 1.2rem; text-align:center; color:#888;
+      font-size:.85rem; margin:.8rem 0 1rem; font-style:italic;
+    }
+    .btn {
+      display:inline-block; padding:.4rem .9rem; background:#1f4f8b;
+      color:#fff; border-radius:4px; font-size:.85rem; font-weight:bold;
+      text-decoration:none; margin-right:.4rem; margin-bottom:.4rem;
+    }
+    .btn:hover { background:#163d6e; text-decoration:none; }
+    .btn-outline {
+      background:transparent; color:#1f4f8b; border:1.5px solid #1f4f8b;
+    }
+    .btn-outline:hover { background:#eef6ff; }
+    .fig { margin:1rem 0 1.2rem; text-align:center; }
+    .fig img { max-width:100%; height:auto; border:1px solid #e0e0e0; border-radius:4px; }
+    .fig .caption { font-size:.82rem; color:#666; margin-top:.4rem; font-style:italic; }
     @media (max-width:900px) {
       .layout { flex-direction:column; }
       nav { width:100%; height:auto; position:static; }
@@ -48,11 +101,40 @@
   <nav>
     <h1>BenchLink</h1>
     <ul>
-      <li class="section-title">Contents</li>
-      <li><a href="#overview">Overview</a></li>
-      <li><a href="#hardware">Hardware</a></li>
-      <li><a href="#software">Software</a></li>
-      <li><a href="#testing">Testing</a></li>
+      <li class="section-title">Getting Started</li>
+      <li><a href="#introduction">Introduction</a></li>
+      <li><a href="#prerequisites">Prerequisites</a></li>
+      <li><a href="#setup">Setup Guide</a></li>
+
+      <li class="section-title">Architecture</li>
+      <li><a href="#codesign">HW/SW Co-Design</a></li>
+      <li><a href="#platform">Platform Architecture</a></li>
+      <li><a href="#protocols">Communication Protocols</a></li>
+      <li><a href="#frame-design">Frame Design</a></li>
+
+      <li class="section-title">Transceiver Chain</li>
+      <li><a href="#tx-chain">Transmitter Chain</a></li>
+      <li><a class="sub" href="#tx-data-gen">Data Generation</a></li>
+      <li><a class="sub" href="#tx-packet-assembly">Packet Assembly</a></li>
+      <li><a class="sub" href="#tx-symbol-mapping">Symbol Mapping</a></li>
+      <li><a class="sub" href="#tx-pilot-insertion">Pilot Insertion</a></li>
+      <li><a class="sub" href="#tx-spreading">Spreading</a></li>
+      <li><a class="sub" href="#tx-pulse-shaping">Pulse Shaping &amp; RF</a></li>
+      <li><a href="#rx-chain">Receiver Chain</a></li>
+      <li><a class="sub" href="#rx-agc">Gain Control</a></li>
+      <li><a class="sub" href="#rx-matched-filter">Matched Filtering</a></li>
+      <li><a class="sub" href="#rx-cfo">CFO Estimation</a></li>
+      <li><a class="sub" href="#rx-frame-detect">Frame Detection</a></li>
+      <li><a class="sub" href="#rx-channel-eq">Channel Equalization</a></li>
+      <li><a class="sub" href="#rx-despreading">Despreading</a></li>
+      <li><a class="sub" href="#rx-demod">Demodulation</a></li>
+
+
+
+      <li class="section-title">Resources</li>
+      <li><a href="#dataset">Dataset</a></li>
+      <li><a href="#source-code">Source Code</a></li>
+      <li><a href="#citation">Citation</a></li>
       <li><a href="#license">License</a></li>
     </ul>
   </nav>
@@ -60,82 +142,282 @@
   <main>
     <header>
       <h1>BenchLink</h1>
+      <p style="margin-top:-.2rem; color:#555; font-size:1.05rem;">An SoC-Based Benchmark for Resilient Communication Links in GPS-Denied Environments</p>
       <div>
-        <span class="pill">Experiment orchestration</span>
-        <span class="pill">Reproducibility</span>
-        <span class="pill">Edge & UAV systems</span>
+        <span class="pill">GPS-Denied Communication</span>
+        <span class="pill">System-on-Chip (SoC)</span>
+        <span class="pill">FPGA &middot; SDR</span>
+        <span class="pill">UAV Testbed</span>
+        <span class="pill">Adaptive Modulation</span>
+        <span class="pill">Open Source</span>
+      </div>
+      <div style="margin-top:1rem;">
+        <a class="btn" href="https://github.com/WingsLabWireless/benchlink_v2" target="_blank">&#9733; Source Code</a>
+        <a class="btn btn-outline" href="https://github.com/WingsLabWireless/benchlink_v2/tree/main/benchlink_data" target="_blank">&#8615; Dataset</a>
+        <a class="btn btn-outline" href="https://wingslabwireless.github.io/opensource.html#benchlink" target="_blank">Project Page</a>
       </div>
     </header>
 
-    <section id="overview">
-      <h2>Overview</h2>
-      <p>
-        BenchLink is an open-source experiment orchestration and integration framework
-        that bridges algorithm development, real hardware, and field deployments.
-        It provides a structured layer for configuring experiments, managing execution,
-        and collecting synchronized results across heterogeneous platforms.
-      </p>
-      <p>
-        BenchLink emphasizes portability and repeatability, enabling researchers to
-        move seamlessly from lab-based testing to outdoor and field experiments.
-      </p>
-    </section>
+    <section id="introduction"><h2>Introduction</h2><p>GPS technology has long provided the accurate timing and positioning that modern wireless communication systems depend on. Cellular networks use GPS to synchronize base stations, support time division duplexing (TDD), and enable techniques such as Coordinated Multi-Point (CoMP) and hybrid aerial-ground networking. However, GPS signals can be unreliable, unavailable, or intentionally disrupted in many emerging applications, including vehicle networks in the field, unmanned aerial vehicles (UAVs) vulnerable to interference and spoofing, urban canyons, tunnels, and indoor environments.</p><p>When GPS is unavailable, the local oscillators of communicating nodes drift independently, introducing carrier frequency offset (CFO) and gradual phase rotation of the constellation points. This challenge is further compounded by mobility: UAV platforms experience rapid fluctuations in signal strength, phase, vibrations, and dynamic multipath propagation.</p><p><strong>BenchLink</strong> is a System-on-Chip (SoC)-based benchmark for resilient communication links that operates without GPS and supports adaptive pilot density and modulation. Unlike General Purpose Processor (GPP)-based software-defined radios (e.g., USRPs), the SoC-based design allows for more precise and deterministic latency control, which is a critical advantage for applications such as integrated sensing and communications (ISAC) and Positioning, Navigation, and Timing (PNT).</p><p>BenchLink is implemented and evaluated on Zynq UltraScale+ MPSoCs and has been demonstrated in both ground-to-ground (G2G) and air-to-air (A2A) UAV environments. The complete SoC-based design, source code, and a comprehensive experimental dataset have been made available to the wireless community.</p><div class="fig"><img src="images/fig1_architecture.png" alt="BenchLink software-hardware partitioning and co-design architecture"><div class="caption">Software-hardware partitioning and co-design architecture of BenchLink. Components marked with * are custom designed.</div></div>
+      <h3>Hardware and Testbed</h3>
+      <div class="fig"><img src="images/fig8_wired_testbed.png" alt="Indoor wired-channel testbed"><div class="caption">Indoor wired-channel testbed: two ZCU102 MPSoC boards with FMCOMMS3 RF front-ends connected via SMA cable and 12 dB attenuator for controlled validation.</div></div>
+      <div class="fig"><img src="images/fig9_outdoor_g2g.png" alt="Outdoor ground-to-ground testbed"><div class="caption">Outdoor ground-to-ground testbed with custom portable BenchLink modules for over-the-air link evaluation.</div></div>
+      <div class="fig"><img src="images/fig10_drone.png" alt="Heavy-duty drone with BenchLink module"><div class="caption">Heavy-duty drone with integrated BenchLink module for air-to-air communication experiments.</div></div>
+</section>
 
-    <section id="hardware">
-      <h2>Hardware</h2>
+    <section id="prerequisites"><h2>Software &amp; Hardware Prerequisites</h2><h3>Hardware Requirements</h3><table><thead><tr><th>Component</th><th>Specification</th><th>Notes</th></tr></thead><tbody><tr><td>MPSoC Platform</td><td>Xilinx Zynq UltraScale+ ZCU102 Evaluation Kit</td><td>Quad-core ARM Cortex-A53 (PS) + FPGA fabric (PL)</td></tr><tr><td>RF Front-End</td><td>Analog Devices AD-FMCOMMS3-EBZ</td><td>AD9361 transceiver; 70 MHz – 6.0 GHz; up to 56 MHz BW; FMC HPC</td></tr><tr><td>Onboard Computer (Field Only)</td><td>Intel NUC or equivalent mini-PC</td><td>Used only for outdoor/field deployments due to compact form factor. For indoor/lab testing, any standard PC or laptop connected via Ethernet can be used instead.</td></tr><tr><td>Antennas</td><td>Omnidirectional monopole antennas</td><td>One TX, one RX per node; 2.4 GHz band compatible</td></tr><tr><td>Attenuator (Indoor)</td><td>12 dB Mini-Circuits fixed RF attenuator</td><td>For wired-channel indoor testing to avoid receiver saturation</td></tr><tr><td>Cables</td><td>RG316 SMA coaxial cable</td><td>For wired-channel experiments; SMA connectors</td></tr><tr><td>Power Supply (Field)</td><td>Bluetti Solar Generator AC180 (or similar)</td><td>High-capacity portable power station for outdoor deployments</td></tr><tr><td>Webcam</td><td>USB webcam</td><td>Connected to the host computer for live video data generation</td></tr></tbody></table><div class="note"><strong>For Aerial Experiments:</strong> Each BenchLink module weighs approximately 15 lbs. Heavy-duty drones capable of carrying payloads up to 50 lbs and generating ~120 lbs of thrust are used. Operating drones with takeoff weight exceeding 55 lbs requires special FAA registration and a designated outdoor test site.</div><h3>Software Requirements</h3><h4>Required: MathWorks MATLAB / Simulink</h4>
+<p>BenchLink is prototyped using the MathWorks HW/SW co-design workflow. MATLAB and Simulink are required for building, modifying, and deploying the design. BenchLink has been tested on both <strong>MATLAB R2021b</strong> and <strong>R2024b</strong>.</p>
+<p>The following MATLAB toolboxes and add-ons are required:</p>
+<table><thead><tr><th>Toolbox / Add-On</th><th>Purpose</th></tr></thead><tbody>
+<tr><td>MATLAB</td><td>Core environment</td></tr>
+<tr><td>Simulink</td><td>Streaming algorithm development and interface model</td></tr>
+<tr><td>HDL Coder</td><td>RTL code and IP core generation from Simulink DUT</td></tr>
+<tr><td>HDL Coder Support Package for AMD FPGA and SoC Devices</td><td>ZCU102 reference design, bitstream generation via Vivado</td></tr>
+<tr><td>Fixed-Point Designer</td><td>Floating-to-fixed-point conversion for FPGA implementation</td></tr>
+<tr><td>Embedded Coder</td><td>C code generation for ARM PS software</td></tr>
+<tr><td>Embedded Coder Support Package for AMD SoC Devices</td><td>ARM deployment and Linux image for Zynq</td></tr>
+<tr><td>Embedded Coder Support Package for ARM Cortex-A Processors</td><td>Required dependency for AMD SoC support</td></tr>
+<tr><td>Embedded Coder Support Package for ARM Cortex-M Processors</td><td>Required dependency</td></tr>
+<tr><td>SoC Blockset</td><td>SoC modeling and HW/SW co-design workflow</td></tr>
+<tr><td>SoC Blockset Support Package for AMD FPGA and SoC Devices</td><td>AD9361 radio reference designs and hardware setup</td></tr>
+<tr><td>Communications Toolbox</td><td>Modulation, channel models, signal processing functions</td></tr>
+<tr><td>DSP System Toolbox</td><td>Streaming signal processing blocks</td></tr>
+<tr><td>DSP HDL Toolbox</td><td>HDL-optimized DSP blocks for FPGA</td></tr>
+<tr><td>Signal Processing Toolbox</td><td>Filter design and spectral analysis</td></tr>
+<tr><td>Wireless HDL Toolbox</td><td>HDL-ready wireless communication blocks</td></tr>
+<tr><td>HDL Verifier</td><td>Runtime FPGA signal capture and debugging</td></tr>
+<tr><td>Simulink Coder</td><td>Code generation from Simulink models</td></tr>
+<tr><td>Simulink Compiler</td><td>Standalone application deployment</td></tr>
+<tr><td>MATLAB Coder</td><td>C/C++ code generation from MATLAB</td></tr>
+<tr><td>MATLAB Compiler</td><td>Standalone MATLAB application packaging</td></tr>
+<tr><td>MATLAB Compiler SDK</td><td>Shared library generation</td></tr>
+</tbody></table>
+
+<h4>Required: Third-Party Tool</h4>
+<table><thead><tr><th>Software</th><th>Purpose</th><th>Version / Notes</th></tr></thead><tbody>
+<tr><td>Xilinx Vivado Design Suite</td><td>FPGA synthesis, place-and-route, bitstream generation (invoked automatically by HDL Coder)</td><td>2021.1 (for R2021b) or 2024.1 (for R2024b)</td></tr>
+</tbody></table>
+
+<h4>Optional: For Standalone Deployment Without MATLAB</h4>
+<p>The following tools are only needed if you want to deploy or modify BenchLink independently of the MATLAB/Simulink workflow (e.g., working directly with the generated HDL or building custom Linux images):</p>
+<table><thead><tr><th>Software</th><th>Purpose</th><th>Notes</th></tr></thead><tbody>
+<tr><td>Xilinx Vitis / SDK</td><td>ARM bare-metal or Linux application development outside MATLAB</td><td>Paired with your Vivado version</td></tr>
+<tr><td>Analog Devices HDL Reference Designs</td><td>AD9361 HDL IP core for manual Vivado integration</td><td><a href="https://github.com/analogdevicesinc/hdl">github.com/analogdevicesinc/hdl</a></td></tr>
+<tr><td>libiio Library</td><td>Direct Ethernet interface between host and MPSoC (without MATLAB)</td><td><a href="https://github.com/analogdevicesinc/libiio">github.com/analogdevicesinc/libiio</a></td></tr>
+<tr><td>Analog Devices Linux Distribution</td><td>Custom Linux kernel on ARM PS</td><td>ADI Kuiper Linux or PetaLinux-based build</td></tr>
+<tr><td>Python 3.x</td><td>Dataset analysis, post-processing, visualization</td><td>NumPy, SciPy, Matplotlib</td></tr>
+</tbody></table><h3>Knowledge Prerequisites</h3><p>Users should be familiar with the basics of digital communications (modulation, pulse shaping, synchronization), FPGA development workflows (HDL design, synthesis, place-and-route), and the Zynq SoC architecture (PS/PL partitioning, AXI interfaces). Familiarity with the AD9361 transceiver and the Analog Devices HDL IP ecosystem is helpful but not required; this guide covers the relevant interfaces.</p></section>
+
+    <section id="setup"><h2>Setup Guide</h2><h3>Step 1: Hardware Assembly</h3><p>Connect the AD-FMCOMMS3-EBZ board to the ZCU102 via the FMC High Pin Count (HPC) connector. Attach the TX and RX antennas (or SMA cable for wired testing) to the FMCOMMS3 TX1 and RX1 SMA ports. Connect a host computer to the ZCU102 via Ethernet. For indoor and lab testing, any standard PC or laptop running MATLAB can serve as the host. Power the ZCU102 using its standard 12V supply.</p><p>For outdoor field deployments, an Intel NUC or similar mini-PC is used as the onboard computer due to its compact form factor. In this case, integrate the NUC, ZCU102, and FMCOMMS3 into the custom portable BenchLink module and connect to a high-capacity power station (e.g., Bluetti AC180).</p><div class="fig"><img src="images/fig7_benchlink_module.png" alt="Custom BenchLink module for field deployment"><div class="caption">Custom-designed BenchLink module with integrated Zynq UltraScale+ ZCU102 MPSoC, AD9361 RF front-end, and onboard computing units for field deployment.</div></div><h3>Step 2: Install and Configure MATLAB HW/SW Co-Design Environment</h3>
+<p>Follow the MathWorks installation guide for HW/SW co-design. The full procedure is documented at: <a href="https://www.mathworks.com/help/soc/ug/installation-for-hardware-software-co-design.html">Installation for Hardware-Software Co-Design</a>. The key steps are:</p>
+<ol>
+<li><strong>Set up host-radio communication:</strong> Connect the ZCU102 to your host PC via Ethernet and note the assigned IP address (default: 192.168.3.2). See <a href="https://www.mathworks.com/help/soc/ug/guided-hardware-setup-for-xilinx-devices.html">Set Up AMD FPGA and SoC Devices</a>.</li>
+<li><strong>Install Xilinx Vivado:</strong> Install Vivado 2021.1 (for R2021b) or 2024.1 (for R2024b). This is invoked automatically by HDL Coder during bitstream generation.</li>
+<li><strong>Install HDL Coder Support Package for AMD FPGA and SoC Devices:</strong> In MATLAB, go to <code>Add-Ons &gt; Get Hardware Support Packages</code> and install it. This enables FPGA code generation for the ZCU102.</li>
+<li><strong>Install Embedded Coder Support Package for AMD SoC Devices:</strong> Same procedure via Add-Ons. This enables ARM code generation and Linux deployment for the Zynq board. (Requires Embedded Coder and Embedded Coder Support Package for ARM Cortex-A Processors.)</li>
+<li><strong>Set up IP address in MATLAB:</strong> Verify connectivity by running:
+<pre><code>devzynq = zynq('linux','192.168.3.2','root','root','/tmp');</code></pre></li>
+<li><strong>Set up Vivado tool path and HDL IP repositories:</strong>
+<pre><code>hdlsetuptoolpath('ToolName','Xilinx Vivado','ToolPath', ...
+    '/opt/Xilinx/Vivado/2024.1/bin')
+setupzynqradiorepositories;</code></pre></li>
+</ol>
+<p>For a complete reference example of this workflow applied to a QPSK transceiver on the AD9361, see: <a href="https://www.mathworks.com/help/soc/ug/hw-sw-co-design-qpsk-transmit-and-receive-using-analog-devices-ad9361-ad9364.html">HW/SW Co-Design QPSK Transmit and Receive Using AD9361/AD9364</a>.</p>
+
+<h3>Step 3: Generate IP Core, Bitstream, and Deploy</h3>
+<p>Open <code>benchlink.slx</code> in Simulink (make sure <code>all_variables.mat</code> is loaded in the workspace). The design is partitioned into a DUT subsystem (FPGA user logic) and an interface model (ARM processing). The build process follows these stages:</p>
+<ol>
+<li><strong>HDL Workflow Advisor (IP Core + Bitstream):</strong> Right-click the DUT subsystem and select <code>HDL Code &gt; HDL Workflow Advisor</code>. Set the target to <code>IP Core Generation</code> with the ZCU102 + FMCOMMS3 reference design. The advisor generates RTL code, creates an IP core, integrates it with the AD9361 reference design, invokes Vivado for synthesis and place-and-route, and produces the bitstream.</li>
+<li><strong>Generate Software Interface Model:</strong> The HDL Workflow Advisor generates a software interface model with AXI driver blocks that map to the FPGA IP core registers. Note the AXI-Lite base addresses and offsets produced at this stage; you will need these if using the standalone Python/C scripts later.</li>
+<li><strong>Build Interface Model:</strong> Build the generated interface model using Embedded Coder, which generates C code for the ARM PS and produces an ELF file for the Cortex-A53.</li>
+<li><strong>Deploy to Hardware:</strong> From the Simulink interface model, program the FPGA bitstream and launch the ARM executable on the ZCU102. You can initially run in <strong>Monitor &amp; Tune</strong> mode to verify the link is functional before switching to independent operation.</li>
+</ol>
+
+<h3>Step 4: Run the Link</h3>
+<p>There are two ways to operate BenchLink once the bitstream and ARM software are deployed:</p>
+
+<h4>Option A: MATLAB Interface (Recommended for Development)</h4>
+<p>Run the Simulink interface model in <strong>Monitor &amp; Tune</strong> or <strong>External</strong> mode on the host computer. This lets you set AXI-Lite parameters and stream AXI4-Stream data directly from MATLAB, with live monitoring of link metrics in Simulink scopes.</p>
+
+
+<h4>Option B: Standalone Python/C Scripts (For Independent Operation)</h4>
+<p>Once the bitstream is loaded and the ARM software is running (either from a prior MATLAB deployment or booted from SD card), you can operate the link independently using the provided scripts without MATLAB:</p>
+<ol>
+<li><strong>Set RF front-end parameters:</strong> Run <code>set_radio_params.py</code> to configure the AD9361 carrier frequency, sample rate, and TX/RX gains.</li>
+<li><strong>Set AXI-Lite registers:</strong> Run <code>benchlink_axilite.py</code> to configure link parameters (modulation, pilot repetitions, thresholds). You must set the correct base address and offset values from the HDL Workflow Advisor output.</li>
+<li><strong>Compile AXI-Stream TX programs:</strong> Cross-compile the appropriate C program for your desired pilot repetition count using <code>gcc-linaro-6.3.1</code>:
+<pre><code># Example: compile for λp=4
+arm-linux-gnueabihf-gcc -o tx_4pilot 4_pilot_reps.c -liio</code></pre></li>
+<li><strong>Send and receive data:</strong> Use <code>send_data.py</code> to transmit data through the compiled AXI-Stream C program, and <code>recv_data.py</code> to receive data via <code>iio_read_module.py</code> and write results to a CSV file.</li>
+</ol>
+
+<div class="note"><strong>Important:</strong> Before using Option B, you must first complete the full HDL Workflow Advisor flow (Step 3) at least once to generate the bitstream, interface model, and ARM software. The standalone scripts depend on the deployed bitstream and the AXI address map it produces.</div><h3>Step 5: Run an Experiment</h3><p>With the hardware powered on and the FPGA programmed, configure the experiment parameters: modulation scheme (4QAM, 8QAM, 16QAM, 64QAM), pilot repetitions (&lambda;<sub>p</sub> = 1, 2, 4, 6, or 8), TX/RX gains, and carrier frequency. Start the transmitter and receiver applications. BenchLink will automatically log all transmitted and received packets, timestamps, CRC results, signal quality indicators, residual frequency offset, goodput, throughput, channel estimates, and EVM to structured data files with SigMF-compliant metadata.</p><div class="success"><strong>Tip:</strong> For initial validation, use the wired-channel indoor setup (TX&rarr;attenuator&rarr;SMA cable&rarr;RX) to isolate oscillator-induced frequency drift from channel effects before moving to over-the-air experiments.</div></section>
+
+    <section id="codesign"><h2>Hardware/Software Co-Design</h2><p>BenchLink follows a hardware/software co-design methodology that partitions the communication system across the heterogeneous computing resources of the Zynq UltraScale+ MPSoC. The MPSoC integrates a software-programmable Processing System (PS), a quad-core ARM Cortex-A53 application processor: with reconfigurable Programmable Logic (PL), i.e., FPGA fabric, connected through high-speed AXI interconnects.</p><h3>Design Rationale</h3><p>The two subsystems serve complementary roles. The PL fabric is ideal for time-deterministic, high-speed, parallel processing: computationally intensive physical layer tasks such as high-throughput baseband filtering, pulse shaping, correlation, and data exchange with the DAC/ADC of the RF front-end are all mapped to FPGA logic. The PS, meanwhile, handles sequential and unpredictable processing: RF front-end configuration, higher-layer protocol management, control signal generation, and data I/O between the PHY and upper layers.</p><p>This partitioning gives BenchLink its key advantage over GPP-based SDRs: deterministic, low-latency processing of time-critical PHY functions directly in hardware, while retaining the flexibility of software for control, configuration, and protocol management.</p><h3>Development Workflow</h3><p>The top-down workflow proceeds through several stages:</p><ol><li><strong>System Specification &amp; Golden Reference:</strong> Define system requirements and develop the wireless algorithms in MATLAB. This floating-point, frame-based algorithm serves as the "golden reference" for verifying all downstream refinements.</li><li><strong>Streaming Algorithm:</strong> Convert the frame-based golden reference into a streaming model in Simulink, incorporating synchronous dataflow, parallel paths, pipelining, and frame markers.</li><li><strong>HW-SW Partitioning:</strong> Decide which parts of the streaming model execute in PL (the Design Under Test / DUT module) versus PS (embedded software). Computationally intensive PHY blocks go to PL; control logic and I/O management go to PS.</li><li><strong>Hardware Architecture Design:</strong> Leverage HDL-optimized IP blocks from the HDL Coder library. Perform floating-to-fixed-point conversion using Fixed-Point Designer, balancing numerical accuracy against resource usage. For blocks with high dynamic range or trigonometric functions (e.g., CORDIC), native floating-point IP may be used selectively.</li><li><strong>HDL Generation &amp; Synthesis:</strong> HDL Coder generates RTL code and an IP core for the DUT. Xilinx Vivado performs synthesis, mapping, place-and-route, and timing analysis, ultimately producing the FPGA bitstream.</li><li><strong>Software Build:</strong> Embedded Coder generates C code for the PS side. The Xilinx SDK builds an Executable and Linkable Format (ELF) file for the ARM processor. AXI driver blocks replace the HW-SW interconnects in the embedded software.</li><li><strong>Deployment &amp; Verification:</strong> The bitstream programs the FPGA and the ELF runs on the ARM. A host computer can run the Simulink interface model in external or hardware-in-the-loop (HIL) mode for runtime data streaming, configuration, and verification.</li></ol><div class="note"><strong>Note:</strong> BenchLink is built entirely using this MathWorks HW/SW co-design flow. MATLAB and Simulink (with the required toolboxes listed in the <a href="#prerequisites">Prerequisites</a> section) are needed to build, modify, and deploy the design. The generated HDL and bitstream can be used on the hardware without MATLAB at runtime, but any design changes require the MATLAB/Simulink environment.</div></section>
+
+    <section id="platform"><h2>Platform Architecture</h2><p>The BenchLink platform consists of three major layers: the Onboard Computer (northbridge), the MPSoC Platform, and the RF Front-End (southbridge): connected through well-defined interfaces.</p><div class="fig"><img src="images/fig1_architecture.png" alt="BenchLink platform architecture"><div class="caption">BenchLink platform architecture: Host/Onboard Computer (northbridge) &harr; MPSoC Platform (ARM PS + Programmable Logic) &harr; RF Front-End (southbridge via FMC HPC).</div></div><h3>Host Computer</h3><p>The host computer runs the MATLAB/Simulink interface model that communicates with the ZCU102 over Ethernet. Through this interface, users can stream data to and from the PHY layer, adjust link parameters at runtime, and monitor signal quality metrics. For indoor and lab testing, any PC or laptop running MATLAB serves as the host. For outdoor field deployments, an Intel NUC or similar mini-PC is used as the onboard computer due to its compact form factor, running the same Simulink interface model.</p><h3>MPSoC Platform (Zynq UltraScale+ ZCU102)</h3><p>The ZCU102 board hosts both the ARM Processing System (PS) and the Programmable Logic (PL):</p><ul><li><strong>ARM PS:</strong> Configures the AD-FMCOMMS3-EBZ RF front-end (center frequency, TX/RX gains, sample rate) via the AD9361 HDL IP. Manages the PHY-ARM Interface for bidirectional data and control exchange with PL. Hosts the TCP/IP server for northbridge Ethernet communication with the host computer.</li><li><strong>Programmable Logic (PL):</strong> Handles all baseband signal processing, including symbol mapping, pilot insertion, frame assembly, pulse shaping (TX path), and AGC, matched filtering, CFO estimation/correction, frame detection, channel equalization, and demodulation (RX path). Custom user logic modules connect to the AD9361 HDL IP through AXI4-Stream interfaces for I/Q sample exchange.</li></ul><h3>RF Front-End (AD-FMCOMMS3-EBZ)</h3><p>The FMCOMMS3 board connects to the ZCU102 via the FMC HPC slot and hosts the AD9361 direct-conversion transceiver. On the transmit path, baseband I/Q samples from the PL pass through the AD9361's internal interpolation filters and DAC, are up-converted to the carrier frequency by the RF mixer, and transmitted through the output amplifier. On the receive path, the incoming RF signal is amplified by the LNA, down-converted and split into I/Q streams, passed through band-shaping filters, digitized by the ADC, and decimated to the baseband rate before being delivered to the PL for processing. The AD9361's internal 128-tap programmable FIR filter also compensates for magnitude and phase distortions from upstream analog and digital filtering.</p><table><thead><tr><th>Parameter</th><th>Value</th></tr></thead><tbody><tr><td>Carrier Frequency</td><td>2.485 GHz</td></tr><tr><td>Sample Rate</td><td>40 Msps</td></tr><tr><td>AD9361 LO Range</td><td>70 MHz – 6.0 GHz</td></tr><tr><td>Channel Bandwidth</td><td>Up to 56 MHz</td></tr><tr><td>DAC/ADC Resolution</td><td>12 bits</td></tr><tr><td>Max Baseband Rate</td><td>61.44 Msps</td></tr><tr><td>TX/RX Channels</td><td>2 &times; 2 (independent)</td></tr></tbody></table></section>
+
+    <section id="protocols"><h2>Communication Protocols &amp; Interfaces</h2><p>The BenchLink design relies on the AXI (Advanced eXtensible Interface) family of protocols, part of the ARM AMBA specification: for all internal communication between the PS, PL, and IP blocks. Understanding these interfaces is essential for extending or modifying the design.</p><h3>AXI4-Stream</h3><p>AXI4-Stream is the primary protocol for high-speed, unidirectional data streaming between the PS and PL, and between IP blocks within the PL. It is used for all baseband I/Q sample paths, covering both TX data flowing from PS&rarr;PL&rarr;RF and RX data flowing from RF&rarr;PL&rarr;PS. The protocol supports DMA (Direct Memory Access) and does not require address management, making it ideal for continuous data pipes.</p><p>The AXI4-Stream interface in BenchLink uses three primary signals:</p><ul><li><code>TDATA</code>: the data bus (I/Q samples, packed as 64-bit words carrying both I and Q components).</li><li><code>TVALID</code>: asserted by the source to indicate that <code>TDATA</code> holds valid data.</li><li><code>TREADY</code>: asserted by the sink (the PL logic) to apply backpressure and manage flow control.</li></ul><p>Data transfer occurs only when both <code>TVALID</code> and <code>TREADY</code> are asserted simultaneously, providing reliable, lossless streaming. On the transmit side, the ARM PS writes frames of source data to DDR memory. The AXI DMA controller reads these frames and streams 32-bit scalar data samples to the FPGA user logic IP through AXI4-Stream. The reverse occurs on the receive side.</p><h3>AXI4-Lite</h3><p>AXI4-Lite is a lightweight, memory-mapped interface used for transporting control signals and configuration parameters. In BenchLink, AXI4-Lite registers are used to:</p><ul><li>Set the number of pilot repetitions per packet (&lambda;<sub>p</sub>) at runtime without bitstream resynthesis.</li><li>Select the modulation scheme (4QAM, 8QAM, 16QAM, 64QAM).</li><li>Configure TX/RX gains and other RF front-end parameters via the AD9361 HDL IP.</li><li>Read back link quality metrics (EVM, SINR, residual CFO, goodput) from the PL to the PS for logging and cross-layer optimization.</li></ul><p>AXI4-Lite communicates through simple read/write transactions to memory-mapped registers, making it straightforward to add new configurable parameters or monitoring points by extending the register map.</p><h3>Northbridge: Ethernet</h3><p>The connection between the host computer and the MPSoC uses Ethernet. When using the MATLAB/Simulink workflow, the host runs the Simulink interface model which communicates with the ZCU102 via the IIO System Object (built on the <a href="https://github.com/analogdevicesinc/libiio">libiio</a> library). The ARM PS on the ZCU102 runs the libiio server (iiod). This allows the host to remotely configure AD9361 parameters, stream I/Q data, and exchange control signals over a standard network connection.</p><h3>Southbridge: FMC HPC</h3><p>The FMCOMMS3 RF front-end connects to the ZCU102 through the FMC High Pin Count (HPC) connector. The AXI AD9361 HDL IP core, an internal FPGA interface provided by Analog Devices: manages communication with the FMCOMMS3 card. This IP core includes IQ correction modules, DC filtering, and exposes configuration registers for gain, carrier frequency, and sample rate.</p></section>
+
+    <section id="frame-design"><h2>Configurable Frame Design</h2><p>BenchLink's frame structure is designed to address the fundamental trade-off between pilot overhead and data throughput in GPS-denied environments.</p><div class="fig"><img src="images/fig2_frame_structure.png" alt="Configurable frame structure of BenchLink"><div class="caption">Configurable frame structure of BenchLink. Each subframe (256 symbols) contains a mix of pilot sequences and data payload controlled by &lambda;<sub>p</sub>.</div></div><h3>Frame Structure</h3><ul><li><strong>Preamble Sequence (128 symbols):</strong> A known marker using Golay Complementary Sequences (GCS) for frame synchronization, detection, and AGC convergence.</li><li><strong>Training Sequence (128 symbols):</strong> Contains 16 replicas of the digital waveform for coarse CFO estimation using the Schmidl-Cox algorithm.</li><li><strong>PHY Dataframe (2048 symbols):</strong> Divided into 8 configurable subframes, each 256 symbols long. Each subframe contains a mix of pilot sequences and data payload, controlled by &lambda;<sub>p</sub>.</li></ul><h3>Configurable Pilot Density (&lambda;<sub>p</sub>)</h3><p>The key parameter &lambda;<sub>p</sub> controls the number of pilot repetitions per subframe. For a payload length of L symbols, pilots are inserted every L/&lambda;<sub>p</sub> symbols.</p><table><thead><tr><th>&lambda;<sub>p</sub></th><th>Pilot Symbols</th><th>Data Symbols</th><th>Pilot Overhead</th></tr></thead><tbody><tr><td>1</td><td>16</td><td>240</td><td>6.25%</td></tr><tr><td>2</td><td>32</td><td>224</td><td>12.5%</td></tr><tr><td>4</td><td>64</td><td>192</td><td>25.0%</td></tr><tr><td>6</td><td>96</td><td>160</td><td>37.5%</td></tr><tr><td>8</td><td>128</td><td>128</td><td>50.0%</td></tr></tbody></table><p>The value of &lambda;<sub>p</sub> is programmable via AXI-Lite, enabling runtime reconfiguration without bitstream resynthesis.</p><h3>Two-Stage CFO Mitigation</h3><h4>Stage 1: Coarse Frequency Offset Correction</h4><p>The receiver detects the preamble start by computing a sliding autocorrelation C[n]. A decision metric &rho;[n] = |C[n]| / P[n] is compared against a programmable threshold. The phase of the autocorrelation peak provides &Delta;f<sub>est</sub>, which drives a Numerically Controlled Oscillator (NCO) generating a correction waveform at &minus;&Delta;f<sub>est</sub> to remove bulk phase rotation.</p><h4>Stage 2: Fine Residual CFO Correction</h4><p>After coarse correction, the residual offset &Delta;&phi; = &Delta;f &minus; &Delta;f<sub>est</sub> is corrected per-subframe using pilot sequences embedded according to &lambda;<sub>p</sub>. The channel coefficient H is estimated by correlating the coarse-corrected signal with the conjugate of the time-reversed pilot sequence.</p></section>
+
+    <section id="tx-chain"><h2>Transmitter Chain</h2><p>The transmitter chain converts application-layer data into over-the-air RF signals through a series of processing stages, all implemented in the FPGA programmable logic.</p><div class="fig"><img src="images/fig4_txrx_chains.png" alt="Transmitter and receiver chains"><div class="caption">Transmitter and receiver signal processing chains. Note: spreading (TX) and despreading (RX) stages are implemented between pilot insertion/channel compensation and pulse shaping/demodulation respectively.</div></div><h3 id="tx-data-gen">Data Generation</h3><p>TX data is streamed from the host computer to the ARM processing system via the Ethernet northbridge interface. The ARM PS forwards this data to a FIFO buffer implemented in the programmable logic using AXI4-Stream. Data transfer occurs only when both <code>TVALID</code> and <code>TREADY</code> are high. Received data is stored in the FIFO, awaiting packet assembly during the next scheduled burst. In the experimental evaluation, a live webcam video stream was used as the traffic source.</p><h3 id="tx-packet-assembly">Packet Assembly</h3><p>The packet assembly module is governed by a Moore state machine (Packetization Control FSM) that coordinates the packetization process. When the FIFO reaches a configured threshold, the FSM activates:</p><ol><li><strong>Append Preamble:</strong> Prepends the 128-symbol Golay preamble for frame synchronization.</li><li><strong>Append Training:</strong> Adds the 128-symbol training sequence for coarse CFO estimation.</li><li><strong>Interleave Pilots &amp; Data:</strong> Based on &lambda;<sub>p</sub>, interleaves data payload with pilot symbols from a lookup table.</li></ol><div class="fig"><img src="images/fig3_frame_assembly.png" alt="Dynamic frame assembly for data transmission"><div class="caption">Dynamic frame assembly: the Packetization Control FSM coordinates preamble appending, pilot interleaving, and data multiplexing based on the configured &lambda;<sub>p</sub>.</div></div><h3 id="tx-symbol-mapping">Symbol Mapping</h3><p>The assembled byte stream is mapped to complex I/Q symbols using the configured modulation scheme (4QAM, 8QAM, 16QAM, 64QAM) with Gray mapping.</p><h3 id="tx-pilot-insertion">Pilot Insertion</h3><p>Pilot symbols are drawn from a lookup table stored in FPGA block RAM. The FSM interleaves pilot sequences within data symbols according to &lambda;<sub>p</sub>.</p><h3 id="tx-spreading">Spreading</h3><p>After pilot insertion, each complex data symbol is spread by multiplying it with a spreading code sequence of length L chips. This converts each symbol-rate sample into L chip-rate samples, expanding the signal bandwidth. The spreading code is configurable via AXI-Lite and stored in a lookup table within the FPGA. Spreading provides processing gain at the receiver, improving robustness against interference and noise.</p><h3 id="tx-pulse-shaping">Pulse Shaping &amp; RF Transmission</h3><p>The signal is upsampled and convolved with a Square-Root Raised-Cosine (SRRC) FIR filter (&alpha; = 0.35). The pulse-shaped I/Q samples pass through AXI4-Stream to the AD9361 HDL IP for DAC conversion, upconversion to 2.485 GHz, and OTA transmission.</p></section>
+
+    <section id="rx-chain"><h2>Receiver Chain</h2><p>The receiver chain recovers data symbols from the received RF signal through signal conditioning, synchronization, equalization, and demodulation stages.</p><h3 id="rx-agc">Automatic Gain Control (AGC)</h3><p>The AGC adaptively adjusts signal amplitude using a square-law power estimator and accumulation-based loop. For burst-mode transmission, an energy detector (ED) subsystem locks the AGC gain during silence periods to prevent overshoot when packets arrive.</p><h3 id="rx-matched-filter">Matched Filtering (SRRC)</h3><p>The gain-controlled signal passes through an SRRC matched filter complementing the transmit pulse shape, maximizing SNR at the sampling instant.</p><h3 id="rx-cfo">CFO Estimation &amp; Correction</h3><p>Coarse CFO correction uses the correlation-and-accumulation method on the training sequence. A CORDIC algorithm extracts the phase of the autocorrelation peak, producing &Delta;f<sub>est</sub> that drives an NCO generating a correction waveform. Averaging over consecutive bursts further reduces estimation error.</p><h3 id="rx-frame-detect">Frame Detection &amp; Synchronization</h3><p>An FIR matched filter performs sliding correlation with the known Golay Complementary Sequences in the preamble. The GCS's zero out-of-phase aperiodic autocorrelation produces a sharp peak. When exceeded, <code>is_FRAME</code> is asserted. The frame synchronizer then asserts <code>is_PILOT</code> at known pilot positions based on &lambda;<sub>p</sub>.</p><div class="fig"><img src="images/fig6_frame_detection.png" alt="Frame detection subsystem"><div class="caption">Frame detection subsystem: Golay preamble correlator with peak-to-average detection and frame synchronization logic that asserts is_FRAME and is_PILOT flags.</div></div><h3 id="rx-channel-eq">Channel Equalization</h3><p>Triggered by <code>is_PILOT</code>, the equalizer estimates channel coefficient H by correlating the received signal with the conjugate of the time-reversed pilot sequence. The inverse is applied to correct data symbols. The <code>is_RESIDUAL</code> flag enables residual phase offset measurement for link quality monitoring.</p><div class="fig"><img src="images/fig5_channel_eq.png" alt="Channel equalization and residual CFO estimation"><div class="caption">Channel equalization and residual CFO estimation. The upper path estimates and corrects the channel coefficient H; the lower path measures the residual phase offset &Delta;&phi;.</div></div><h3 id="rx-despreading">Despreading</h3><p>After channel equalization, the corrected chip-rate samples are despread by correlating each group of L consecutive chips with the known spreading code. This despreading operation combines the L chip estimates into a single symbol-rate decision variable, collapsing the spread bandwidth back to the symbol rate and realizing the processing gain against interference and noise.</p><h3 id="rx-demod">Baseband Demodulation &amp; Data Delivery</h3><p>The despread symbols are demodulated by the QAM demapper into a byte stream and transferred to the ARM processing system via AXI4-Stream. The data is then forwarded over Ethernet to the host computer running the Simulink interface model, where it can be logged and analyzed. CRC validation is performed on each received packet to identify correctly decoded data.</p></section>
+
+    
+
+    
+
+    
+
+    
+
+    <section id="dataset">
+      <h2>Dataset</h2>
+
+      <h3>Dataset Overview</h3>
+      <p>A comprehensive dataset has been collected using BenchLink across indoor, outdoor ground, and outdoor aerial scenarios. The experiments were conducted over multiple sessions to capture diverse channel conditions and operational settings.</p>
+
+      <table><thead><tr><th>Property</th><th>Value</th></tr></thead><tbody>
+        <tr><td>Total Size</td><td>~18 MB of labeled data</td></tr>
+        <tr><td>Duration</td><td>~3 continuous hours</td></tr>
+        <tr><td>Rows</td><td>~108,000 data rows (~600 per minute)</td></tr>
+        <tr><td>Environments</td><td>Air-to-Air (A2A), Ground-to-Ground (G2G)</td></tr>
+        <tr><td>Modulation Schemes</td><td>4QAM, 8QAM, 16QAM, 64QAM</td></tr>
+        <tr><td>Pilot Repetitions</td><td>1, 2, 4, 6, 8 per packet</td></tr>
+        <tr><td>Test Rounds (G2G)</td><td>3 independent rounds per configuration</td></tr>
+      </tbody></table>
+
+      <h3>Dataset Folder Structure</h3>
+      <p>The dataset is organized under <code>BENCHLINK_DATA/</code> with separate top-level folders for each environment. Within each environment, the data is further organized by round (for G2G) and then by configuration subfolder named <code>&lt;N&gt;rep_&lt;MOD&gt;</code> (e.g., <code>1rep_4qam</code>, <code>4rep_16qam</code>, <code>8rep_64qam</code>). Each configuration subfolder contains the raw CSV data file, a configuration text file, and (after running the conversion script) a SigMF metadata file.</p>
+
+      <pre><code>BENCHLINK_DATA/
+├── air_to_air_data/
+│   ├── 1rep_4qam/
+│   │   ├── 20250629_134359_1_config.txt
+│   │   ├── 20250629_134359_1_data.csv
+│   │   └── 20250629_134359_1_data.sigmf-meta   (generated)
+│   ├── 1rep_8qam/
+│   ├── 1rep_16qam/
+│   ├── 1rep_64qam/
+│   ├── 2rep_4qam/
+│   ├── 2rep_8qam/
+│   ├── 2rep_16qam/
+│   ├── 2rep_64qam/
+│   ├── 4rep_4qam/
+│   ├── ...
+│   ├── 8rep_64qam/
+│   ├── benchlink_combined.sigmf-meta            (generated)
+│   └── csv_to_sigmf.py
+│
+├── ground_to_ground_data/
+│   ├── Round1/
+│   │   ├── 1rep_4qam/
+│   │   │   ├── ..._config.txt
+│   │   │   ├── ..._data.csv
+│   │   │   └── ..._data.sigmf-meta              (generated)
+│   │   ├── 1rep_8qam/
+│   │   ├── ...
+│   │   └── 8rep_64qam/
+│   ├── Round2/
+│   │   ├── 1rep_4qam/
+│   │   ├── ...
+│   │   └── 8rep_64qam/
+│   └── Round3/
+│       ├── 1rep_4qam/
+│       ├── ...
+│       └── 8rep_64qam/
+</code></pre>
+
+      <p>Each configuration subfolder (e.g., <code>4rep_16qam/</code>) contains:</p>
       <ul>
-        <li>UAV platforms with onboard compute and SDR payloads</li>
-        <li>Ground-based radios, spectrum sensors, and edge servers</li>
-        <li>Heterogeneous compute nodes (x86, ARM, SoC-based systems)</li>
+        <li><code>*_config.txt</code> : Experiment configuration parameters for that run.</li>
+        <li><code>*_data.csv</code> : Raw logged data with per-packet measurements (timestamp, modulation, frequency, TX/RX node IDs, RX gain, SINR, throughput, symbol error rate, GPS coordinates, distance).</li>
+        <li><code>*_data.sigmf-meta</code> : SigMF-compliant JSON metadata generated from the CSV (see below).</li>
       </ul>
-      <p>
-        Hardware dependencies are abstracted through adapters so that experiment
-        definitions remain portable across platforms.
-      </p>
-    </section>
 
-    <section id="software">
-      <h2>Software</h2>
+      <p>The folder naming convention encodes the configuration: <code>1rep</code> = 1 pilot repetition, <code>4qam</code> = 4QAM modulation. The A2A dataset has one set of 20 configurations (5 pilot reps &times; 4 modulations). The G2G dataset has three independent rounds (Round1, Round2, Round3), each with the same 20 configurations.</p>
+
+      <h3>Logged Fields</h3>
+      <p>Each <code>*_data.csv</code> file contains the following fields (empty or unavailable fields are excluded from SigMF conversion):</p>
+      <table><thead><tr><th>Field</th><th>Description</th></tr></thead><tbody>
+        <tr><td><code>timestamp</code></td><td>Measurement timestamp (YYYYMMDD_HHMMSS)</td></tr>
+        <tr><td><code>modulation</code></td><td>Modulation scheme (4QAM, 8QAM, 16QAM, 64QAM)</td></tr>
+        <tr><td><code>frequency</code></td><td>Carrier frequency in MHz</td></tr>
+        <tr><td><code>tx_node</code></td><td>Transmitter node ID</td></tr>
+        <tr><td><code>rx_node</code></td><td>Receiver node ID</td></tr>
+        <tr><td><code>rx_gain</code></td><td>Receiver gain in dB</td></tr>
+        <tr><td><code>avg_sinr</code></td><td>Average SINR (dB)</td></tr>
+        <tr><td><code>throughput</code></td><td>Measured throughput (kbps)</td></tr>
+        <tr><td><code>avg_ser</code></td><td>Average symbol error rate</td></tr>
+        <tr><td><code>src_lat, src_lon</code></td><td>Transmitter GPS coordinates</td></tr>
+        <tr><td><code>dest_lat, dest_lon</code></td><td>Receiver GPS coordinates</td></tr>
+        <tr><td><code>distance</code></td><td>Link distance in meters</td></tr>
+      </tbody></table>
+
+      <h3>SigMF Metadata Generation</h3>
+      <p>A conversion script (<code>csv_to_sigmf.py</code>) is provided to generate <a href="https://github.com/gnuradio/SigMF">SigMF</a>-compliant JSON metadata from the raw CSV files. Place the script in the environment folder (e.g., <code>air_to_air_data/</code>) and run it:</p>
+      <pre><code>cd BENCHLINK_DATA/air_to_air_data/
+python3 csv_to_sigmf.py</code></pre>
+      <p>The script automatically:</p>
       <ul>
-        <li>Declarative experiment configuration and parameter management</li>
-        <li>Pluggable backends for radios, UAV controllers, and edge services</li>
-        <li>Structured logging and artifact collection for post-analysis</li>
+        <li>Scans all subfolders and finds every <code>*_data.csv</code> file.</li>
+        <li>Parses pilot repetitions and modulation from the folder name (e.g., <code>4rep_16qam</code> &rarr; &lambda;<sub>p</sub>=4, 16QAM).</li>
+        <li>Generates an individual <code>.sigmf-meta</code> file next to each CSV.</li>
+        <li>Generates a single <code>benchlink_combined.sigmf-meta</code> in the root containing all experiments with full annotations.</li>
+        <li>Skips empty columns and fields with only "unknown" values.</li>
       </ul>
-      <p>
-        BenchLink integrates with existing research code and control software rather
-        than imposing a monolithic framework.
-      </p>
+
+      <p>For G2G data with multiple rounds, run the script inside each round folder:</p>
+      <pre><code>cd BENCHLINK_DATA/ground_to_ground_data/Round1/
+python3 ../csv_to_sigmf.py    # or copy csv_to_sigmf.py into Round1/</code></pre>
+
+      
+
+      <div style="margin-top:1rem;"><a class="btn" href="https://github.com/WingsLabWireless/benchlink_v2/tree/main/benchlink_data" target="_blank">&#8615; Download Dataset</a></div>
     </section>
 
-    <section id="testing">
-      <h2>Testing</h2>
-      <ul>
-        <li>Local and lab-based functional testing</li>
-        <li>Hardware-in-the-loop experiments</li>
-        <li>Outdoor and field deployments with repeatable configurations</li>
-      </ul>
-      <p>
-        Consistent experiment descriptions and logging enable fair comparison across
-        runs, platforms, and environments.
-      </p>
-    </section>
+    <section id="source-code"><h2>Source Code</h2><p>The complete BenchLink source code is publicly available:</p><ul><li><strong>matlab_files/:</strong> The main Simulink model (<code>benchlink.slx</code>) containing the full PHY transceiver design (DUT subsystem) and the interface model. The workspace file <code>all_variables.mat</code> contains all parameters required to run the model.</li><li><strong>axi_stream/:</strong> C programs for writing data to the FPGA via AXI4-Stream (one per pilot repetition configuration: &lambda;<sub>p</sub> = 1, 2, 4, 6, 8). These must be cross-compiled with <code>gcc-linaro-6.3.1</code> for the ARM target. Also includes <code>iio_read_module.py</code> for reading AXI4-Stream RX data using pylibiio.</li><li><strong>axi_lite/:</strong> Python script (<code>benchlink_axilite.py</code>) for setting AXI4-Lite register values on the MPSoC. The base address and offset must be configured according to the AXI-Lite addresses generated during RTL/bitstream generation in the HDL Workflow Advisor.</li><li><strong>set_frontend_params/:</strong> Python script (<code>set_radio_params.py</code>) for configuring the AD9361/FMCOMMS3 RF front-end parameters (carrier frequency, sample rate, TX/RX gains).</li><li><strong>sample_read_write/:</strong> Example scripts for sending data (<code>send_data.py</code>, which invokes the compiled C AXI-Stream programs) and receiving data (<code>recv_data.py</code>, which reads via AXI-Stream and writes results to a CSV file).</li></ul><div style="margin-top:1rem;"><a class="btn" href="https://github.com/WingsLabWireless/benchlink_v2" target="_blank">&#9733; GitHub Repository</a></div><h3>Repository Structure</h3><pre><code>BENCHLINK_V2/
+├── matlab_files/               # Simulink model and workspace
+│   ├── benchlink.slx           # Main Simulink PHY model (DUT + interface)
+│   └── all_variables.mat       # Workspace variables required by benchlink.slx
+├── axi_stream/                 # AXI4-Stream read/write utilities
+│   ├── 1_pilot_rep.c           # AXI-Stream TX for λp=1 (compile with gcc-linaro-6.3.1)
+│   ├── 2_pilot_reps.c          # AXI-Stream TX for λp=2
+│   ├── 4_pilot_reps.c          # AXI-Stream TX for λp=4
+│   ├── 6_pilot_reps.c          # AXI-Stream TX for λp=6
+│   ├── 8_pilots_reps.c         # AXI-Stream TX for λp=8
+│   └── iio_read_module.py      # AXI-Stream RX reader using pylibiio
+├── axi_lite/                   # AXI4-Lite register control
+│   └── benchlink_axilite.py    # Python script to set AXI-Lite registers
+├── set_frontend_params/        # RF front-end configuration
+│   └── set_radio_params.py     # Set AD9361/FMCOMMS3 radio parameters
+├── sample_read_write/          # Example data send/receive scripts
+│   ├── send_data.py            # Send data via AXI-Stream (calls C programs)
+│   └── recv_data.py            # Receive data via AXI-Stream, writes to CSV
+├── BENCHLINK_DATA/             # Experiment datasets (see Dataset section)
+│   ├── air_to_air_data/        #   A2A: 20 config subfolders + csv_to_sigmf.py
+│   └── ground_to_ground_data/  #   G2G: Round1/, Round2/, Round3/ each with 20 configs
+└── README.md</code></pre></section>
 
-    <section id="license">
-      <h2>License</h2>
-      <p>
-        BenchLink is released under the <strong>MIT License</strong>.
-      </p>
-      <div class="note">
-        Permission is hereby granted, free of charge, to any person obtaining a copy
-        of this software and associated documentation files, to deal in the Software
-        without restriction, including without limitation the rights to use, copy,
-        modify, merge, publish, distribute, sublicense, and/or sell copies of the
-        Software.
-      </div>
-    </section>
+    <section id="citation"><h2>Citation</h2><p>If you use BenchLink in your research, please cite:</p><pre><code>@inproceedings{benchlink2026,
+  title     = {{BenchLink}: An {SoC}-Based Benchmark for Resilient
+               Communication Links in {GPS}-Denied Environments},
+  author    = {Santhi Nivas, Sidharth and Pattanshetty Vasanth Kumar,
+               Prem Sagar and Zhang, Zhaoxi and Zhao, Chenzhi and
+               McManus, Maxwell and Mastronarde, Nicholas and
+               Bentley, Elizabeth Serena and Sklivanitis, George
+               and Pados, Dimitris A. and Guan, Zhangyu},
+  booktitle = {Proc. IEEE INFOCOM},
+  year      = {2026}
+}</code></pre></section>
+
+    <section id="license"><h2>License</h2><p>BenchLink is released under the <strong>MIT License</strong>.</p><div class="note">Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files, to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software.</div></section>
 
     <footer style="margin-top:3rem; font-size:.8rem; color:#777;">
-      WINGS Lab Open Source • BenchLink
+      WINGS Lab Open Source &bull; BenchLink &bull; University of Minnesota Twin Cities<br>
+      Supported by NSF (SWIFT-2229563, CNS-2450418) and AFRL (FA8750-21-F-1012, FA8750-20-C1021, FA8750-25-1-1000)
     </footer>
   </main>
 </div>
