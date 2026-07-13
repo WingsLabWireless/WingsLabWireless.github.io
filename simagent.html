@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SimAgent | WINGS Lab Open Source</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body { margin:0; font-family:Arial, Helvetica, sans-serif; line-height:1.55; color:#222; }
+    .layout { display:flex; min-height:100vh; }
+    nav {
+      width:260px; background:#f3f4f6; border-right:1px solid #ddd;
+      padding:1rem; box-sizing:border-box; position:sticky; top:0;
+      height:100vh; overflow-y:auto;
+    }
+    nav h1 { font-size:1.1rem; margin:0 0 .6rem 0; }
+    nav ul { list-style:none; padding:0; margin:0; font-size:.9rem; }
+    nav li.section-title { font-weight:bold; margin:.9rem 0 .3rem; }
+    nav li { margin-bottom:.35rem; }
+    nav a { color:#1f4f8b; text-decoration:none; }
+    nav a:hover { text-decoration:underline; }
+    nav a.sub { padding-left:1rem; font-size:.85rem; color:#4a6fa5; }
+    main { flex:1; padding:1.6rem 2rem; box-sizing:border-box; max-width:980px; }
+    main h1 { font-size:1.9rem; margin-top:0; }
+    main h2 {
+      font-size:1.35rem; margin-top:2.1rem;
+      border-bottom:1px solid #eee; padding-bottom:.3rem;
+    }
+    main h3 { font-size:1.1rem; margin-top:1.5rem; margin-bottom:.3rem; }
+    main h4 { font-size:.95rem; margin-top:1.1rem; margin-bottom:.3rem; }
+    p { margin:.45rem 0 .7rem; }
+    ul, ol { margin:.4rem 0 .9rem; padding-left:1.4rem; }
+    li { margin-bottom:.3rem; }
+    a { color:#1f4f8b; text-decoration:none; }
+    a:hover { text-decoration:underline; }
+    .pill {
+      display:inline-block; font-size:.78rem; padding:.12rem .45rem;
+      border-radius:999px; background:#f5f5f5; border:1px solid #e6e6e6;
+      color:#444; margin-right:.35rem; margin-bottom:.25rem;
+    }
+    .note {
+      background:#eef6ff; border-left:4px solid #1f4f8b;
+      padding:.7rem .9rem; margin:1.2rem 0; font-size:.9rem;
+    }
+    .warning {
+      background:#fff8f0; border-left:4px solid #c4600c;
+      padding:.7rem .9rem; margin:1.2rem 0; font-size:.9rem;
+    }
+    .success {
+      background:#f0faf4; border-left:4px solid #1a7a3a;
+      padding:.7rem .9rem; margin:1.2rem 0; font-size:.9rem;
+    }
+    code {
+      font-family:Consolas, Monaco, 'Courier New', monospace;
+      font-size:.88em; background:#f0f0f0; padding:.1em .3em;
+      border-radius:3px;
+    }
+    pre {
+      background:#1e1e1e; color:#d4d4d4; padding:1rem 1.2rem;
+      border-radius:5px; overflow-x:auto; font-size:.85rem;
+      line-height:1.55; margin:.7rem 0 1.1rem;
+    }
+    pre code { background:none; padding:0; color:inherit; font-size:inherit; }
+    table {
+      width:100%; border-collapse:collapse; margin:.7rem 0 1.1rem;
+      font-size:.9rem;
+    }
+    th {
+      background:#1f4f8b; color:#fff; font-weight:bold; text-align:left;
+      padding:.45rem .7rem; font-size:.85rem;
+    }
+    td { padding:.4rem .7rem; border-bottom:1px solid #eee; }
+    tr:hover { background:#fafafa; }
+    .img-placeholder {
+      background:#f0f0f0; border:2px dashed #ccc; border-radius:5px;
+      padding:2rem 1.2rem; text-align:center; color:#888;
+      font-size:.85rem; margin:.8rem 0 1rem; font-style:italic;
+    }
+    .btn {
+      display:inline-block; padding:.4rem .9rem; background:#1f4f8b;
+      color:#fff; border-radius:4px; font-size:.85rem; font-weight:bold;
+      text-decoration:none; margin-right:.4rem; margin-bottom:.4rem;
+    }
+    .btn:hover { background:#163d6e; text-decoration:none; }
+    .btn-outline {
+      background:transparent; color:#1f4f8b; border:1.5px solid #1f4f8b;
+    }
+    .btn-outline:hover { background:#eef6ff; }
+    .fig { margin:1rem 0 1.2rem; text-align:center; }
+    .fig img { max-width:100%; height:auto; border:1px solid #e0e0e0; border-radius:4px; }
+    .fig .caption { font-size:.82rem; color:#666; margin-top:.4rem; font-style:italic; }
+    @media (max-width:900px) {
+      .layout { flex-direction:column; }
+      nav { width:100%; height:auto; position:static; }
+      main { padding:1rem; }
+    }
+  </style>
+</head>
+
+<body>
+<div class="layout">
+  <nav>
+    <h1>SimAgent</h1>
+    <ul>
+      <li class="section-title">Getting Started</li>
+      <li><a href="#introduction">Introduction</a></li>
+      <li><a href="#prerequisites">Prerequisites</a></li>
+      <li><a href="#setup">Setup Guide</a></li>
+
+      <li class="section-title">Architecture</li>
+      <li><a href="#codesign">HW/SW Co-Design</a></li>
+      <li><a href="#platform">Platform Architecture</a></li>
+      <li><a href="#protocols">Communication Protocols</a></li>
+      <li><a href="#frame-design">Frame Design</a></li>
+
+      <!--
+      <li class="section-title">Transceiver Chain</li>
+      <li><a href="#tx-chain">Transmitter Chain</a></li>
+      <li><a class="sub" href="#tx-data-gen">Data Generation</a></li>
+      <li><a class="sub" href="#tx-packet-assembly">Packet Assembly</a></li>
+      <li><a class="sub" href="#tx-symbol-mapping">Symbol Mapping</a></li>
+      <li><a class="sub" href="#tx-pilot-insertion">Pilot Insertion</a></li>
+      <li><a class="sub" href="#tx-spreading">Spreading</a></li>
+      <li><a class="sub" href="#tx-pulse-shaping">Pulse Shaping &amp; RF</a></li>
+      <li><a href="#rx-chain">Receiver Chain</a></li>
+      <li><a class="sub" href="#rx-agc">Gain Control</a></li>
+      <li><a class="sub" href="#rx-matched-filter">Matched Filtering</a></li>
+      <li><a class="sub" href="#rx-cfo">CFO Estimation</a></li>
+      <li><a class="sub" href="#rx-frame-detect">Frame Detection</a></li>
+      <li><a class="sub" href="#rx-channel-eq">Channel Equalization</a></li>
+      <li><a class="sub" href="#rx-despreading">Despreading</a></li>
+      <li><a class="sub" href="#rx-demod">Demodulation</a></li>
+      -->
+
+
+
+      <li class="section-title">Resources</li>
+      <!-- 
+      <li><a href="#dataset">Dataset</a></li>
+      -->
+      <li><a href="#source-code">Source Code</a></li>
+      <li><a href="#citation">Citation</a></li>
+      <li><a href="#license">License</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <header>
+      <h1>BenchLink</h1>
+      <p style="margin-top:-.2rem; color:#555; font-size:1.05rem;">An SoC-Based Benchmark for Resilient Communication Links in GPS-Denied Environments</p>
+      <div>
+        <span class="pill">Software-defined Networking</span>
+        <span class="pill">Network Protocol Design</span>
+        <span class="pill">Testbed Emulation</span>
+        <span class="pill">Containerized Networking</span>
+        <span class="pill">Open Source</span>
+      </div>
+      <div style="margin-top:1rem;">
+        <a class="btn" href="https://github.com/WingsLabWireless/SimAgent" target="_blank">&#9733; Source Code</a>
+        <!-- 
+        <a class="btn btn-outline" href="https://github.com/WingsLabWireless/benchlink_v2/tree/main/benchlink_data" target="_blank">&#8615; Dataset</a>
+        <a class="btn btn-outline" href="https://arxiv.org/abs/2512.20942" target="_blank">Paper (arXiv)</a> 
+        --> 
+      </div>
+    </header>
+
+    <section id="introduction"><h2>Introduction</h2>
+      <p>
+        While most wireless network simulation frameworks offer configuration options, many lack a clear framework for integrating extant software-defined 
+        protocol stacks. This leaves evaluation of software-defined network toolchains to custom frameworks, which may be challenging to design or share
+        with members of the wireless research community.          
+      </p>
+      <p>
+        <strong>SimAgent</strong> is a lightweight software testbench designed to simplify behavioral evaluation of software-defined wireless network protocols 
+        through a containerized networking interface and abstracted channel model. While existing network simulation tools may impose compatibility restrictions 
+        with regards to programming language or event-based synchronization, the containerized design supports standalone operation of containerized node 
+        instances across a layer-agnostic socket interface. This reduces integration requirements and streamlines evaluation steps to minimize complexity 
+        in behavioral evaluation of software-defined networking tools ranging from individual signaling algorithms as well as full-scale software-defined 
+        protocol stacks.  
+      </p>
+      <!-- 
+      <div class="fig"><img src="images/fig1_architecture.png" alt="BenchLink software-hardware partitioning and co-design architecture"><div class="caption">Software-hardware partitioning and co-design architecture of BenchLink. Components marked with * are custom designed.</div></div>
+      <div class="fig"><img src="images/fig10_drone.png" alt="Heavy-duty drone with BenchLink module"><div class="caption">Heavy-duty drone with integrated BenchLink module for air-to-air communication experiments.</div></div>
+      -->
+</section>
+
+<section id="prerequisites"><h2>Software &amp; Hardware Prerequisites</h2>
+<h3>Hardware Requirements</h3>
+  <p>
+    While SimAgent does not require any specific hardware configuration, computational load during operation will naturally increase with the scale and 
+    complexity of the software under test as well as the target networking scenario. While strict configuration limits will vary based on the specifications
+    of the device running the SimAgent testbench, we recommend running fewer simultaneous node instances than the number of available processor threads of 
+    the device running SimAgent for best performance. 
+  </p>
+
+
+<!--
+  <table><thead><tr><th>Component</th><th>Specification</th><th>Notes</th></tr></thead>
+    <tbody><tr><td>MPSoC Platform</td><td>Xilinx Zynq UltraScale+ ZCU102 Evaluation Kit</td><td>Quad-core ARM Cortex-A53 (PS) + FPGA fabric (PL)</td></tr>
+      <tr><td>RF Front-End</td><td>Analog Devices AD-FMCOMMS3-EBZ</td><td>AD9361 transceiver; 70 MHz – 6.0 GHz; up to 56 MHz BW; FMC HPC</td></tr>
+      <tr><td>Onboard Computer (Field Only)</td><td>Intel NUC or equivalent mini-PC</td><td>Used only for outdoor/field deployments due to compact form factor. 
+        For indoor/lab testing, any standard PC or laptop connected via Ethernet can be used instead.</td></tr>
+      <tr><td>Antennas</td><td>Omnidirectional monopole antennas</td><td>One TX, one RX per node; 2.4 GHz band compatible</td></tr>
+      <tr><td>Attenuator (Indoor)</td><td>12 dB Mini-Circuits fixed RF attenuator</td><td>For wired-channel indoor testing to avoid receiver saturation</td></tr>
+      <tr><td>Cables</td><td>RG316 SMA coaxial cable</td><td>For wired-channel experiments; SMA connectors</td></tr>
+      <tr><td>Power Supply (Field)</td><td>Bluetti Solar Generator AC180 (or similar)</td><td>High-capacity portable power station for outdoor deployments</td></tr>
+      <tr><td>Webcam</td><td>USB webcam</td><td>Connected to the host computer for live video data generation</td></tr>
+    </tbody>
+  </table>
+-->
+
+<!--
+<div class="note">
+  <strong>For Aerial Experiments:</strong> Each BenchLink module weighs approximately 15 lbs. 
+  Heavy-duty drones capable of carrying payloads up to 50 lbs and generating ~120 lbs of thrust are used. 
+  Operating drones with takeoff weight exceeding 55 lbs requires special FAA registration and a designated outdoor test site.
+</div>
+-->
+  
+<h3>Software Requirements</h3>
+<ul>
+  <li>
+    <strong>Docker Engine</strong>: recommend version 29 or later (<i>developed using 29.5.2</i>)
+  </li>
+  <li>
+    <strong>Python</strong>: recommend version 3.10 or later (<i>developed using 3.10.14</i>)
+  </li>
+  <li>
+    <strong>Ubuntu</strong>: recommend version 22.04 or later (<i>developed using 24.04</i>)
+  </li>
+</ul>
+<!-- NOTE: for numbered list, use <ol> <li> </li> </ol> -->
+  
+<div class="note">
+  <strong>Alternate configurations:</strong> While only the development configuration has been tested, the simplicity of the SimAgent source code may 
+  enable successful deployment on unlisted or untested configurations. If you are already using a combination of Docker and Python on a Linux-based OS 
+  for your own research, we recommend testing the source code directly and sharing your experience with us via GitHub. 
+</div>
+
+
+<h3>Recommended Tools</h3>
+<ul>
+  <li>
+    <strong>X11</strong>: SimAgent is configured to use X11 forwarding for protocol stacks which require a graphical interface; 
+    if this is not supported by the user software, configuration options may depend on alterations to the source code 
+  </li>
+  <li>
+    <strong>Anaconda</strong>: Python environment managment within Docker containers is handled using
+    <a href="https://www.anaconda.com/docs/main">Anaconda</a> by default, which allows users to install dependencies automatically as outlined below; 
+    use of this feature is optional, but alternative environment management strategies will require manual configuration of the SimAgent source code 
+  </li>
+</ul>
+
+<h3>Knowledge Prerequisites</h3>
+  <p>
+    Users must be familiar with Dockerfile composition, including syntax, execution, and file system interactions to enable network protocol integration 
+    (further reading <a href="https://docs.docker.com/get-started/docker-concepts/building-images/writing-a-dockerfile/">Dockerfile composition)</a>. We 
+    recommend familiarity with <a href="https://docs.docker.com/engine/network/">Docker Network</a> configuration to help troubleshoot configuration issues.  
+  </p>
+  <p>  
+    Users must also be familiar with <a href="https://www.shellscript.sh/">Shell Command Language</a> to configure the automated network startup scripts.
+  </p>
+  <p>
+    We recommend familiarity with Unix sockets, including addressing, general capabilities and limitations, and 
+    <a href="https://docs.python.org/3/library/socket.html">Python implementation</a> for general use beyond the scope of this documentation. 
+  </p>
+  <p>
+    We recommend a basic understanding of <a href="https://web.stanford.edu/class/ee359/doc/WirelessComm_Chp1-16_March32020.pdf">wireless communications</a>,
+    such as channel properties and modeling, for extension or manipulation of the basic channel abstraction, which is also beyond the scope of this documentation. 
+  </p>
+</section>
+
+
+
+
+<section id="setup"><h2>Setup Guide</h2>
+<h3>Installation</h3>
+  <p>
+    Ensure Docker has been configured correctly on the host machine 
+    (see the <a href="https://docs.docker.com/engine/install/ubuntu/">Docker Installation guide</a> for more info). 
+  </p>
+
+  <p>
+    (<i>Optional</i>) Ensure X11 forwarding is available on the host machine. 
+    <ul>
+      <li>
+        <code>echo $DISPLAY</code>: should return display ID (e.g. "<code>:1</code>") if environment variable is set correctly 
+      </li>
+      <li>
+        <strong>xclock</strong>: will open a small clock window if X11 is working 
+      </li>
+    </ul>
+  </p>
+
+  <p>
+    Clone the <a href="https://github.com/WingsLabWireless/SimAgent">repository</a>, e.g.: <code>git clone git@github.com:WingsLabWireless/SimAgent.git</code>
+  </p>
+
+
+  <p>
+    <strong>WARNING: step-by-step documentation beyond this point is still being generated and additional details will be provided ASAP</strong>. 
+  </p>
+
+  
+  <p>
+    Deploy user code in the <code>ProtocolFolder</code>, and update the automated startup script <code>protocol_script.sh</code>. 
+  </p>
+
+
+  <p>
+    Modify the <code>Dockerfile</code>. 
+  </p>
+
+
+  <p>
+    (<i>Optional</i>) Modify the <code>.dockerignore</code>.  
+  </p>
+  
+
+  <p>
+    Modify the startup script <code>start_emulator.sh</code>. 
+  </p>
+
+
+  <p>
+    Configure container ports. 
+  </p>
+  
+</section>
+
+
+<!--
+<section id="citation"><h2>Citation</h2><p>If you use BenchLink in your research, please cite the following paper (<a href="https://arxiv.org/abs/2512.20942">arXiv</a>):</p><pre><code>@inproceedings{benchlink2026,
+  title     = {{BenchLink}: An {SoC}-Based Benchmark for Resilient
+               Communication Links in {GPS}-Denied Environments},
+  author    = {Santhi Nivas, Sidharth and Pattanshetty Vasanth Kumar,
+               Prem Sagar and Zhang, Zhaoxi and Zhao, Chenzhi and
+               McManus, Maxwell and Mastronarde, Nicholas and
+               Bentley, Elizabeth Serena and Sklivanitis, George
+               and Pados, Dimitris A. and Guan, Zhangyu},
+  booktitle = {Proc. IEEE INFOCOM},
+  year      = {2026}
+}</code></pre>
+</section>
+-->
+
+<section id="license"><h2>License</h2><p>BenchLink is released under the <strong>MIT License</strong>.</p><div class="note">Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files, to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software.</div></section>
+
+<footer style="margin-top:3rem; font-size:.8rem; color:#777;">
+  WINGS Lab Open Source &bull; SimAgent &bull; University of Minnesota Twin Cities
+  <!-- 
+  <br> Supported by NSF (SWIFT-2229563, CNS-2450418) and AFRL (FA8750-21-F-1012, FA8750-20-C1021, FA8750-25-1-1000)
+  -->
+</footer>
+</main>
+</div>
+</body>
+</html>
