@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>UnionLabs Workshop 2026</title>
+   
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="./2021_files/w3.css">
+   <link href="./2021_files/wcnee.css" rel="stylesheet" type="text/css" id="styleId">
+   <link rel="stylesheet" href="./2021_files/css">
+   <link rel="stylesheet" href="./2021_files/css(1)">
+   <link rel="stylesheet" href="./2021_files/font-awesome.min.css">
+   <style>
+      body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+      .w3-bar,h1,button {font-family: "Montserrat", sans-serif}
+      .fa-anchor,.fa-coffee {font-size:200px}
+      #home {padding-top:8px;}
+      #home > .w3-content {max-width:1200px;}
+      .logo-row {
+         display:flex;
+         align-items:center;
+         justify-content:center;
+         flex-wrap:wrap;
+         gap:18px 42px;
+         margin:0 auto 10px;
+      }
+      .logo-row img {
+         display:block;
+         max-width:100%;
+         height:auto;
+      }
+      .logo-unionlabs {width:250px;}
+      .logo-nsf {width:150px;}
+      .logo-cloudbank, .logo-access {width:250px;}
+      .workshop-tagline {
+         font-size:32px;
+         line-height:1.35;
+         font-weight:400;
+         text-align:left;
+         margin:14px 0 8px;
+      }
+
+      .top-banner {
+         display:block;
+         width:100%;
+         max-width:1200px;
+         height:auto;
+         margin:0 auto 10px;
+      }
+
+      .main-sections {
+         width:calc(100% - 32px);
+         max-width:1200px;
+         margin:0 auto;
+         padding:0;
+      }
+
+      .content-section {
+         width:100%;
+         max-width:1200px;
+         margin:0 auto 22px;
+         padding:32px 28px;
+         box-sizing:border-box;
+      }
+
+      .content-section.section-grey {
+         background-color:#f1f1f1 !important;
+      }
+
+      .content-section.section-white {
+         background-color:#ffffff !important;
+      }
+
+      .content-section > .w3-content {
+         width:100%;
+         max-width:1144px;
+         margin-left:auto;
+         margin-right:auto;
+      }
+
+      .university-logo-placeholder {
+         width:220px;
+         height:90px;
+         margin:0 auto;
+         border:2px dashed #999;
+         border-radius:6px;
+         display:flex;
+         align-items:center;
+         justify-content:center;
+         box-sizing:border-box;
+         padding:10px;
+         color:#666;
+         background:#fafafa;
+         font-size:16px;
+         text-align:center;
+      }
+
+      @media (max-width:700px) {
+         .logo-row {gap:14px 24px;}
+         .logo-unionlabs {width:210px;}
+         .logo-nsf {width:110px;}
+         .logo-cloudbank, .logo-access {width:190px;}
+         .workshop-tagline {font-size:23px; margin-top:10px;}
+
+         .main-sections {
+            width:calc(100% - 16px);
+         }
+         .content-section {
+            padding:24px 16px;
+            margin-bottom:14px;
+         }
+
+      }
+   </style>
+</head>
+<body>
+
+      <div class="w3-top">
+         <div class="w3-bar w3-deep-orange w3-card-2 w3-left-align w3-large">
+            <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-deep-orange" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+            <a href="#" class="w3-bar-item w3-button w3-padding-large w3-white">Home</a>
+            <a href="#scope" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Scope</a>
+            <a href="#patron" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Collaborators</a>
+            <a href="#committees" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Committee</a>
+			<a href="#program" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Program</a>
+            <a href="#speaker" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Speakers</a>
+           
+            <a href="#contact" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Contact</a>
+</div>
+      </div>
+      
+      <header class="w3-container w3-white" style="padding-top:64px;">
+      </header>
+      
+      <div class="w3-row-padding w3-padding-8 w3-container" id="home">
+         <div class="w3-content">
+            <div class="logo-row">
+               <a href="https://www.nsf.gov/"><img class="logo-nsf" src="./UnionLabs2026_Files/nsf.png" alt="National Science Foundation"></a>
+               <a href="https://access-ci.org/"><img class="logo-access" src="./UnionLabs2026_Files/access.jpg" alt="ACCESS"></a>
+               <a href="https://www.cloudbank.org/"><img class="logo-cloudbank" src="./UnionLabs2026_Files/cloudbank.png" alt="CloudBank"></a>
+               <a href="http://unionlabs.s3-website-us-east-1.amazonaws.com/login"><img class="logo-unionlabs" src="./UnionLabs2026_Files/unionlabs2.png" alt="UnionLabs"></a>
+            </div>
+            <img class="w3-image top-banner" src="./UnionLabs2026_Files/uof.jpg" alt="Workshop banner">
+            <h2 class="w3-jumbo w3-text-deep-orange" style="margin-bottom:-25px;"><b>UnionLabs Community Workshop 2026</b></h2>
+            <h3 class="w3-text-deep-orange workshop-tagline"><i>Building a Federated Ecosystem for Experimental Wireless Research</i></h3>			
+			<br>
+			<h3> December 2026, Gainesville, Florida &nbsp &nbsp &nbsp &nbsp <font color="red"></font></h3>  
+            <br>
+			<br>
+         </div>
+      </div>
+
+      <div class="w3-container main-sections">
+         <div class="w3-container content-section section-grey" id="scope">
+            <div class="w3-content">
+
+               <h1 class="w3-xxlarge w3-text-deep-orange"><b>Scope</b></h1>
+               <div class="w3-row-padding">
+                  <div>
+                     <p style="font-size:20px" align="justify">
+                        The UnionLabs Community Workshop brings together researchers, educators, testbed operators,
+                        industry practitioners, and government stakeholders to advance an open and federated ecosystem
+                        for experimental wireless research. The workshop provides a forum for sharing research challenges,
+                        technical solutions, operational experience, and community needs related to the federation of
+                        heterogeneous wireless testbeds, remote experimentation, reproducible research, and shared
+                        cyberinfrastructure.
+                     </p>
+                     <p style="font-size:20px" align="justify">
+                        Topics of interest include testbed federation and interoperability, experiment orchestration,
+                        cloud-edge integration, software-defined wireless platforms, open-source tools, security and trust,
+                        resource discovery and scheduling, dataset sharing, reproducibility, education and workforce
+                        development, and emerging applications involving 5G/6G, Internet of Things, UAV networks, rural
+                        connectivity, and AI-native wireless systems. The workshop will also facilitate discussions on
+                        sustainable governance models, community engagement, and future research directions for building
+                        a broadly accessible national wireless experimentation ecosystem.
+                     </p>
+                     <p style="font-size:20px" align="justify">
+                        UnionLabs is supported by the U.S. National Science Foundation through the Community Infrastructure
+                        for Research in Computer and Information Science and Engineering (CIRC) program under Awards
+                        <b>CNS-2450418</b> and <b>CNS-2450419</b>.
+                     </p>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+         <div class="w3-container content-section section-white" id="patron">
+            <div class="w3-content">
+               <h1 class="w3-xxlarge w3-text-deep-orange "><b>Collaborators</b></h1>
+
+        <table style="padding:10px" border="0px" cellpadding="10">
+        <colgroup>
+           <col span="1" style="width: 20%;">
+           <col span="1" style="width: 25%;">
+           <col span="1" style="width: 20%;">
+           <col span="1" style="width: 20%;">
+           <col span="1" style="width: 20%;">
+           <col span="1" style="width: 20%;">           
+           
+        </colgroup>           
+        
+        <tbody>      
+            <tr>
+            
+              <td valign="top"><center> <a href=""> <img src="./UnionLabs2026_Files/ub.png" width="200"> </a>
+				</center>
+              </td>              
+              
+              <td valign="top"><center> <a href=""> <img src="./UnionLabs2026_Files/placeholder.jpg" width="100"> <a>
+				</center>
+              </td>  
+              
+              <td valign="top"><center> <a href=""> <img src="./UnionLabs2026_Files/placeholder.jpg" width="100"> <a>
+				</center>
+              </td>          
+
+              <td valign="top"><center> <a href=""> <img src="./UnionLabs2026_Files/placeholder.jpg" width="100"> <a>
+				</center>
+              </td>     
+
+			</tr> 
+        </tbody>
+        
+        <colgroup>
+           <col span="1" style="width: 30%;">
+           <col span="1" style="width: 25%;">
+           <col span="1" style="width: 20%;">
+           <col span="1" style="width: 20%;">
+           <col span="1" style="width: 20%;">
+           <col span="1" style="width: 20%;">           
+           
+        </colgroup>           
+        
+        <tbody>      
+            <tr>
+            
+              <td valign="top"><center> <a href=""> <img src="./UnionLabs2026_Files/placeholder.jpg" width="100"> <a>
+				</center>
+              </td>            
+              
+              <td valign="top"><center> <a href=""> <img src="./UnionLabs2026_Files/placeholder.jpg" width="100"> <a>
+				</center>
+              </td>  
+                  			  
+              <td valign="top"><center> <a href=""> <img src="./UnionLabs2026_Files/placeholder.jpg" width="100"> <a>
+				</center>
+              </td>  
+              
+              <td valign="top"><center> <a href=""> <img src="./UnionLabs2026_Files/placeholder.jpg" width="100"> <a>
+				</center>
+              </td>            
+              
+			</tr> 
+        </tbody>        
+        </table>  
+        
+            </div>
+         </div>         
+
+         <div class="w3-container content-section section-grey" id="committees">
+            <div class="w3-content">
+               <h1 class="w3-xxlarge w3-text-deep-orange"><b>Workshop Co-Chairs</b></h1>
+            </div>
+
+            <div class="w3-content">
+               <table style="padding:0px; width:100%;" border="0px" cellpadding="10">
+                  <tbody>
+                     <tr>
+                        <td valign="top" style="width:18%;">
+                           <center><img src="./UnionLabs2026_Files/guan.jpg" width="150" height="180" alt="Zhangyu Guan"><br></center>
+                        </td>
+                        <td valign="top" style="width:52%;">
+                           <font size="2">
+                              <b>Workshop Co-Chair</b>: Zhangyu Guan
+                              <a href="https://wingslabwireless.github.io/" target="_blank">[Website]</a><br>
+                              The Bradley Department of Electrical and Computer Engineering<br>
+                              Virginia Tech, USA<br>
+                           </font>
+                        </td>
+                        <td valign="middle" style="width:30%;">
+                           <center><a href="https://www.vt.edu/" target="_blank"><img src="./UnionLabs2026_Files/vt.png" width="300" style="max-height:200px; object-fit:contain;" alt="Virginia Tech"></a></center>
+                        </td>
+                     </tr>
+
+                     <tr>
+                        <td valign="top">
+                           <center><img src="./UnionLabs2026_Files/mingyue.jfif" width="150" height="190" alt="Mingyue Ji"><br></center>
+                        </td>
+                        <td valign="top">
+                           <font size="2">
+                              <b>Workshop Co-Chair</b>: Mingyue Ji
+                              <a href="https://faculty.eng.ufl.edu/mingyueji/" target="_blank">[Website]</a><br>
+                              Department of Electrical and Computer Engineering<br>
+                              University of Florida, USA<br>
+                           </font>
+                        </td>
+                        <td valign="middle">
+                           <center><a href="https://www.ufl.edu/" target="_blank"><img src="./UnionLabs2026_Files/uf.png" width="300" style="max-height:200px; object-fit:contain;" alt="University of Florida"></a></center>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+
+         <div class="w3-container content-section section-white" id="speaker">
+            <div class="w3-content">
+               <h1 class="w3-xxlarge w3-text-deep-orange"><b>Featured Speakers</b></h1>
+            </div>
+
+            <div class="w3-content">
+               <table style="padding:0px; width:100%;" border="0px" cellpadding="10">
+                  <tbody>
+                     <tr>
+                        <td valign="top" style="width:18%;">
+                           <center>
+                              <img src="./UnionLabs2026_Files/guan.jpg"
+                                   width="150" height="180"
+                                   style="object-fit:cover;"
+                                   alt="Speaker photo placeholder"><br>
+                           </center>
+                        </td>
+
+                        <td valign="top" style="width:52%;">
+                           <font size="2">
+                              <b>Speaker</b>: Zhangyu Guan
+                              <a href="https://wingslabwireless.github.io/" target="_blank">[Website]</a><br>
+                              Associate Professor<br>
+                              The Bradley Department of Electrical and Computer Engineering<br>
+                              Virginia Tech, USA<br>
+                              <b>Topic</b>: UnionLabs: Facilitating Shared Access to Heterogeneous Wireless Testbeds Through Grassroots-Driven Federation<br>
+                           </font>
+                        </td>
+
+                        <td valign="middle" style="width:30%;">
+                           <center>
+                              <img src="./UnionLabs2026_Files/vt.png"
+                                   width="300"
+                                   style="max-height:200px; object-fit:contain;"
+                                   alt="University logo placeholder">
+                           </center>
+                        </td>
+                     </tr>
+
+                     <tr>
+                        <td valign="top" style="width:18%;">
+                           <center>
+                              <img src="./UnionLabs2026_Files/mingyue.jfif"
+                                   width="150" height="190"
+                                   style="object-fit:cover;"
+                                   alt="Mingyue Ji"><br>
+                           </center>
+                        </td>
+
+                        <td valign="top" style="width:52%;">
+                           <font size="2">
+                              <b>Speaker</b>: Mingyue Ji
+                              <a href="https://faculty.eng.ufl.edu/mingyueji/" target="_blank">[Website]</a><br>
+                              Associate Professor<br>
+                              Department of Electrical and Computer Engineering<br>
+                              University of Florida, USA<br>
+                              <b>Topic</b>: UnionLabs: Facilitating Shared Access to Heterogeneous Wireless Testbeds Through Grassroots-Driven Federation<br>
+                           </font>
+                        </td>
+
+                        <td valign="middle" style="width:30%;">
+                           <center>
+                              <img src="./UnionLabs2026_Files/uf.png"
+                                   width="300"
+                                   style="max-height:200px; object-fit:contain;"
+                                   alt="University of Florida">
+                           </center>
+                        </td>
+                     </tr>
+
+                  </tbody>
+               </table>
+            </div>
+         </div>
+
+          <div class="w3-container content-section section-grey" id="program">
+            <div class="w3-content">
+               <h1 class="w3-xxlarge w3-text-deep-orange"><b> <a> Program (all times in EST) </a> </b></h1>
+			<ul class="w3-ul">
+
+            <font color="red"> <a style="font-size:20px"> <b> December</b> </a> </font> <br>
+            <li><a style="font-size:20px"> <b>18:00 - 20:00 Welcome Reception </b> (Contacts: Mingyue Ji)  </a> <br>
+            <a style="font-size:20px"> <i>Welcome Remarks, TBD</i></a> 
+            </li>
+           
+            <font color="red"> <a style="font-size:20px"> <b> December (Venue: TBD) </b> </a> </font> <br>
+  			<li><a style="font-size:20px"> <b>08:00-08:30  &nbsp Check-in and Breakfast</b> </a> <br>           
+            </li>                
+  			<li><a style="font-size:20px"> <b>08:30-08:40  &nbsp Opening Remarks</b> (Session Chairs: Mingyue Ji)  </a> <br>
+            <a style="font-size:20px"> <i>TBD (TBD)</i></a><br> 
+            <a style="font-size:20px"> <i>TBD (TBD)</i></a>
+            </li>
+            
+  			<li><a style="font-size:20px"> <b>08:45-09:25  &nbsp Keynote Speech </b> (Session Chair: Zhangyu Guan) </a> <br>
+            <a style="font-size:20px"> <i>TBD (TBD) </i> </a> <br> 
+            </li>
+
+            <li>
+               <a style="font-size:20px">
+                  <b>Invited Talks </b> (Session Chairs: Zhangyu Guan, Mingyue Ji)
+               </a><br>
+               <a style="font-size:20px"><i>Speakers, topics, and schedule: TBD</i></a>
+            </li>
+
+            <li>
+               <a style="font-size:20px">
+                  <b>Poster/Demo/Hands-on Sessions</b> (Session Chairs: Zhangyu Guan, Mingyue Ji)
+               </a><br>
+               <a style="font-size:20px"><i>Session details and schedule: TBD</i></a>
+            </li>
+
+            <li>
+               <a style="font-size:20px">
+                  <b>Break-out Discussion and Feedback</b> (Session Chairs: Zhangyu Guan, Mingyue Ji)
+               </a><br>
+               <a style="font-size:20px"><i>Discussion topics, moderators, and schedule: TBD</i></a>
+            </li>
+
+            </ul>
+             </div>
+          </div>	
+<div class="w3-container content-section section-white" id="contact">
+            <div class="w3-content">
+               <h1 class="w3-xxlarge w3-text-deep-orange"><b>Contact Us</b></h1>
+               <a style="font-size:20px" target="_top">E-mail the organizers:</a> <a style="font-size:20px"><i><b>Mingyue Ji</b> (mingyueji@ufl.edu), <b>Zhangyu Guan</b> (zhangyuguan@vt.edu)</i></a>
+            </div>
+         </div>
+<div class="w3-container" style="position:relative">
+            <a href="#home" class="w3-button w3-normal w3-circle w3-blue" style="position:absolute;top:-18px;right:24px"> top </a> 
+         </div>
+
+      </div>
+
+      <script>
+         // Used to toggle the menu on small screens when clicking on the menu button
+         function myFunction() {
+             var x = document.getElementById("navDemo");
+             if (x.className.indexOf("w3-show") == -1) {
+                 x.className += " w3-show";
+             } else { 
+                 x.className = x.className.replace(" w3-show", "");
+             }
+         }
+      </script>
+   
+</body></html>
