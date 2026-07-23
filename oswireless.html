@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>OSWireless | WINGS Lab Open Source</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body { margin:0; font-family:Arial, Helvetica, sans-serif; line-height:1.55; color:#222; }
+    .layout { display:flex; min-height:100vh; }
+    nav {
+      width:260px; background:#f3f4f6; border-right:1px solid #ddd;
+      padding:1rem; box-sizing:border-box; position:sticky; top:0;
+      height:100vh; overflow-y:auto;
+    }
+    nav h1 { font-size:1.1rem; margin:0 0 .6rem 0; }
+    nav ul { list-style:none; padding:0; margin:0; font-size:.9rem; }
+    nav li.section-title { font-weight:bold; margin:.9rem 0 .3rem; }
+    nav li { margin-bottom:.35rem; }
+    nav a { color:#1f4f8b; text-decoration:none; }
+    nav a:hover { text-decoration:underline; }
+    nav a.sub { padding-left:1rem; font-size:.85rem; color:#4a6fa5; }
+    main { flex:1; padding:1.6rem 2rem; box-sizing:border-box; max-width:980px; }
+    main h1 { font-size:1.9rem; margin-top:0; }
+    main h2 {
+      font-size:1.35rem; margin-top:2.1rem;
+      border-bottom:1px solid #eee; padding-bottom:.3rem;
+    }
+    main h3 { font-size:1.1rem; margin-top:1.5rem; margin-bottom:.3rem; }
+    main h4 { font-size:.95rem; margin-top:1.1rem; margin-bottom:.3rem; }
+    p { margin:.45rem 0 .7rem; }
+    ul, ol { margin:.4rem 0 .9rem; padding-left:1.4rem; }
+    li { margin-bottom:.3rem; }
+    a { color:#1f4f8b; text-decoration:none; }
+    a:hover { text-decoration:underline; }
+    .pill {
+      display:inline-block; font-size:.78rem; padding:.12rem .45rem;
+      border-radius:999px; background:#f5f5f5; border:1px solid #e6e6e6;
+      color:#444; margin-right:.35rem; margin-bottom:.25rem;
+    }
+    .note {
+      background:#eef6ff; border-left:4px solid #1f4f8b;
+      padding:.7rem .9rem; margin:1.2rem 0; font-size:.9rem;
+    }
+    .warning {
+      background:#fff8f0; border-left:4px solid #c4600c;
+      padding:.7rem .9rem; margin:1.2rem 0; font-size:.9rem;
+    }
+    .success {
+      background:#f0faf4; border-left:4px solid #1a7a3a;
+      padding:.7rem .9rem; margin:1.2rem 0; font-size:.9rem;
+    }
+    code {
+      font-family:Consolas, Monaco, 'Courier New', monospace;
+      font-size:.88em; background:#f0f0f0; padding:.1em .3em;
+      border-radius:3px;
+    }
+    pre {
+      background:#1e1e1e; color:#d4d4d4; padding:1rem 1.2rem;
+      border-radius:5px; overflow-x:auto; font-size:.85rem;
+      line-height:1.55; margin:.7rem 0 1.1rem;
+    }
+    pre code { background:none; padding:0; color:inherit; font-size:inherit; }
+    table {
+      width:100%; border-collapse:collapse; margin:.7rem 0 1.1rem;
+      font-size:.9rem;
+    }
+    th {
+      background:#1f4f8b; color:#fff; font-weight:bold; text-align:left;
+      padding:.45rem .7rem; font-size:.85rem;
+    }
+    td { padding:.4rem .7rem; border-bottom:1px solid #eee; }
+    tr:hover { background:#fafafa; }
+    .img-placeholder {
+      background:#f0f0f0; border:2px dashed #ccc; border-radius:5px;
+      padding:2rem 1.2rem; text-align:center; color:#888;
+      font-size:.85rem; margin:.8rem 0 1rem; font-style:italic;
+    }
+    .btn {
+      display:inline-block; padding:.4rem .9rem; background:#1f4f8b;
+      color:#fff; border-radius:4px; font-size:.85rem; font-weight:bold;
+      text-decoration:none; margin-right:.4rem; margin-bottom:.4rem;
+    }
+    .btn:hover { background:#163d6e; text-decoration:none; }
+    .btn-outline {
+      background:transparent; color:#1f4f8b; border:1.5px solid #1f4f8b;
+    }
+    .btn-outline:hover { background:#eef6ff; }
+    .fig { margin:1rem 0 1.2rem; text-align:center; }
+    .fig img { max-width:100%; height:auto; border:1px solid #e0e0e0; border-radius:4px; }
+    .fig .caption { font-size:.82rem; color:#666; margin-top:.4rem; font-style:italic; }
+    @media (max-width:900px) {
+      .layout { flex-direction:column; }
+      nav { width:100%; height:auto; position:static; }
+      main { padding:1rem; }
+    }
+  </style>
+</head>
+
+<body>
+<div class="layout">
+  <nav>
+    <h1>OSWireless</h1>
+    <ul>
+      <li class="section-title">Getting Started</li>
+      <li><a href="#introduction">Introduction</a></li>
+      <li><a href="#prerequisites">Prerequisites</a></li>
+      <li><a href="#setup">Setup Guide</a></li>
+
+      <li class="section-title">Architecture</li>
+      <li><a href="#design-objective">Design Objective</a></li>
+      <li><a href="#winas">WiNAS Subplane</a></li>
+      <li><a class="sub" href="#mathspec">MathSpec Module</a></li>
+      <li><a class="sub" href="#nettopo">NetTopo Module</a></li>
+      <li><a class="sub" href="#qospara">QoSPara Module</a></li>
+      <li><a class="sub" href="#paramodel">ParaModel Module</a></li>
+      <li><a href="#oaas">OaaS Subplane</a></li>
+      <li><a class="sub" href="#decomposition">Decomposition Engine</a></li>
+      <li><a class="sub" href="#algogen">AlgoGen Engine</a></li>
+
+      <li class="section-title">Experiments</li>
+      <li><a href="#testbed">NeXT Testbed</a></li>
+      <li><a href="#experiments">Control Scenarios</a></li>
+
+      <li class="section-title">Resources</li>
+      <li><a href="#source-code">Source Code</a></li>
+      <li><a href="#citation">Citation</a></li>
+      <li><a href="#license">License</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <header>
+      <h1>OSWireless</h1>
+      <p style="margin-top:-.2rem; color:#555; font-size:1.05rem;">Enhancing Automation for Optimizing Intent-Driven Software-Defined Wireless Networks</p>
+      <div>
+        <span class="pill">Intent-Driven Networks</span>
+        <span class="pill">Software-Defined Networking</span>
+        <span class="pill">Specification Abstraction</span>
+        <span class="pill">Automated Optimization</span>
+        <span class="pill">SDR &middot; USRP Testbed</span>
+        <span class="pill">Open Source</span>
+      </div>
+      <div style="margin-top:1rem;">
+        <a class="btn" href="https://github.com/WingsLabWireless/OSWireless_G1" target="_blank">&#9733; Source Code</a>
+        <a class="btn btn-outline" href="https://doi.org/10.1109/MASS56207.2022.00034" target="_blank">Paper (IEEE MASS 2022)</a>
+      </div>
+    </header>
+
+    <!-- <section id="introduction">
+      <h2>Introduction</h2>
+      <p>To control wireless networks with optimized configurations, engineers usually need to grapple simultaneously with network modeling, algorithm and protocol design, as well as the implementation of the resulting control logic on distributed nodes. This process is tedious and error prone.</p>
+      <p>Software-defined networking (SDN) has demonstrated immense performance gains in wired networks, but its extension to wireless networks remains challenging. Existing SDN controllers primarily provide services for <em>distribution abstraction</em> and <em>forwarding abstraction</em>, while very few efforts address <em>specification abstraction</em>, i.e., providing simplified network models that map abstract specifications to physical operational configurations.</p>
+      <p><strong>OSWireless</strong> is a new control plane for optimizing software-defined wireless networks with automated optimization program generation capabilities. At its core is the virtualization of four control plane functionalities: <em>intent</em>, <em>mathematical</em>, <em>algorithmic</em>, and <em>forwarding</em> specifications, provided as a service to network engineers. Network engineers specify the control intent (<em>what to do</em>) in a centralized manner using high-level APIs, and OSWireless translates it into possibly distributed operational control specifications (<em>how to do it</em>).</p>
+      <p>To this end, OSWireless introduces two new subplanes: the <strong>Wireless Network Abstraction Specification (WiNAS) Subplane</strong>, which converts intent specifications into corresponding mathematical specifications, and the <strong>Optimization-as-a-Service (OaaS) Subplane</strong>, which automatically generates operational algorithmic specifications. OSWireless has been prototyped and deployed over NeXT, a software-defined network emulation and experimentation testbed with 20 USRP SDRs.</p>
+      <div class="fig"><img src="images/fig1_architecture.png" alt="Overall architecture of OSWireless"><div class="caption">Overall architecture of OSWireless, showing the WiNAS and OaaS Subplanes within the SDN control plane and the PPS Subplane in the data plane.</div></div>
+    </section> -->
+
+    <section id="introduction">
+  <h2>Introduction</h2>
+
+  <p><strong>OSWireless</strong> is an intent-driven control framework for software-defined wireless networks. It enables network engineers to define network objectives using high-level APIs while automatically generating the distributed control algorithms required to achieve those objectives.</p>
+
+  <p>Developing optimized wireless network control applications typically requires expertise in network modeling, optimization, protocol design, and distributed implementation. OSWireless simplifies this workflow by abstracting these tasks into modular control plane services, allowing users to focus on specifying <em>what</em> the network should accomplish rather than <em>how</em> it should be implemented.</p>
+
+  <p>The framework extends traditional software-defined networking by providing <em>specification abstraction</em> in addition to the commonly available <em>distribution</em> and <em>forwarding</em> abstractions. High-level intent specifications are translated into mathematical optimization models, decomposed into distributed optimization problems, and converted into executable control programs for deployment on programmable wireless nodes.</p>
+
+  <p>OSWireless is organized into two primary control-plane subplanes. The <strong>Wireless Network Abstraction Specification (WiNAS) Subplane</strong> constructs mathematical representations of user-defined network intents, while the <strong>Optimization-as-a-Service (OaaS) Subplane</strong> generates the distributed optimization algorithms required for runtime execution. The framework is designed to operate with the NeXT software-defined wireless testbed and supports deployment on networks built using USRP software-defined radios.</p>
+
+  <div class="fig">
+    <img src="images/oswireless_architecture.png" alt="Overall architecture of OSWireless">
+    <div class="caption">
+      Overall architecture of OSWireless, showing the WiNAS and OaaS Subplanes within the SDN control plane and the PPS Subplane in the data plane.
+    </div>
+  </div>
+</section>
+
+    <section id="prerequisites">
+      <h2>Software &amp; Hardware Prerequisites</h2>
+
+      <h3>Hardware Requirements</h3>
+      <table><thead><tr><th>Component</th><th>Specification</th><th>Notes</th></tr></thead><tbody>
+        <tr><td>Edge Server</td><td>Dell EMC R340 PowerEdge workstations (5&times;)</td><td>Intel Xeon E-2246G 3.6 GHz CPU, Ubuntu 18.04. One workstation hosts OSWireless; the others act as SDR controlling hosts.</td></tr>
+        <tr><td>Front-End SDR</td><td>Ettus USRP N210 (20&times;)</td><td>Software radio forwarding substrates; 2&ndash;2.6 GHz spectrum band divided into three subchannels</td></tr>
+        <tr><td>Power Distribution</td><td>CyberPower PDU41001 Switched PDU (3&times;)</td><td>Enables remote power cycling and remote experimentation</td></tr>
+        <tr><td>Networking</td><td>Two Gigabit Ethernet switches, TP-Link router, D-Link switch</td><td>Connects edge servers and front-end SDRs</td></tr>
+        <tr><td>Antennas / Cables</td><td>Standard USRP antennas, Gigabit Ethernet cables</td><td>Per-node TX/RX</td></tr>
+      </tbody></table>
+
+      <div class="note"><strong>Scaled-Down Setup:</strong> The full NeXT testbed uses 20 USRPs, but the provided experiments run two sessions with four nodes each. A minimal reproduction therefore requires 8 USRP N210s plus the controlling hosts. The algorithm generation stage (WiNAS + OaaS) requires no radio hardware at all and can be run on a single Linux machine.</div>
+
+      <h3>Software Requirements</h3>
+      <table><thead><tr><th>Software</th><th>Purpose</th><th>Notes</th></tr></thead><tbody>
+        <tr><td>Ubuntu 18.04 (or later)</td><td>Host operating system</td><td>Used on all edge server workstations</td></tr>
+        <tr><td>Python 3.x</td><td>Runs the OSWireless kernel, decomposition, and algorithm generation scripts</td><td>Core requirement</td></tr>
+        <tr><td>SymPy</td><td>Symbolic mathematical operations required by decomposition automation</td><td><a href="https://www.sympy.org/">sympy.org</a></td></tr>
+        <tr><td>CogApp</td><td>Open-source content generator used for executing Python snippets in the numerical algorithm templates</td><td><a href="https://pypi.python.org/pypi/cogapp">pypi.python.org/pypi/cogapp</a></td></tr>
+        <tr><td>NumPy / SciPy</td><td>Numerical computation in the generated optimization algorithms</td><td>Standard scientific stack</td></tr>
+        <tr><td>UHD (USRP Hardware Driver)</td><td>Host&ndash;USRP interface for the N210 front-ends</td><td>Required only for testbed execution</td></tr>
+        <tr><td>GNU Radio</td><td>Baseband signal processing for the programmable protocol stack</td><td>Required only for testbed execution</td></tr>
+      </tbody></table>
+
+      <h3>Knowledge Prerequisites</h3>
+      <p>Users should be familiar with the basics of network optimization (convex optimization, utility maximization, Lagrangian duality and decomposition theory), software-defined networking concepts (control plane vs. data plane, intent specification), and cross-layer wireless protocol design. Familiarity with USRP/GNU Radio workflows is helpful for the testbed experiments but is not required for the algorithm generation stage.</p>
+    </section>
+
+    <section id="setup">
+      <h2>Setup Guide</h2>
+
+      <h3>Step 1: Clone the Repository</h3>
+      <pre><code>git clone https://github.com/WingsLabWireless/OSWireless_G1.git
+cd OSWireless_G1
+unzip OSWireless_v1.zip</code></pre>
+      <p>The archive expands into two main directories: <code>OSW-G2/NeXT-OS</code> (the OSWireless control plane and algorithm generation) and <code>OSW-G2/NeXT-PPS</code> (the programmable protocol stack that runs on the SDR testbed).</p>
+
+      <h3>Step 2: Generate the Control Algorithms</h3>
+      <p>Navigate to the OSWireless kernel directory and execute the demo script corresponding to the desired control intent. Each script defines an intent specification using the high-level WiNAS APIs, constructs the mathematical specification, decomposes it, and generates the distributed operational algorithms.</p>
+      <pre><code>cd OSW-G2/NeXT-OS
+
+python3 g2_demo1.py     # Experiment 1: MSMH_PowRate_ThrptMax
+python3 g2_delay.py     # Experiment 2: MSMH_PwrRate_DlyMin
+python3 g2_mobile.py    # Experiment 3: MSMHMob_Mov_ThrptMax</code></pre>
+
+      <p>The generated algorithms are written to separate repositories, one per experiment:</p>
+      <table><thead><tr><th>Script</th><th>Experiment</th><th>Output Repository</th></tr></thead><tbody>
+        <tr><td><code>g2_demo1.py</code></td><td>MSMH_PowRate_ThrptMax</td><td><code>NCP-g2_rate_power</code></td></tr>
+        <tr><td><code>g2_delay.py</code></td><td>MSMH_PwrRate_DlyMin</td><td><code>NCP-g2_min_delay</code></td></tr>
+        <tr><td><code>g2_mobile.py</code></td><td>MSMHMob_Mov_ThrptMax</td><td><code>NCP-g2_location</code></td></tr>
+      </tbody></table>
+
+      <div class="note"><strong>Naming Convention:</strong> In each scenario name, the first field (e.g., MSMH) represents the network topology (multi-session multi-hop), the second field indicates the control variables, and the last field is the control objective.</div>
+
+      <h3>Step 3: Configure the SDR Testbed</h3>
+      <p>Move to the programmable protocol stack directory and edit the network configuration:</p>
+      <pre><code>cd OSW-G2/NeXT-PPS</code></pre>
+      <ol>
+        <li><strong>Configure node addresses:</strong> In <code>netcfg_g2.py</code>, set the IP addresses of the USRPs and their controlling laptops/workstations at <strong>lines 373&ndash;417</strong>.</li>
+        <li><strong>Select the experiment:</strong> In <code>netcfg_g2.py</code>, change the scheme at <strong>line 180</strong> to match the experiment whose algorithms were generated in Step 2.</li>
+      </ol>
+
+      <h3>Step 4: Run the Experiment</h3>
+      <p>Two sessions with four nodes each are launched using the provided per-session scripts:</p>
+      <pre><code>python3 pc_1.py     # Session 1
+python3 pc_2.py     # Session 2</code></pre>
+      <p>Each node runs the automatically generated distributed control program, which adapts the transmission parameters (transmit power, source rate, coding rate) at different layers of the programmable protocol stack at network run time.</p>
+
+      <div class="success"><strong>Tip:</strong> Run the algorithm generation stage (Step 2) on its own first to inspect the generated control programs before deploying to hardware. This validates the intent specification and decomposition independently of the radio setup.</div>
+    </section>
+
+    <section id="design-objective">
+      <h2>Overall Design Objective</h2>
+      <p>The primary goal of OSWireless is to enable intent-driven wireless networking by hiding the specification complexity from network engineers. Given a control intent (<em>what to do</em>, e.g., maximize network spectral efficiency or minimize end-to-end delay), OSWireless determines in an automated manner a desirable operational forwarding strategy (<em>how to do it</em>, e.g., which nodes transmit with what power, in which frequency bands, and in which time slots) executable on the distributed physical forwarding substrates.</p>
+      <p>Denoting <strong>S</strong><sub>int</sub> and <strong>S</strong><sub>fwd</sub> as the intent and forwarding specifications, the design objective is expressed as a mapping <em>f</em> : <em>C</em>(<strong>S</strong><sub>int</sub>) &rarr; <em>D</em>(<strong>S</strong><sub>fwd</sub>), where <em>C</em>(&middot;) indicates centralized definition and <em>D</em>(&middot;) indicates distributed deployment.</p>
+
+      <h3>Three-Phase Approach</h3>
+      <p>OSWireless realizes this mapping through three phases:</p>
+      <ol>
+        <li><strong>Phase (i) &mdash; Intent to Mathematical:</strong> The control intent <strong>S</strong><sub>int</sub> is specified centrally using the OSWireless APIs, and the corresponding mathematical representation <strong>S</strong><sub>math</sub> is constructed. Handled by the WiNAS Subplane.</li>
+        <li><strong>Phase (ii) &mdash; Mathematical to Algorithmic:</strong> A set of possibly distributed numerical solution algorithms <strong>S</strong><sub>alg</sub> is generated to solve <strong>S</strong><sub>math</sub>. Handled by the OaaS Subplane.</li>
+        <li><strong>Phase (iii) &mdash; Algorithmic to Forwarding:</strong> <strong>S</strong><sub>alg</sub> is executed on the distributed physical substrates to obtain the forwarding specification <strong>S</strong><sub>fwd</sub> at network run time.</li>
+      </ol>
+      <p>The rationale behind this three-phase design is to separate the coupled network control processes &mdash; network modeling, objective formulation, and distributed algorithm design &mdash; and provide the functionality of each process as a service to the others. This is similar in spirit to how the TCP/IP protocol stack separates network functionalities into layers and provides each layer as a service to the others.</p>
+    </section>
+
+    <section id="winas">
+      <h2>OSWireless Kernel: WiNAS Subplane</h2>
+      <p>The Wireless Network Abstraction Specification (WiNAS) Subplane is the kernel of OSWireless. Its core functionalities are two-fold: constructing the mathematical specification <strong>S</strong><sub>math</sub> from a user-defined intent specification <strong>S</strong><sub>int</sub>, and providing kernel services on which the other OSWireless functionalities are implemented. It comprises four modules: <em>MathSpec</em>, <em>NetTopo</em>, <em>QoSPara</em>, and <em>ParaModel</em>.</p>
+
+      <h3>Network Elements</h3>
+      <p>In OSWireless, each network component or parameter is a <strong>Network Element</strong>, of which there are two types:</p>
+      <ul>
+        <li><strong>View element:</strong> Characterizes the global view of the network, i.e., the graph representation of the network topology based on vertices (nodes) and edges (links), with each vertex or edge associated with hardware and radio resources such as antennas and subchannels. The set of view elements is denoted <em>V</em>.</li>
+        <li><strong>Behavior element:</strong> Characterizes the behaviors of view elements in terms of QoS metrics, e.g., noise, capacity, delay. The set of behavior elements is denoted <em>B</em>. A behavior element is a <em>leaf</em> element if it cannot be expressed as a function of other behavior elements (e.g., <code>noise</code>, <code>power</code>); otherwise it is an <em>intermediate</em> element (e.g., <code>capacity</code>, a function of noise and power).</li>
+      </ul>
+      <p>A view-behavior element pair (VBEP) <em>T<sub>i</sub></em> = (<em>V<sub>i</sub></em>, <em>B<sub>i</sub></em>) is the basic unit from which both <strong>S</strong><sub>int</sub> and <strong>S</strong><sub>math</sub> are constructed. The key difference: <strong>S</strong><sub>int</sub> characterizes network behaviors mostly through intermediate behavior elements without exposing the low-level coupling to the engineer, while <strong>S</strong><sub>math</sub> exposes all the details of that coupling.</p>
+
+      <h3 id="mathspec">MathSpec Module</h3>
+      <p>The MathSpec Module constructs <strong>S</strong><sub>math</sub> from <strong>S</strong><sub>int</sub> in three steps:</p>
+      <ol>
+        <li><strong>Expression Initialization:</strong> Each intent specification consists of a set of textual expressions defining the utility or constraints of the target control problem. This step replaces the textual API expressions with the corresponding VBEPs to build an initial representation <em>f</em>(<em>T<sub>k</sub></em>). For example, a sum-log-rate utility over four links becomes <em>f</em>(<em>T<sub>k</sub></em>) = log(link1.rate) + log(link2.rate) + log(link3.rate) + log(link4.rate), where <code>log</code> introduces proportional fairness among the links.</li>
+        <li><strong>Tree Representation:</strong> The textual expression is converted into a binary tree in which every leaf node is a VBEP and all other nodes are mathematical operators. Preorder traversal is used to identify the VBEPs. The process stops when all leaf nodes are VBEPs.</li>
+        <li><strong>Model Expansion:</strong> Each identified VBEP is substituted with its corresponding model defined in the ParaModel Module, and the updated expression is converted into a new binary tree. This repeats until all behavior elements in the expression are leaf behavior elements.</li>
+      </ol>
+      <div class="fig"><img src="images/mathspec.png" alt="Diagram of the MathSpec Module"><div class="caption">MathSpec Module: expression initialization, tree representation, and model expansion. Solid and open dots denote view and behavior elements respectively; open dots with dotted outlines denote models of behavior elements.</div></div>
+
+      <h3 id="nettopo">NetTopo Module</h3>
+      <p>The NetTopo Module enables flexible definition of view and behavior elements, characterizes the coupling among defined network elements, and associates them with their mathematical models. It also provides internal interfaces among WiNAS modules and external interfaces to the OaaS Subplane.</p>
+      <p>NetTopo manages a set of <strong>view records</strong>, each a variable-length tuple with five categories of fields:</p>
+      <ul>
+        <li><code>vID</code> &mdash; the OSWireless-wide unique ID of the view element.</li>
+        <li><code>vAttrList</code> &mdash; attributes such as element name (<code>vElmtName</code>), parent view element (<code>vPrntElmt</code>), and whether the record is a set or an individual element (<code>vElmtType</code>).</li>
+        <li><code>vNetPtr</code> &mdash; pointers to other associated view elements, e.g., the individual elements forming a set element.</li>
+        <li><code>vBPtr</code> (ParaPtr) &mdash; the set of behavior elements attached to this view element.</li>
+        <li><code>vOprPtr</code> &mdash; the set of operations supported by this view element, designed to enable automated expression initialization and model expansion (e.g., <code>checkVBEP()</code>, <code>getCompExpr()</code>, <code>vBElmtLoader()</code>).</li>
+      </ul>
+
+      <h3 id="qospara">QoSPara Module</h3>
+      <p>The QoSPara Module maintains the set of behavior elements <em>B</em>. Each behavior record consists of a unique ID <code>bID</code> and an attribute list <code>bAttrList</code>. Two attributes are central to distributed decomposition:</p>
+      <ul>
+        <li><code>bLayer</code> &mdash; the protocol layer information of the behavior element (app, transport, network, link, phy).</li>
+        <li><code>bHID</code> &mdash; the horizontal index, defining the node view element to which the behavior element is associated. This information is passed to the OaaS Subplane for automated distributed problem decomposition.</li>
+      </ul>
+      <p>Each behavior record also carries a <code>bMdlPtr</code> field pointing to the mathematical model of the behavior element in the ParaModel Module.</p>
+
+      <h3 id="paramodel">ParaModel Module</h3>
+      <p>The ParaModel Module defines all models available to each behavior element. Two model types are supported:</p>
+      <ul>
+        <li><strong>Expression Model (EM):</strong> Models a behavior element using a closed-form mathematical expression.</li>
+        <li><strong>Script Model (SM):</strong> Models a behavior element using a script. Script models provide more flexibility in characterizing coupling among behavior elements and are better suited to sophisticated network control problems.</li>
+      </ul>
+      <div class="fig"><img src="images/nettopo.png" alt="Diagram of NetTopo, QoSPara and ParaModel modules"><div class="caption">NetTopo, QoSPara, and ParaModel modules, which together provide the kernel services for the other components of OSWireless.</div></div>
+    </section>
+
+    <section id="oaas">
+      <h2>OaaS Subplane Design</h2>
+      <p>Given the mathematical specification <strong>S</strong><sub>math</sub> produced by WiNAS, the Optimization-as-a-Service (OaaS) Subplane automatically constructs a set of numerical solution algorithms executable on distributed forwarding substrates. Since <strong>S</strong><sub>math</sub> is defined centrally and possibly spans multiple protocol layers, it must first be decomposed. OaaS consists of two major components: the <em>Decomposition Engine</em> and the <em>AlgoGen Engine</em>.</p>
+      <div class="fig"><img src="images/oaas_subplane.png" alt="Overall architecture of the OaaS Subplane"><div class="caption">Architecture of the Optimization-as-a-Service (OaaS) Subplane, comprising the Decomposition Engine and the AlgoGen Engine.</div></div>
+
+      <h3 id="decomposition">Decomposition Engine</h3>
+      <p>A textual expression <em>f</em> is decomposed in two steps: break <em>f</em> into a set of component expressions connected by the operator "+", then assign those component expressions into groups corresponding to different subproblems. The first step reuses the tree representation service provided by the WiNAS Subplane. The second step applies two types of decomposition:</p>
+      <ul>
+        <li><strong>Vertical decomposition:</strong> Uncouples the protocol layers involved in <strong>S</strong><sub>math</sub>. For each component expression, its associated layer is obtained via the WiNAS API <code>bLayer()</code>. For example, the VBEP (<code>ses</code>, <code>rate</code>) &mdash; the transport-layer transmission rate of a session &mdash; assigns its component expression to the transport-layer subproblem.</li>
+        <li><strong>Horizontal decomposition:</strong> Further decomposes each per-layer subproblem into per-node subproblems using the <strong>horizontal index (HID)</strong>. The HID identifies the view network element where another behavior or view element should be registered and managed at run time. By default the HID is the parent view element: the HID of <code>link_capacity</code> is its parent <code>link</code>, and the HID of a link is the <code>source_node</code> of that link. The API <code>bHID()</code> is applied repeatedly until the HID of the view element is itself, at which point the component expression is assigned to the corresponding subproblem.</li>
+      </ul>
+
+      <h4>Decomposability Detection and Reformulation</h4>
+      <p>Expressions in wireless network optimization are not always decomposable, because control variables at different protocol layers and different nodes are often coupled. The decomposability of <em>f</em> is determined branch-by-branch using the layer checking service <code>bLayer()</code> and the HID checking service <code>bHID()</code>: if a component expression spans different protocol layers, it is nondecomposable and cannot be assigned to any single layer subproblem.</p>
+      <p>To handle these cases, OSWireless automates decomposition techniques including <strong>dual decomposition</strong>, <strong>indirect decomposition</strong>, and <strong>decomposition by partial linearization</strong>. Under indirect decomposition, auxiliary variables are introduced to uncouple variables in a nondecomposable expression and to coordinate the optimization of the resulting subproblems.</p>
+      <p>A representative example is the M/M/1 queuing delay model, in which the average response time is 1 / (link_capacity &minus; src_rate). This expression is not directly decomposable, since <code>link_capacity</code> and <code>src_rate</code> operate at the physical and transport layers respectively. Indirect decomposition introduces an auxiliary variable <code>v_aux</code> together with the decomposable equality constraint <code>v_aux == link_capacity - src_rate</code>. Lagrangian coefficients introduced by dual decomposition are another form of auxiliary variable. The rules for introducing auxiliary variables and assigning them to protocol layers are defined in the Decomposition Detection and Reformulation Module and in the behavior element models of ParaModel.</p>
+      <p>The symbolic mathematical operations required by this decomposition automation are based on the open-source symbolic computing library <a href="https://www.sympy.org/">SymPy</a>.</p>
+
+      <h3 id="algogen">AlgoGen Engine</h3>
+      <p>The AlgoGen Engine generates the distributed algorithmic specification <strong>S</strong><sub>alg</sub> by producing numerical solution algorithms for each subproblem. Three types of algorithms are generated:</p>
+      <ul>
+        <li><strong>Base optimization algorithm</strong> &mdash; solves the local subproblem at each node.</li>
+        <li><strong>Vertical signaling algorithm</strong> &mdash; exchanges the signaling parameters that couple protocol layers. Under dual decomposition, these are the Lagrangian coefficients, updated at run time by a projected linear operation derived from the corresponding constraint expression and exchanged among subproblems.</li>
+        <li><strong>Horizontal penalization algorithm</strong> &mdash; applies a penalization term incorporated into the utility function to prevent a distributed node from hurting other nodes too much. Penalization terms are generated automatically by converting the textual expression into the symbolic domain.</li>
+      </ul>
+      <p>A set of numerical algorithm templates defines the formats for the optimization variables, signaling parameters, and penalization terms. These templates are built on <a href="https://pypi.python.org/pypi/cogapp">CogApp</a>, an open-source content generator for executing Python snippets in source files. Optimization variables are specified in <strong>S</strong><sub>int</sub>, stored in the QoSPara Module, and retrieved via the WiNAS API <code>bVar()</code> during base algorithm construction. Both scalar and vector variables are supported.</p>
+    </section>
+
+    <section id="testbed">
+      <h2>NeXT Testbed</h2>
+      <p>OSWireless is prototyped and deployed over NeXT, a software-defined network emulation and experimentation testbed. The testbed has three major components:</p>
+      <ul>
+        <li><strong>Edge server:</strong> Five Dell EMC R340 PowerEdge workstations (Intel Xeon E-2246G 3.6 GHz, Ubuntu 18.04). One workstation runs the OSWireless prototype (WiNAS + OaaS Subplanes); the remaining workstations act as controlling hosts for the front-end SDRs, performing baseband signal processing and running the automatically generated distributed control programs.</li>
+        <li><strong>Front-end SDR:</strong> 20 USRP N210 radios powered by three CyberPower PDU41001 switched PDUs, which enable remote experimentation and community sharing of the testbed. Edge servers and SDRs are connected via two Gigabit Ethernet switches.</li>
+        <li><strong>Programmable protocol stack (PPS):</strong> Operates over the software radio forwarding substrates and exposes the parameters that the generated control programs adapt at run time.</li>
+      </ul>
+      <div class="fig"><img src="images/nexttestbed.png" alt="Snapshot of the NeXT software-defined testbed"><div class="caption">Snapshot of the software-defined testbed and the software diagram for OSWireless prototyping.</div></div>
+
+      <h3>Programmable Protocol Stack Parameters</h3>
+      <table><thead><tr><th>Parameter</th><th>Value / Range</th></tr></thead><tbody>
+        <tr><td>Modulation Schemes</td><td>BPSK, QPSK, GMSK, and others</td></tr>
+        <tr><td>Forward Error Correction</td><td>Reed-Solomon code, coding rate 0.14&ndash;0.30 in steps of 0.02</td></tr>
+        <tr><td>Transmission Power</td><td>Adapted on the fly via the transmit gain of the USRP FPGA (range up to 25 dB)</td></tr>
+        <tr><td>Packet Length</td><td>1000 bytes</td></tr>
+        <tr><td>Retransmission Limit</td><td>10 per link</td></tr>
+        <tr><td>PER Thresholds</td><td>0.05 (lower) and 0.15 (upper) for triggering coding rate reconfiguration</td></tr>
+        <tr><td>Transport-Layer Congestion Control</td><td>TCP Vegas, data rate 1&ndash;200 kbps</td></tr>
+        <tr><td>Spectrum Band</td><td>2&ndash;2.6 GHz, divided into three subchannels</td></tr>
+        <tr><td>Spectrum Reuse Factor</td><td>1/2 (configurable)</td></tr>
+      </tbody></table>
+    </section>
+
+    <section id="experiments">
+      <h2>Control Scenarios</h2>
+      <p>Three network control scenarios are provided, each covering a different point in the space of intent specifications. In all scenarios, two source nodes communicate with their destination nodes via a set of relay nodes in a multi-session multi-hop (MSMH) topology.</p>
+      <div class="fig"><img src="images/netowork_topologies.png" alt="Network topologies for OSWireless testing"><div class="caption">Network topologies used for OSWireless testing over the NeXT testbed (Scenarios 1&ndash;3).</div></div>
+
+      <h3>Experiment 1: MSMH_PowRate_ThrptMax</h3>
+      <p>Maximize the sum end-to-end throughput of two sessions by jointly controlling the transmission power of the nodes at the physical layer and the source rate at the transport layer, subject to proportional fairness between the sessions.</p>
+      <p>The intent is expressed using three behavior elements and their associated view elements: <code>ssrate</code> (source rate of a session), <code>lkcap</code> (link capacity), and <code>lkpwr</code> (transmission power of a link). The engineer does <em>not</em> need to specify the low-level coupling &mdash; e.g., the mathematical model of <code>lkcap</code> as a function of <code>lkpwr</code>, or their association to different protocol layers. That coupling is integrated automatically through expression expansion in the MathSpec Module. After specifying the utility and constraints, the distributed optimization algorithms are generated with three lines of code:</p>
+      <pre><code>vdcp = xlydcp.ncp_xlayer_decomp(nt_ctl)   # vertical decomposition
+hdcp = dstdcp.ncp_dist_decomp(vdcp)       # horizontal decomposition
+ag.alg_gen(hdcp)                          # algorithm generation</code></pre>
+      <p>Here <code>nt_ctl</code> stores the centralized intent specification, and <code>vdcp</code> and <code>hdcp</code> are the specifications after vertical and horizontal decomposition respectively.</p>
+      <p>In this scenario the control variables <code>ssrate</code> and <code>lkpwr</code> are only loosely coupled through the network flow conservation constraint of each link, so they can be decoupled vertically after constructing the dual problem.</p>
+      <!-- <div class="fig"><img src="images/fig8_throughput.png" alt="End-to-end throughput results"><div class="caption">(a) Single-run running average and (b) multi-run average end-to-end throughput achieved by the OSWireless-generated control programs for MSMH_PowRate_ThrptMax.</div></div> -->
+      <p>The generated control programs achieve around 300% throughput gain over a benchmark with fixed mid-range transmit gain (15 dB) and no rate or power adaptation, and outperform all four benchmark schemes considered (maximum transmit gain with maximum source rate; fixed transmission power with adaptive source rate; and power adaptation subject to a target end-to-end throughput).</p>
+
+      <h3>Experiment 2: MSMH_PwrRate_DlyMin</h3>
+      <p>Minimize the average end-to-end delay of concurrent sessions by jointly controlling the source rate at the transport layer and the transmission power of the nodes at the physical layer, under minimum end-to-end throughput constraints for each session. An M/M/1 queuing model is used for each session.</p>
+      <p>This scenario stresses the flexibility of OSWireless: the session rate <code>ssrate</code> and link capacity <code>lkcap</code> (hence <code>lkpwr</code>) are tightly coupled in the utility, both appearing in the denominator of the queuing model, so the resulting mathematical specification cannot be decomposed directly. The network engineer nevertheless only needs to install the model:</p>
+      <pre><code>nt.install_model(sess, ssdelay, mm1)</code></pre>
+      <p>where <code>sess</code>, <code>ssdelay</code>, and <code>mm1</code> are respectively the view element, behavior element, and parameter model defined in the NetTopo, QoSPara, and ParaModel modules. OSWireless then analyzes decomposability, reformulates the problem by introducing auxiliary vertical signaling variables, and decomposes it via indirect decomposition.</p>
+      <!-- <div class="fig"><img src="images/fig9_delay.png" alt="End-to-end delay and instantaneous transmission rate results"><div class="caption">(a) Average end-to-end delay and (b) instantaneous transmission rate for MSMH_PwrRate_DlyMin, with target throughputs of 1.5 pkts/s and 3 pkts/s for the two sessions.</div></div> -->
+      <p>With low-data-rate applications and target end-to-end throughputs of 1.5 pkts/s and 3 pkts/s for the two sessions, OSWireless achieves up to 5&times; lower delay than the tailored benchmark schemes.</p>
+
+      <h3>Experiment 3: MSMHMob_Mov_ThrptMax</h3>
+      <p>Maximize throughput in a multi-session multi-hop network with mobile nodes, where node movement is included among the control variables. Algorithms are generated by <code>g2_mobile.py</code> into the <code>NCP-g2_location</code> repository.</p>
+    </section>
+
+    <section id="source-code">
+      <h2>Source Code</h2>
+      <p>The complete OSWireless source code is publicly available:</p>
+      <ul>
+        <li><strong>OSW-G2/NeXT-OS/:</strong> The OSWireless control plane, containing the WiNAS Subplane kernel (MathSpec, NetTopo, QoSPara, ParaModel modules) and the OaaS Subplane (Decomposition Engine and AlgoGen Engine), together with the three intent specification demo scripts (<code>g2_demo1.py</code>, <code>g2_delay.py</code>, <code>g2_mobile.py</code>).</li>
+        <li><strong>OSW-G2/NeXT-PPS/:</strong> The programmable protocol stack for the SDR testbed. <code>netcfg_g2.py</code> configures USRP and host IP addresses (lines 373&ndash;417) and selects the experiment scheme (line 180). <code>pc_1.py</code> and <code>pc_2.py</code> launch the two sessions with four nodes each.</li>
+        <li><strong>Generated algorithm repositories:</strong> <code>NCP-g2_rate_power</code>, <code>NCP-g2_min_delay</code>, and <code>NCP-g2_location</code>, produced by the corresponding demo scripts.</li>
+      </ul>
+      <div style="margin-top:1rem;"><a class="btn" href="https://github.com/WingsLabWireless/OSWireless_G1" target="_blank">&#9733; GitHub Repository</a></div>
+
+      <h3>Repository Structure</h3>
+      <pre><code>OSWIRELESS_G1/
+├── OSWireless_v1.zip           # Main archive (unzip first)
+└── OSW-G2/
+    ├── NeXT-OS/                # OSWireless control plane
+    │   ├── g2_demo1.py         # Intent spec: MSMH_PowRate_ThrptMax
+    │   ├── g2_delay.py         # Intent spec: MSMH_PwrRate_DlyMin
+    │   ├── g2_mobile.py        # Intent spec: MSMHMob_Mov_ThrptMax
+    │   ├── winas/              # WiNAS Subplane kernel modules
+    │   │                       #   MathSpec, NetTopo, QoSPara, ParaModel
+    │   └── oaas/               # OaaS Subplane
+    │                           #   Decomposition Engine + AlgoGen Engine
+    └── NeXT-PPS/               # Programmable protocol stack (SDR testbed)
+        ├── netcfg_g2.py        # Node IPs (L373-417), scheme select (L180)
+        ├── pc_1.py             # Launch session 1
+        └── pc_2.py             # Launch session 2
+
+Generated at run time:
+├── NCP-g2_rate_power/          # Algorithms for Experiment 1
+├── NCP-g2_min_delay/           # Algorithms for Experiment 2
+└── NCP-g2_location/            # Algorithms for Experiment 3</code></pre>
+    </section>
+
+    <section id="citation">
+      <h2>Citation</h2>
+      <p>If you use OSWireless in your research, please cite the following paper:</p>
+      <pre><code>@inproceedings{oswireless,
+  author    = {Moorthy, Sabarish Krishna and Guan, Zhangyu and
+               Mastronarde, Nicholas and Bentley, Elizabeth Serena
+               and Medley, Michael},
+  title     = {{OSWireless}: Enhancing Automation for Optimizing
+               Intent-Driven Software-Defined Wireless Networks},
+  booktitle = {Proc. of IEEE International Conference on Mobile
+               Ad-Hoc and Smart Systems (MASS)},
+  address   = {Denver, Colorado},
+  month     = {October},
+  year      = {2022}
+}</code></pre>
+    </section>
+
+    <section id="license">
+      <h2>License</h2>
+      <p>OSWireless is released under the <strong>MIT License</strong>.</p>
+      <div class="note">Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files, to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software.</div>
+      <!-- <div class="warning"><strong>Distribution Statement A:</strong> Approved for Public Release; distribution unlimited AFRL-2021-3478 on 12 October 2021. Other requests shall be referred to AFRL/RIT 525 Brooks Rd, Rome, NY 13441.</div> -->
+    </section>
+
+    <footer style="margin-top:3rem; font-size:.8rem; color:#777;">
+      WINGS Lab Open Source &bull; OSWireless
+    </footer>
+  </main>
+</div>
+</body>
+</html>
