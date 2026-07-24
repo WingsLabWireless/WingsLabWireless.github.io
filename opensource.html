@@ -163,13 +163,27 @@
     .cta {
       margin-top: 0.6rem;
       display: inline-block;
+      padding: 0.35rem 0.8rem;
+      border: 1px solid #1f4f8b;
+      border-radius: 4px;
       color: #1f4f8b;
+      background: transparent;
       text-decoration: none;
       font-weight: bold;
-      font-size: 0.92rem;
+      font-size: 0.88rem;
     }
 
-    .cta:hover { text-decoration: underline; }
+    .cta:hover {
+      background: #1f4f8b;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .cta.disabled {
+      border-color: #ccc;
+      color: #888;
+      pointer-events: none;
+    }
 
     .small {
       font-size: 0.85rem;
@@ -256,7 +270,7 @@
             <li>Pluggable backends for different radios, UAVs, and edge devices.</li>
             <li>Designed to support “sim-to-real” and field-test repeatability.</li>
           </ul>
-          <a class="cta" href="benchlink.html">Project page →</a>
+          <a class="cta" href="benchlink.html">Project page</a>
         </div>
           <div class="project-card" id="oswireless">
           <h3>OSWireless</h3>
@@ -275,7 +289,7 @@
             <li>Automated decomposition of centralized control problems across layers and nodes.</li>
             <li>Generated optimization algorithms deployable on SDR testbeds.</li>
           </ul>
-          <a class="cta" href="oswireless.html">Project page →</a>
+          <a class="cta" href="oswireless.html">Project page</a>
         </div>
         <div class="project-card" id="wings-4039">
           <h3>WINGS-4039</h3>
@@ -295,7 +309,7 @@
             <li>Interfaces for experiment control, telemetry, and synchronized logging.</li>
             <li>Designed as part of a larger WINGS open UAV ecosystem.</li>
           </ul>
-          <a class="cta" href="wings-4039.html">Project page (coming soon) →</a>
+          <a class="cta disabled" href="wings-4039.html">Project page (coming soon)</a>
         </div>
       
         <div class="project-card" id="StormWave">
@@ -303,7 +317,7 @@
           <p class="project-meta">
             <strong>Overview:</strong> StormWave is an open-source, portable software-defined Radio Frequency (RF) interference generation and monitoring platform designed for realistic field-based evaluation of the resilience of wireless communication systems.
           </p>
-          <a class="cta" href="">Project page (coming soon) →</a>
+          <a class="cta disabled" href="">Project page (coming soon)</a>
         </div>        
       </section>
 
