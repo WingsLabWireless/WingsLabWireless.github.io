@@ -1,0 +1,2629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <title>UB-ANC Emulator | WINGS Lab Open Source</title>
+
+  <meta
+    name="description"
+    content="UB-ANC Emulator is an open-source emulation framework for multi-agent drone networks, flight control, mission planning, ns-3 network simulation, and hardware-in-the-loop experimentation."
+  />
+
+  <meta
+    name="keywords"
+    content="UB-ANC, drone emulator, UAV networks, multi-agent systems, MAVLink, SITL, ns-3, QGroundControl, APM Planner, software-defined radio"
+  />
+
+  <meta name="author" content="WINGS Lab" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    :root {
+      --primary: #1f4f8b;
+      --primary-dark: #163d6e;
+      --primary-light: #eef6ff;
+
+      --text-main: #222;
+      --text-muted: #59636f;
+      --text-light: #737d89;
+
+      --background: #ffffff;
+      --sidebar-background: #f5f7fa;
+      --surface: #ffffff;
+      --surface-soft: #f8fafc;
+
+      --border: #dde3ea;
+      --border-light: #edf0f3;
+
+      --success: #1a7a3a;
+      --success-background: #f0faf4;
+
+      --warning: #b45309;
+      --warning-background: #fff8ed;
+
+      --info-background: #eef6ff;
+
+      --source-background: #f7f9fc;
+      --source-border: #dbe3ec;
+
+      --shadow-small: 0 2px 8px rgba(15, 23, 42, 0.06);
+      --shadow-medium: 0 8px 24px rgba(15, 23, 42, 0.08);
+
+      --radius-small: 5px;
+      --radius-medium: 9px;
+      --radius-large: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 1rem;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.58;
+      color: var(--text-main);
+      background: var(--background);
+    }
+
+    img {
+      max-width: 100%;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    p {
+      margin: 0.45rem 0 0.8rem;
+    }
+
+    ul,
+    ol {
+      margin: 0.45rem 0 1rem;
+      padding-left: 1.45rem;
+    }
+
+    li {
+      margin-bottom: 0.35rem;
+    }
+
+    .layout {
+      display: flex;
+      min-height: 100vh;
+      align-items: flex-start;
+    }
+
+    /* =========================================================
+       Sidebar navigation
+       ========================================================= */
+
+    nav {
+      width: 275px;
+      min-width: 275px;
+      height: 100vh;
+      position: sticky;
+      top: 0;
+      overflow-y: auto;
+
+      padding: 1.1rem 1rem 1.5rem;
+
+      background: var(--sidebar-background);
+      border-right: 1px solid var(--border);
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+
+      margin-bottom: 1rem;
+      padding: 0.38rem 0.55rem;
+
+      font-size: 0.82rem;
+      font-weight: 700;
+
+      color: var(--primary);
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-small);
+    }
+
+    .back-link:hover {
+      background: var(--primary-light);
+      text-decoration: none;
+    }
+
+    nav h1 {
+      margin: 0 0 0.25rem;
+      font-size: 1.12rem;
+      line-height: 1.25;
+    }
+
+    .nav-subtitle {
+      margin-bottom: 1rem;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      line-height: 1.4;
+    }
+
+    nav ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-size: 0.88rem;
+    }
+
+    nav li {
+      margin-bottom: 0.3rem;
+    }
+
+    nav li.section-title {
+      margin: 1.05rem 0 0.35rem;
+      padding-top: 0.65rem;
+
+      color: #303946;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.045em;
+      text-transform: uppercase;
+
+      border-top: 1px solid var(--border);
+    }
+
+    nav li.section-title:first-of-type {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    nav a {
+      display: block;
+      padding: 0.22rem 0.25rem;
+
+      color: var(--primary);
+      border-radius: 4px;
+    }
+
+    nav a:hover {
+      background: rgba(31, 79, 139, 0.07);
+      text-decoration: none;
+    }
+
+    nav a.sub {
+      padding-left: 1.1rem;
+      color: #4a6fa5;
+      font-size: 0.83rem;
+    }
+
+    /* =========================================================
+       Main page
+       ========================================================= */
+
+    main {
+      width: 100%;
+      max-width: 1080px;
+      padding: 2rem 2.4rem 3rem;
+    }
+
+    main h1 {
+      margin: 0;
+      font-size: 2.15rem;
+      line-height: 1.18;
+    }
+
+    main h2 {
+      margin-top: 2.5rem;
+      margin-bottom: 0.85rem;
+      padding-bottom: 0.4rem;
+
+      font-size: 1.45rem;
+      line-height: 1.3;
+
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    main h3 {
+      margin-top: 1.65rem;
+      margin-bottom: 0.45rem;
+      font-size: 1.13rem;
+    }
+
+    main h4 {
+      margin-top: 1.25rem;
+      margin-bottom: 0.35rem;
+      font-size: 0.98rem;
+    }
+
+    section {
+      scroll-margin-top: 1rem;
+    }
+
+    /* =========================================================
+       Header
+       ========================================================= */
+
+    .hero {
+      padding: 1.4rem 1.5rem;
+      margin-bottom: 1.25rem;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(31, 79, 139, 0.07),
+          rgba(31, 79, 139, 0.015)
+        );
+
+      border: 1px solid #dce6f2;
+      border-radius: var(--radius-large);
+    }
+
+    .hero-subtitle {
+      margin: 0.35rem 0 0.75rem;
+
+      color: var(--text-muted);
+      font-size: 1.08rem;
+      line-height: 1.45;
+    }
+
+    .project-authors {
+      margin: 0.5rem 0 0.9rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .pill-row {
+      margin-bottom: 0.85rem;
+    }
+
+    .pill {
+      display: inline-block;
+
+      margin: 0 0.32rem 0.32rem 0;
+      padding: 0.17rem 0.5rem;
+
+      color: #3e4854;
+      background: #fff;
+
+      border: 1px solid #dce2e8;
+      border-radius: 999px;
+
+      font-size: 0.76rem;
+      font-weight: 600;
+    }
+
+    .button-row {
+      margin-top: 0.75rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+
+      margin: 0 0.4rem 0.45rem 0;
+      padding: 0.45rem 0.88rem;
+
+      color: #fff;
+      background: var(--primary);
+
+      border: 1.5px solid var(--primary);
+      border-radius: var(--radius-small);
+
+      font-size: 0.84rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      color: #fff;
+      background: var(--primary-dark);
+      border-color: var(--primary-dark);
+      text-decoration: none;
+    }
+
+    .btn-outline {
+      color: var(--primary);
+      background: transparent;
+    }
+
+    .btn-outline:hover {
+      color: var(--primary);
+      background: var(--primary-light);
+      border-color: var(--primary);
+    }
+
+    /* =========================================================
+       Informational callouts
+       ========================================================= */
+
+    .note,
+    .warning,
+    .success {
+      margin: 1.15rem 0;
+      padding: 0.8rem 0.95rem;
+
+      border-radius: 0 var(--radius-small) var(--radius-small) 0;
+      font-size: 0.9rem;
+    }
+
+    .note {
+      background: var(--info-background);
+      border-left: 4px solid var(--primary);
+    }
+
+    .warning {
+      background: var(--warning-background);
+      border-left: 4px solid var(--warning);
+    }
+
+    .success {
+      background: var(--success-background);
+      border-left: 4px solid var(--success);
+    }
+
+    .status-card {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.75rem;
+
+      margin: 1rem 0 1.3rem;
+      padding: 0.9rem 1rem;
+
+      background: var(--warning-background);
+      border: 1px solid #f0d7b5;
+      border-radius: var(--radius-medium);
+    }
+
+    .status-icon {
+      width: 34px;
+      height: 34px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      color: #8a4709;
+      background: #fff3df;
+      border: 1px solid #efd3a6;
+      border-radius: 50%;
+
+      font-size: 1rem;
+      font-weight: 800;
+    }
+
+    .status-card strong {
+      display: block;
+      margin-bottom: 0.18rem;
+    }
+
+    .status-card p {
+      margin: 0;
+      color: #5d4934;
+      font-size: 0.88rem;
+    }
+
+    /* =========================================================
+       Cards and workflow
+       ========================================================= */
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
+      gap: 0.85rem;
+      margin: 1rem 0 1.25rem;
+    }
+
+    .info-card {
+      padding: 0.9rem 1rem;
+
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-medium);
+      box-shadow: var(--shadow-small);
+    }
+
+    .info-card h3,
+    .info-card h4 {
+      margin-top: 0;
+    }
+
+    .info-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .workflow {
+      counter-reset: workflow-step;
+      margin: 1rem 0 1.3rem;
+    }
+
+    .workflow-step {
+      position: relative;
+
+      margin: 0 0 0.65rem;
+      padding: 0.75rem 0.9rem 0.75rem 3.25rem;
+
+      background: var(--surface-soft);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-medium);
+    }
+
+    .workflow-step::before {
+      counter-increment: workflow-step;
+      content: counter(workflow-step);
+
+      position: absolute;
+      left: 0.85rem;
+      top: 50%;
+      transform: translateY(-50%);
+
+      width: 1.7rem;
+      height: 1.7rem;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      color: #fff;
+      background: var(--primary);
+      border-radius: 50%;
+
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .workflow-step strong {
+      color: #243447;
+    }
+
+    /* =========================================================
+       Code
+       ========================================================= */
+
+    code {
+      padding: 0.11em 0.32em;
+
+      font-family: Consolas, Monaco, "Courier New", monospace;
+      font-size: 0.88em;
+
+      background: #f0f2f4;
+      border-radius: 3px;
+    }
+
+    pre {
+      margin: 0.75rem 0 1.15rem;
+      padding: 1rem 1.15rem;
+
+      overflow-x: auto;
+
+      color: #d4d4d4;
+      background: #1e1e1e;
+
+      border-radius: var(--radius-small);
+
+      font-family: Consolas, Monaco, "Courier New", monospace;
+      font-size: 0.84rem;
+      line-height: 1.55;
+    }
+
+    pre code {
+      padding: 0;
+      color: inherit;
+      background: transparent;
+      font-size: inherit;
+    }
+
+    /* =========================================================
+       Tables
+       ========================================================= */
+
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      margin: 0.75rem 0 1.2rem;
+    }
+
+    table {
+      width: 100%;
+      min-width: 600px;
+
+      border-collapse: collapse;
+      font-size: 0.89rem;
+    }
+
+    th {
+      padding: 0.55rem 0.75rem;
+
+      color: #fff;
+      background: var(--primary);
+
+      text-align: left;
+      font-size: 0.83rem;
+      font-weight: 700;
+    }
+
+    th:first-child {
+      border-radius: var(--radius-small) 0 0 0;
+    }
+
+    th:last-child {
+      border-radius: 0 var(--radius-small) 0 0;
+    }
+
+    td {
+      padding: 0.52rem 0.75rem;
+
+      vertical-align: top;
+
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    tbody tr:nth-child(even) {
+      background: #fafbfc;
+    }
+
+    tbody tr:hover {
+      background: #f3f7fb;
+    }
+
+    /* =========================================================
+       Figures
+       ========================================================= */
+
+    .fig {
+      max-width: 900px;
+      margin: 1.35rem auto 1.75rem;
+
+      overflow: hidden;
+
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-large);
+      box-shadow: var(--shadow-medium);
+    }
+
+    .fig-image-wrap {
+      padding: 1rem;
+      background: #f7f9fb;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .fig img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      max-height: 630px;
+      object-fit: contain;
+
+      margin: 0 auto;
+
+      background: #fff;
+      border: 1px solid #e2e6ea;
+      border-radius: var(--radius-medium);
+    }
+
+    .fig-body {
+      padding: 0.9rem 1rem 1rem;
+    }
+
+    .fig-title {
+      margin: 0 0 0.28rem;
+
+      color: #26384d;
+      font-size: 0.96rem;
+      font-weight: 800;
+    }
+
+    .fig-caption {
+      margin: 0;
+
+      color: var(--text-muted);
+      font-size: 0.86rem;
+      line-height: 1.5;
+    }
+
+    /*
+       Improved image-source design
+    */
+
+    .figure-source {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.55rem;
+
+      margin-top: 0.75rem;
+      padding: 0.62rem 0.72rem;
+
+      color: #596574;
+      background: var(--source-background);
+
+      border: 1px solid var(--source-border);
+      border-radius: var(--radius-small);
+
+      font-size: 0.75rem;
+      line-height: 1.45;
+    }
+
+    .source-icon {
+      width: 24px;
+      height: 24px;
+      min-width: 24px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      color: var(--primary);
+      background: #fff;
+
+      border: 1px solid #d7e0ea;
+      border-radius: 50%;
+
+      font-size: 0.72rem;
+      font-weight: 800;
+    }
+
+    .source-content {
+      flex: 1;
+    }
+
+    .source-label {
+      display: block;
+
+      margin-bottom: 0.08rem;
+
+      color: #35465a;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.035em;
+      text-transform: uppercase;
+    }
+
+    .source-content cite {
+      font-style: normal;
+    }
+
+    .source-content a {
+      font-weight: 700;
+    }
+
+    .source-license {
+      display: inline-block;
+
+      margin-top: 0.3rem;
+      padding: 0.08rem 0.38rem;
+
+      color: #4b5968;
+      background: #fff;
+
+      border: 1px solid #d8e0e9;
+      border-radius: 999px;
+
+      font-size: 0.67rem;
+      font-weight: 700;
+    }
+
+    /* =========================================================
+       Paper list
+       ========================================================= */
+
+    .paper-list {
+      display: grid;
+      gap: 0.85rem;
+      margin: 1rem 0 1.25rem;
+    }
+
+    .paper-card {
+      padding: 0.95rem 1rem;
+
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-medium);
+      box-shadow: var(--shadow-small);
+    }
+
+    .paper-card h3 {
+      margin: 0 0 0.35rem;
+      font-size: 1rem;
+    }
+
+    .paper-meta {
+      margin: 0 0 0.4rem;
+      color: var(--text-light);
+      font-size: 0.78rem;
+    }
+
+    .paper-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* =========================================================
+       Footer
+       ========================================================= */
+
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.1rem;
+
+      color: var(--text-light);
+      border-top: 1px solid var(--border-light);
+
+      font-size: 0.79rem;
+      line-height: 1.6;
+    }
+
+    /* =========================================================
+       Mobile layout
+       ========================================================= */
+
+    @media (max-width: 940px) {
+      .layout {
+        display: block;
+      }
+
+      nav {
+        width: 100%;
+        min-width: 0;
+        height: auto;
+
+        position: static;
+
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      nav ul {
+        columns: 2;
+        column-gap: 1.5rem;
+      }
+
+      nav li.section-title {
+        break-after: avoid;
+      }
+
+      main {
+        max-width: none;
+        padding: 1.35rem 1.15rem 2.5rem;
+      }
+    }
+
+    @media (max-width: 620px) {
+      nav ul {
+        columns: 1;
+      }
+
+      main h1 {
+        font-size: 1.78rem;
+      }
+
+      .hero {
+        padding: 1.1rem;
+      }
+
+      .status-card {
+        grid-template-columns: 1fr;
+      }
+
+      .status-icon {
+        display: none;
+      }
+
+      .fig-image-wrap {
+        padding: 0.55rem;
+      }
+
+      .figure-source {
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="layout">
+
+    <!-- =====================================================
+         Sidebar
+         ===================================================== -->
+
+    <nav>
+      <a class="back-link" href="index.html">
+        ← WINGS Lab Open Source
+      </a>
+
+      <h1>UB-ANC Emulator</h1>
+
+      <div class="nav-subtitle">
+        Multi-agent drone emulation, networking, flight control, and
+        hardware-in-the-loop experimentation.
+      </div>
+
+      <ul>
+        <li class="section-title">Overview</li>
+        <li><a href="#introduction">Introduction</a></li>
+        <li><a href="#features">Key Features</a></li>
+        <li><a href="#workflow">How It Works</a></li>
+
+        <li class="section-title">Architecture</li>
+        <li><a href="#testbed-architecture">Physical UB-ANC Testbed</a></li>
+        <li><a href="#architecture">Emulator Architecture</a></li>
+        <li><a class="sub" href="#agent-model">Agent Model</a></li>
+        <li><a class="sub" href="#simulation-models">Flight and Network Models</a></li>
+        <li><a class="sub" href="#external-hardware">External Hardware</a></li>
+
+        <li class="section-title">Getting Started</li>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#build">Build</a></li>
+        <li><a href="#objects">Objects Directory</a></li>
+        <li><a href="#missions">Custom Missions</a></li>
+        <li><a href="#run">Run</a></li>
+
+        <li class="section-title">Research</li>
+        <li><a href="#evaluation">Validation</a></li>
+        <li><a href="#applications">Applications</a></li>
+        <li><a href="#limitations">Limitations</a></li>
+        <li><a href="#research-papers">Research Papers</a></li>
+
+        <li class="section-title">Deployment</li>
+        <li><a href="#advanced">Advanced Options</a></li>
+        <li><a href="#logging">Logging</a></li>
+        <li><a href="#docker">Docker</a></li>
+        <li><a href="#ports">Port Mapping</a></li>
+
+        <li class="section-title">Resources</li>
+        <li><a href="#source-code">Source Code</a></li>
+        <li><a href="#citation">Citation</a></li>
+        <li><a href="#license">License and Attribution</a></li>
+      </ul>
+    </nav>
+
+    <!-- =====================================================
+         Main content
+         ===================================================== -->
+
+    <main>
+
+      <!-- ===================================================
+           Header
+           =================================================== -->
+
+      <header class="hero">
+        <h1>UB-ANC Emulator</h1>
+
+        <p class="hero-subtitle">
+          An Emulation Framework for Multi-Agent Drone Networks
+        </p>
+
+        <p class="project-authors">
+          Originally developed by Jalil Modares, Nicholas Mastronarde,
+          and Karthik Dantu at the University at Buffalo.
+        </p>
+
+        <div class="pill-row">
+          <span class="pill">Drone Networks</span>
+          <span class="pill">Multi-Agent Systems</span>
+          <span class="pill">MAVLink</span>
+          <span class="pill">SITL</span>
+          <span class="pill">QGroundControl</span>
+          <span class="pill">APM Planner</span>
+          <span class="pill">ns-3</span>
+          <span class="pill">Software-Defined Radio</span>
+          <span class="pill">Docker</span>
+          <span class="pill">Open Source</span>
+        </div>
+
+        <div class="button-row">
+          <a
+            class="btn"
+            href="https://github.com/nmastron/UB-ANC-Emulator"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            ★ Source Code
+          </a>
+
+          <a
+            class="btn btn-outline"
+            href="https://github.com/jmodares/UB-ANC-Emulator"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Original Repository
+          </a>
+
+          <a
+            class="btn btn-outline"
+            href="https://doi.org/10.1109/SIMPAR.2016.7862404"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Main Paper
+          </a>
+        </div>
+      </header>
+
+      <div class="status-card">
+        <div class="status-icon">!</div>
+
+        <div>
+          <strong>Legacy research software</strong>
+
+          <p>
+            UB-ANC Emulator was originally developed during the 2015–2019
+            period. Its documented environment uses Ubuntu 16.04,
+            QGroundControl 3.2, and ns-3.27. Running the project on a modern
+            Linux distribution may require dependency updates, patches, or the
+            original Docker environment.
+          </p>
+        </div>
+      </div>
+
+      <!-- ===================================================
+           Introduction
+           Image 01
+           =================================================== -->
+
+      <section id="introduction">
+        <h2>Introduction</h2>
+
+        <p>
+          <strong>UB-ANC Emulator</strong> is an open-source software
+          environment for designing, implementing, testing, and debugging
+          missions involving one or more networked drones before moving to
+          field experimentation.
+        </p>
+
+        <p>
+          It combines mission-planning logic, MAVLink-compatible flight
+          control, software-in-the-loop simulation, sensing, data logging,
+          ground-control visualization, wireless-network modeling, and optional
+          integration with physical communication hardware.
+        </p>
+
+        <p>
+          The framework is designed to help researchers study communications,
+          networking, robotics, autonomy, and multi-agent coordination as parts
+          of one integrated cyber-physical system.
+        </p>
+
+        <div class="note">
+          <strong>UB-ANC versus UB-ANC Emulator:</strong>
+          UB-ANC is the physical airborne networking and communications
+          testbed. UB-ANC Emulator is the software environment used to develop
+          and test multi-drone mission logic before deploying it on the
+          physical platform.
+        </div>
+
+        <div class="fig">
+          <div class="fig-image-wrap">
+            <img
+              src="images/01_ubanc_drone_sdr_configuration.png"
+              alt="UB-ANC drone in the software-defined radio configuration"
+              loading="lazy"
+            />
+          </div>
+
+          <div class="fig-body">
+            <div class="fig-title">
+              UB-ANC Drone in the Software-Defined Radio Configuration
+            </div>
+
+            <p class="fig-caption">
+              The physical UB-ANC platform combines autonomous flight control,
+              onboard computing, mission-control software, and a
+              reconfigurable software-defined radio for airborne networking
+              and communication experiments.
+            </p>
+
+            <div class="figure-source">
+              <div class="source-icon">S</div>
+
+              <div class="source-content">
+                <span class="source-label">Figure source</span>
+
+                <cite>
+                  J. Modares and N. Mastronarde,
+                  “UB-ANC Drone: A Flexible Airborne Networking and
+                  Communications Testbed,” Figure 1.
+                </cite>
+
+                <br />
+
+                <a
+                  href="https://arxiv.org/abs/1509.08346"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View publication
+                </a>
+
+                <div class="source-license">
+                  Publication attribution retained
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================
+           Features
+           =================================================== -->
+
+      <section id="features">
+        <h2>Key Features</h2>
+
+        <div class="card-grid">
+          <div class="info-card">
+            <h3>Multi-Agent Emulation</h3>
+
+            <p>
+              Create multiple emulated drones, each with its own mission agent,
+              flight-controller firmware, configuration, networking, and
+              logging.
+            </p>
+          </div>
+
+          <div class="info-card">
+            <h3>Real Flight Interfaces</h3>
+
+            <p>
+              Uses MAVLink and software-in-the-loop flight-controller firmware
+              that closely match the interfaces used on physical drones.
+            </p>
+          </div>
+
+          <div class="info-card">
+            <h3>Scalable Default Models</h3>
+
+            <p>
+              Lightweight flight and network models allow researchers to run
+              larger multi-agent scenarios on conventional computers.
+            </p>
+          </div>
+
+          <div class="info-card">
+            <h3>Realistic Networking</h3>
+
+            <p>
+              ns-3 integration supports protocol stacks, routing, wireless
+              channels, interference, packet loss, throughput, and latency.
+            </p>
+          </div>
+
+          <div class="info-card">
+            <h3>Ground-Control Tools</h3>
+
+            <p>
+              Emulated vehicles can be monitored through MAVLink-compatible
+              ground-control applications such as APM Planner and
+              QGroundControl.
+            </p>
+          </div>
+
+          <div class="info-card">
+            <h3>Hardware Integration</h3>
+
+            <p>
+              Emulated agents may exchange traffic through physical radios,
+              enabling software-defined radio and hardware-in-the-loop
+              experiments.
+            </p>
+          </div>
+
+          <div class="info-card">
+            <h3>Reusable Mission Logic</h3>
+
+            <p>
+              Mission-planning software can move from emulation to real
+              hardware with minimal modification.
+            </p>
+          </div>
+
+          <div class="info-card">
+            <h3>Structured Logging</h3>
+
+            <p>
+              Record vehicle position, flight state, MAVLink messages, network
+              events, sensor measurements, and mission status.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================
+           Workflow
+           =================================================== -->
+
+      <section id="workflow">
+        <h2>How the Emulator Works</h2>
+
+        <p>
+          The following sequence summarizes the normal execution flow from
+          startup to mission logging.
+        </p>
+
+        <div class="workflow">
+          <div class="workflow-step">
+            <strong>The Emulation Engine creates the scenario.</strong>
+            It instantiates one MAV Object for every emulated drone.
+          </div>
+
+          <div class="workflow-step">
+            <strong>Each MAV Object starts its internal components.</strong>
+            These include the UB-ANC Agent, SITL flight controller, networking,
+            sensing, MAVLink, and logging modules.
+          </div>
+
+          <div class="workflow-step">
+            <strong>The Agent Control Unit executes mission logic.</strong>
+            It determines the drone's actions based on mission state, local
+            information, sensor inputs, and messages from other agents.
+          </div>
+
+          <div class="workflow-step">
+            <strong>Flight commands are sent through MAVLink.</strong>
+            The MAVLink Control Unit sends takeoff, waypoint, loiter, landing,
+            and other commands to the SITL flight controller.
+          </div>
+
+          <div class="workflow-step">
+            <strong>The flight-controller simulator updates vehicle state.</strong>
+            Position, altitude, velocity, flight mode, and other state
+            information are returned to the emulator.
+          </div>
+
+          <div class="workflow-step">
+            <strong>Agents exchange network traffic.</strong>
+            The Network Control Unit uses the default model, ns-3, a physical
+            network interface, or software-defined radio hardware.
+          </div>
+
+          <div class="workflow-step">
+            <strong>A ground-control station visualizes the mission.</strong>
+            APM Planner or QGroundControl displays vehicle locations, status,
+            paths, commands, and MAVLink messages.
+          </div>
+
+          <div class="workflow-step">
+            <strong>Logs are collected for analysis.</strong>
+            Mission, flight, sensing, and networking events can be stored for
+            debugging, validation, and research analysis.
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================
+           Physical testbed architecture
+           Images 02 and 04
+           =================================================== -->
+
+      <section id="testbed-architecture">
+        <h2>Physical UB-ANC Testbed</h2>
+
+        <p>
+          The physical UB-ANC platform combines an autonomous vehicle, an
+          embedded computer, a MAVLink-compatible flight controller, and a
+          configurable wireless communication subsystem.
+        </p>
+
+        <p>
+          Its modular architecture separates mission logic from the underlying
+          network and flight-controller technologies. This makes it possible to
+          evaluate the same application using Wi-Fi, Zigbee, LTE, GNU Radio,
+          or software-defined radio hardware.
+        </p>
+
+        <div class="fig">
+          <div class="fig-image-wrap">
+            <img
+              src="images/02_ubanc_testbed_software_architecture.png"
+              alt="UB-ANC physical testbed software and communication architecture"
+              loading="lazy"
+            />
+          </div>
+
+          <div class="fig-body">
+            <div class="fig-title">
+              UB-ANC Testbed Software and Communication Architecture
+            </div>
+
+            <p class="fig-caption">
+              The Agent Control Unit coordinates mission behavior through the
+              Network Control Unit, MAVLink Control Unit, and Logging Unit. The
+              communication interface can connect to GNU Radio and SDR hardware
+              or to a conventional wireless network.
+            </p>
+
+            <div class="figure-source">
+              <div class="source-icon">S</div>
+
+              <div class="source-content">
+                <span class="source-label">Figure source</span>
+
+                <cite>
+                  J. Modares and N. Mastronarde,
+                  “UB-ANC Drone: A Flexible Airborne Networking and
+                  Communications Testbed,” Figure 2.
+                </cite>
+
+                <br />
+
+                <a
+                  href="https://arxiv.org/abs/1509.08346"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View publication
+                </a>
+
+                <div class="source-license">
+                  Publication attribution retained
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h3>Experimental Drone Platform</h3>
+
+        <p>
+          The experimental platform used in the emulator-validation studies
+          included a custom multirotor frame, a Pixhawk flight controller, a
+          Raspberry Pi onboard computer, power sensing, and a high-capacity
+          battery.
+        </p>
+
+        <div class="fig">
+          <div class="fig-image-wrap">
+            <img
+              src="images/04_ubanc_drone_custom_frame.png"
+              alt="Custom UB-ANC drone used for experimental validation"
+              loading="lazy"
+            />
+          </div>
+
+          <div class="fig-body">
+            <div class="fig-title">
+              Custom UB-ANC Experimental Drone
+            </div>
+
+            <p class="fig-caption">
+              Custom-built multirotor used for UB-ANC validation experiments,
+              including the Pixhawk flight controller, Raspberry Pi onboard
+              computer, sensing hardware, and battery system.
+            </p>
+
+            <div class="figure-source">
+              <div class="source-icon">S</div>
+
+              <div class="source-content">
+                <span class="source-label">Figure source</span>
+
+                <cite>
+                  J. Modares, N. Mastronarde, and K. Dantu,
+                  “Simulating Unmanned Aerial Vehicle Swarms with the
+                  UB-ANC Emulator,” Figure 2.
+                </cite>
+
+                <br />
+
+                <a
+                  href="https://doi.org/10.1177/1756829319837668"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View publication
+                </a>
+
+                <div class="source-license">
+                  CC BY-NC 4.0 article
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================
+           Emulator architecture
+           Image 03
+           =================================================== -->
+
+      <section id="architecture">
+        <h2>UB-ANC Emulator Architecture</h2>
+
+        <p>
+          The emulator is organized around three central elements:
+          the <strong>Emulation Engine</strong>, one
+          <strong>MAV Object</strong> for each vehicle, and the
+          <strong>UB-ANC Agent</strong> that implements mission behavior.
+        </p>
+
+        <div class="fig">
+          <div class="fig-image-wrap">
+            <img
+              src="images/03_ubanc_emulator_architecture.png"
+              alt="UB-ANC Emulator software architecture"
+              loading="lazy"
+            />
+          </div>
+
+          <div class="fig-body">
+            <div class="fig-title">
+              UB-ANC Emulator Software Architecture
+            </div>
+
+            <p class="fig-caption">
+              The Emulation Engine manages multiple MAV Objects. Each MAV
+              Object contains the UB-ANC Agent, object attributes, network and
+              sensor interfaces, logging, MAVLink control, and a software-in-
+              the-loop flight-controller simulator.
+            </p>
+
+            <div class="figure-source">
+              <div class="source-icon">S</div>
+
+              <div class="source-content">
+                <span class="source-label">Figure source</span>
+
+                <cite>
+                  J. Modares, N. Mastronarde, and K. Dantu,
+                  “Simulating Unmanned Aerial Vehicle Swarms with the
+                  UB-ANC Emulator,” Figure 1.
+                </cite>
+
+                <br />
+
+                <a
+                  href="https://doi.org/10.1177/1756829319837668"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View publication
+                </a>
+
+                <div class="source-license">
+                  CC BY-NC 4.0 article
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h3 id="agent-model">UB-ANC Agent Model</h3>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Component</th>
+                <th>Responsibility</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>Agent Control Unit (ACU)</td>
+                <td>
+                  Contains mission-planning logic and determines the actions
+                  the drone performs.
+                </td>
+              </tr>
+
+              <tr>
+                <td>Network Control Unit (NCU)</td>
+                <td>
+                  Sends and receives information between agents, ground
+                  systems, network simulators, and external communication
+                  interfaces.
+                </td>
+              </tr>
+
+              <tr>
+                <td>Sensor Control Unit (SCU)</td>
+                <td>
+                  Supplies the mission logic with simulated or physical sensor
+                  measurements.
+                </td>
+              </tr>
+
+              <tr>
+                <td>MAVLink Control Unit (MCU)</td>
+                <td>
+                  Sends commands to and receives state information from a
+                  MAVLink-compatible flight controller.
+                </td>
+              </tr>
+
+              <tr>
+                <td>Logging Unit (LU)</td>
+                <td>
+                  Records vehicle state, mission events, MAVLink messages,
+                  network traffic, and sensing information.
+                </td>
+              </tr>
+
+              <tr>
+                <td>SITL Simulator</td>
+                <td>
+                  Runs the flight-controller firmware and vehicle dynamics
+                  without requiring physical flight-controller hardware.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- =================================================
+             ns-3 integration
+             Image 07
+             ================================================= -->
+
+        <h3 id="simulation-models">Flight and Network Models</h3>
+
+        <p>
+          The default emulator prioritizes scalability. For network studies
+          that require realistic packet-level behavior, UB-ANC can integrate
+          with ns-3.
+        </p>
+
+        <p>
+          UB-ANC supplies agent behavior, mobility, and packet requests, while
+          ns-3 models application, transport, network, link, physical, channel,
+          mobility, and routing behavior.
+        </p>
+
+        <div class="fig">
+          <div class="fig-image-wrap">
+            <img
+              src="images/07_ubanc_ns3_integration.png"
+              alt="Integration of ns-3 with the UB-ANC Emulator"
+              loading="lazy"
+            />
+          </div>
+
+          <div class="fig-body">
+            <div class="fig-title">
+              ns-3 Integration with UB-ANC
+            </div>
+
+            <p class="fig-caption">
+              Packet-transmission events, packet-delivery events, and vehicle
+              position updates are exchanged between UB-ANC MAV Objects and
+              their corresponding ns-3 nodes.
+            </p>
+
+            <div class="figure-source">
+              <div class="source-icon">S</div>
+
+              <div class="source-content">
+                <span class="source-label">Figure source</span>
+
+                <cite>
+                  J. Modares, N. Mastronarde, and K. Dantu,
+                  “Realistic Network Simulation in the UB-ANC Aerial Vehicle
+                  Network Emulator,” Figure 2.
+                </cite>
+
+                <br />
+
+                <a
+                  href="https://doi.org/10.1109/INFCOMW.2017.8116354"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View publication
+                </a>
+
+                <div class="source-license">
+                  IEEE publication — check reuse terms
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h4>Network-Simulator Interface</h4>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Interface</th>
+                <th>Purpose</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td><code>netDataReady()</code></td>
+                <td>
+                  Signals that a MAV Object has a packet ready for the network
+                  simulator.
+                </td>
+              </tr>
+
+              <tr>
+                <td><code>netSendData()</code></td>
+                <td>
+                  Delivers a packet from the network simulator to the
+                  destination MAV Object.
+                </td>
+              </tr>
+
+              <tr>
+                <td><code>globalPositionChanged()</code></td>
+                <td>
+                  Notifies the network simulator when an emulated drone changes
+                  position.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- =================================================
+             Hardware integration
+             Image 06
+             ================================================= -->
+
+        <h3 id="external-hardware">External Hardware Integration</h3>
+
+        <p>
+          UB-ANC supports progressive and mixed emulation. A researcher can
+          emulate flight and mission behavior while routing communication
+          through physical radio hardware.
+        </p>
+
+        <div class="fig">
+          <div class="fig-image-wrap">
+            <img
+              src="images/06_ubanc_usrp_n210_integration.png"
+              alt="UB-ANC Emulator integrated with USRP N210 radios"
+              loading="lazy"
+            />
+          </div>
+
+          <div class="fig-body">
+            <div class="fig-title">
+              USRP N210 Hardware-in-the-Loop Integration
+            </div>
+
+            <p class="fig-caption">
+              Two emulated MAVs communicate through physical USRP N210
+              software-defined radios connected through an Ethernet switch,
+              while their flight and mission behavior remain inside the
+              emulator.
+            </p>
+
+            <div class="figure-source">
+              <div class="source-icon">S</div>
+
+              <div class="source-content">
+                <span class="source-label">Figure source</span>
+
+                <cite>
+                  J. Modares, N. Mastronarde, and K. Dantu,
+                  “Simulating Unmanned Aerial Vehicle Swarms with the
+                  UB-ANC Emulator,” Figure 6.
+                </cite>
+
+                <br />
+
+                <a
+                  href="https://doi.org/10.1177/1756829319837668"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View publication
+                </a>
+
+                <div class="source-license">
+                  CC BY-NC 4.0 article
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================
+           Prerequisites
+           =================================================== -->
+
+      <section id="prerequisites">
+        <h2>Software Prerequisites</h2>
+
+        <p>
+          The original installation instructions recommend
+          <strong>Ubuntu 16.04</strong>. The documented emulator version uses
+          <strong>QGroundControl 3.2</strong> and
+          <strong>ns-3.27</strong>.
+        </p>
+
+        <pre><code>sudo apt-get update &amp;&amp; sudo apt-get upgrade
+
+sudo apt-get install build-essential \
+    libgl1-mesa-dev \
+    libsdl2-dev \
+    python-future \
+    libfontconfig1 \
+    dbus-x11 \
+    geoclue \
+    curl \
+    git \
+    netcat \
+    xvfb</code></pre>
+
+        <div class="warning">
+          <strong>Modern-system compatibility:</strong>
+          This dependency list is historical. Some package names or versions
+          may no longer be available on recent Linux releases. Use Docker or an
+          Ubuntu 16.04-compatible virtual environment when possible.
+        </div>
+      </section>
+
+      <!-- ===================================================
+           Build
+           =================================================== -->
+
+      <section id="build">
+        <h2>Build</h2>
+
+        <p>
+          The project provides a build script that downloads, compiles, and
+          configures the original emulator environment.
+        </p>
+
+        <pre><code>cd ~
+
+mkdir ub-anc
+cd ub-anc
+
+curl -sSL \
+    https://raw.githubusercontent.com/jmodares/UB-ANC-Emulator/master/script/build_emulator.sh \
+    | bash</code></pre>
+
+        <p>
+          After installation, the emulator should be available at:
+        </p>
+
+        <pre><code>~/ub-anc/emulator/</code></pre>
+
+        <p>
+          Add the current user to the <code>dialout</code> group:
+        </p>
+
+        <pre><code>sudo usermod -a -G dialout $USER</code></pre>
+
+        <div class="note">
+          <strong>Important:</strong>
+          Log out and log back in after modifying group membership.
+        </div>
+      </section>
+
+      <!-- ===================================================
+           Objects
+           =================================================== -->
+
+      <section id="objects">
+        <h2>Configuration: Objects Directory</h2>
+
+        <p>
+          The <code>objects</code> directory defines the emulated agents.
+          Each subdirectory represents one vehicle and follows this format:
+        </p>
+
+        <pre><code>mav_001
+mav_002
+mav_003
+...
+mav_250</code></pre>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>File</th>
+                <th>Purpose</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td><code>agent</code></td>
+                <td>
+                  Compiled mission executable for the corresponding drone.
+                </td>
+              </tr>
+
+              <tr>
+                <td><code>arducopter</code></td>
+                <td>
+                  Software-in-the-loop flight-controller firmware executable.
+                </td>
+              </tr>
+
+              <tr>
+                <td><code>copter.parm</code></td>
+                <td>
+                  Flight-controller parameter configuration.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>
+          To create ten agents using the default object template:
+        </p>
+
+        <pre><code>cd ~/ub-anc/emulator
+
+./setup_objects.sh 10</code></pre>
+
+        <p>
+          This creates <code>mav_001</code> through
+          <code>mav_010</code>.
+        </p>
+      </section>
+
+      <!-- ===================================================
+           Missions
+           =================================================== -->
+
+      <section id="missions">
+        <h2>Custom Missions</h2>
+
+        <p>
+          The default example uses the
+          <a
+            href="https://github.com/jmodares/follower"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            follower mission
+          </a>.
+          New missions can be created from the
+          <a
+            href="https://github.com/jmodares/UB-ANC-Agent"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            UB-ANC Agent template
+          </a>.
+        </p>
+
+        <ol>
+          <li>Implement the custom mission behavior.</li>
+          <li>Compile the mission as an executable named <code>agent</code>.</li>
+          <li>Copy it into the emulator's object template directory.</li>
+          <li>
+            Run <code>setup_objects.sh</code> to create the required number of
+            agents.
+          </li>
+          <li>Start the emulator and monitor the mission.</li>
+        </ol>
+      </section>
+
+      <!-- ===================================================
+           Run
+           Image 05
+           =================================================== -->
+
+      <section id="run">
+        <h2>Run the Emulator</h2>
+
+        <pre><code>cd ~/ub-anc/emulator
+
+./start_emulator.sh</code></pre>
+
+        <p>
+          The startup script launches the flight-controller instances,
+          establishes emulator connections, and then starts each mission agent.
+        </p>
+
+        <div class="fig">
+          <div class="fig-image-wrap">
+            <img
+              src="images/05_ubanc_apm_planner_visualization.png"
+              alt="APM Planner visualization for UB-ANC Emulator"
+              loading="lazy"
+            />
+          </div>
+
+          <div class="fig-body">
+            <div class="fig-title">
+              Ground-Control Visualization
+            </div>
+
+            <p class="fig-caption">
+              APM Planner displays the search area, active vehicles, traveled
+              paths, selected vehicle status, command controls, and MAVLink
+              messages during an emulated multi-drone mission.
+            </p>
+
+            <div class="figure-source">
+              <div class="source-icon">S</div>
+
+              <div class="source-content">
+                <span class="source-label">Figure source</span>
+
+                <cite>
+                  J. Modares, N. Mastronarde, and K. Dantu,
+                  “Simulating Unmanned Aerial Vehicle Swarms with the
+                  UB-ANC Emulator,” Figure 3.
+                </cite>
+
+                <br />
+
+                <a
+                  href="https://doi.org/10.1177/1756829319837668"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View publication
+                </a>
+
+                <div class="source-license">
+                  CC BY-NC 4.0 article
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p>
+          Wait until the following messages appear before beginning a mission:
+        </p>
+
+        <pre><code>[XXX] Info: EKF2 IMU0 is using GPS
+[XXX] Info: EKF2 IMU1 is using GPS</code></pre>
+      </section>
+
+      <!-- ===================================================
+           Evaluation
+           Image 08
+           =================================================== -->
+
+      <section id="evaluation">
+        <h2>Emulation and Experimental Validation</h2>
+
+        <p>
+          UB-ANC Emulator was evaluated by comparing software emulation with
+          real drone experiments.
+        </p>
+
+        <h3>What Was Evaluated</h3>
+
+        <ul>
+          <li>
+            A coordinated three-drone takeoff, loiter, communication, and
+            landing mission.
+          </li>
+
+          <li>
+            Arming, landing, disarming, longitude, altitude, and mission timing.
+          </li>
+
+          <li>
+            Leader-follower scenarios with up to 100 emulated MAVs in the
+            reported test environment.
+          </li>
+
+          <li>
+            Communication through physical USRP N210 radios.
+          </li>
+
+          <li>
+            Motor current, energy use, flight speed, and barometric pressure.
+          </li>
+
+          <li>
+            Link-level and end-to-end networking behavior using ns-3.
+          </li>
+        </ul>
+
+        <div class="fig">
+          <div class="fig-image-wrap">
+            <img
+              src="images/08_ubanc_emulation_experiment_comparison.png"
+              alt="Comparison of UB-ANC emulation and real drone experiments"
+              loading="lazy"
+            />
+          </div>
+
+          <div class="fig-body">
+            <div class="fig-title">
+              Emulation versus Real Three-Drone Experiments
+            </div>
+
+            <p class="fig-caption">
+              Comparison of mission-event timing, longitude deviation, and
+              relative altitude for a coordinated mission executed in both the
+              emulator and the physical UB-ANC testbed.
+            </p>
+
+            <div class="figure-source">
+              <div class="source-icon">S</div>
+
+              <div class="source-content">
+                <span class="source-label">Figure source</span>
+
+                <cite>
+                  J. Modares, N. Mastronarde, and K. Dantu,
+                  “Simulating Unmanned Aerial Vehicle Swarms with the
+                  UB-ANC Emulator,” Figure 4.
+                </cite>
+
+                <br />
+
+                <a
+                  href="https://doi.org/10.1177/1756829319837668"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View publication
+                </a>
+
+                <div class="source-license">
+                  CC BY-NC 4.0 article
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================
+           Applications
+           Image 09
+           =================================================== -->
+
+      <section id="applications">
+        <h2>Research Applications</h2>
+
+        <h3>Energy-Efficient Coverage Path Planning</h3>
+
+        <p>
+          UB-ANC has been used to study coverage-path planning for single and
+          multiple drones. The associated research models energy consumption
+          based on traveled distance and turning behavior.
+        </p>
+
+        <p>
+          Planning methods were evaluated through optimization, emulation, and
+          physical drone experiments with virtual obstacles.
+        </p>
+
+        <div class="fig">
+          <div class="fig-image-wrap">
+            <img
+              src="images/09_ubanc_coverage_path_planning.png"
+              alt="Coverage path planning evaluated with UB-ANC"
+              loading="lazy"
+            />
+          </div>
+
+          <div class="fig-body">
+            <div class="fig-title">
+              Energy-Aware Coverage Path Planning
+            </div>
+
+            <p class="fig-caption">
+              Planned and experimentally executed coverage paths around virtual
+              obstacles, comparing a depth-limited search method with the
+              energy-aware LKH-D approach.
+            </p>
+
+            <div class="figure-source">
+              <div class="source-icon">S</div>
+
+              <div class="source-content">
+                <span class="source-label">Figure source</span>
+
+                <cite>
+                  J. Modares, N. Mastronarde, and K. Dantu,
+                  “Simulating Unmanned Aerial Vehicle Swarms with the
+                  UB-ANC Emulator,” Figure 8.
+                </cite>
+
+                <br />
+
+                <a
+                  href="https://doi.org/10.1177/1756829319837668"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View publication
+                </a>
+
+                <div class="source-license">
+                  CC BY-NC 4.0 article
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================
+           Limitations
+           =================================================== -->
+
+      <section id="limitations">
+        <h2>Limitations</h2>
+
+        <ul>
+          <li>
+            The default flight model prioritizes scalability rather than
+            full high-fidelity aerodynamic simulation.
+          </li>
+
+          <li>
+            The basic network model is range based. Realistic packet-level
+            networking requires ns-3 or external communication hardware.
+          </li>
+
+          <li>
+            Timing differences can occur between emulation and physical flight,
+            especially around takeoff and other flight transitions.
+          </li>
+
+          <li>
+            The original software dependencies are old and may not build
+            directly on current Linux distributions.
+          </li>
+
+          <li>
+            The reported 100-agent scalability result was obtained using a
+            specific historical computer and leader-follower scenario; it is
+            not a universal maximum.
+          </li>
+
+          <li>
+            Successful emulation does not replace physical validation, flight
+            safety reviews, trained operators, or compliance with applicable
+            aviation regulations.
+          </li>
+        </ul>
+      </section>
+
+      <!-- ===================================================
+           Advanced options
+           =================================================== -->
+
+      <section id="advanced">
+        <h2>Advanced Options</h2>
+
+        <p>
+          QGroundControl, flight-controller, and ns-3 parameters can be passed
+          or changed by editing the <code>start_emulator</code> function inside
+          <code>start_emulator.sh</code>.
+        </p>
+
+        <h3>Console Mode</h3>
+
+        <pre><code>cd ~/ub-anc/emulator
+
+./start_emulator.sh -c</code></pre>
+
+        <p>
+          The documented console-mode configuration uses AODV routing by
+          default. Routing, propagation, gain, data rate, and logging settings
+          can be adjusted in the startup script or associated ns-3 code.
+        </p>
+      </section>
+
+      <!-- ===================================================
+           Logging
+           =================================================== -->
+
+      <section id="logging">
+        <h2>Output Traces and Logging</h2>
+
+        <p>
+          The default startup script suppresses agent output by redirecting it
+          to <code>/dev/null</code>. This reduces overhead when running many
+          agents.
+        </p>
+
+        <p>
+          For debugging or experimental analysis, modify the startup script to
+          display logs in real time or save them to files.
+        </p>
+
+        <div class="success">
+          <strong>Scalability tip:</strong>
+          Enable detailed console output only when necessary. Heavy logging can
+          reduce emulator performance when many drones are active.
+        </div>
+      </section>
+
+      <!-- ===================================================
+           Docker
+           =================================================== -->
+
+      <section id="docker">
+        <h2>Docker</h2>
+
+        <p>
+          Docker provides the most practical way to reproduce the historical
+          UB-ANC software environment.
+        </p>
+
+        <h3>Build the Image</h3>
+
+        <pre><code>docker build -t jmod/ub-anc-emulator:latest \
+    https://raw.githubusercontent.com/jmodares/UB-ANC-Emulator/master/script/Dockerfile</code></pre>
+
+        <h3>Run with Linux GUI Support</h3>
+
+        <pre><code>xauth nlist $DISPLAY \
+    | sed -e 's/^..../ffff/' \
+    | xauth -f /tmp/.docker.xauth nmerge -
+
+docker run -it \
+    --env DISPLAY=$DISPLAY \
+    --env XAUTHORITY=/tmp/.docker.xauth \
+    --volume /tmp/.X11-unix:/tmp/.X11-unix \
+    --volume /tmp/.docker.xauth:/tmp/.docker.xauth \
+    --device /dev/dri:/dev/dri \
+    --device /dev/snd:/dev/snd \
+    --volume $PWD/docker:/tmp/emulator \
+    --publish 5770:5770 \
+    --publish 5780:5780 \
+    jmod/ub-anc-emulator:latest</code></pre>
+
+        <h3>Run without GUI Mapping</h3>
+
+        <pre><code>docker run -it \
+    --volume $PWD/docker:/tmp/emulator \
+    --publish 5770:5770 \
+    --publish 5780:5780 \
+    jmod/ub-anc-emulator:latest</code></pre>
+
+        <p>
+          Inside the container:
+        </p>
+
+        <pre><code>cp -r emulator/ /tmp/
+
+cd /tmp/emulator</code></pre>
+
+        <div class="note">
+          <strong>Historical container credentials:</strong>
+          The original README lists both the username and password as
+          <code>ub-anc</code>.
+        </div>
+      </section>
+
+      <!-- ===================================================
+           Ports
+           =================================================== -->
+
+      <section id="ports">
+        <h2>Port Mapping</h2>
+
+        <p>
+          Ground-control applications connect to agent <code>i</code> using:
+        </p>
+
+        <pre><code>port = 10 * i + 5760</code></pre>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Agent</th>
+                <th>Port</th>
+                <th>Docker publish option</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>Agent 1</td>
+                <td><code>5770</code></td>
+                <td><code>--publish 5770:5770</code></td>
+              </tr>
+
+              <tr>
+                <td>Agent 2</td>
+                <td><code>5780</code></td>
+                <td><code>--publish 5780:5780</code></td>
+              </tr>
+
+              <tr>
+                <td>Agent 3</td>
+                <td><code>5790</code></td>
+                <td><code>--publish 5790:5790</code></td>
+              </tr>
+
+              <tr>
+                <td>Agent N</td>
+                <td><code>10 * N + 5760</code></td>
+                <td><code>--publish &lt;port&gt;:&lt;port&gt;</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===================================================
+           Source code
+           =================================================== -->
+
+      <section id="source-code">
+        <h2>Source Code</h2>
+
+        <ul>
+          <li>
+            <strong>Current repository:</strong>
+            <a
+              href="https://github.com/nmastron/UB-ANC-Emulator"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              github.com/nmastron/UB-ANC-Emulator
+            </a>
+          </li>
+
+          <li>
+            <strong>Original repository:</strong>
+            <a
+              href="https://github.com/jmodares/UB-ANC-Emulator"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              github.com/jmodares/UB-ANC-Emulator
+            </a>
+          </li>
+
+          <li>
+            <strong>Mission template:</strong>
+            <a
+              href="https://github.com/jmodares/UB-ANC-Agent"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              UB-ANC Agent
+            </a>
+          </li>
+
+          <li>
+            <strong>Follower mission:</strong>
+            <a
+              href="https://github.com/jmodares/follower"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              follower
+            </a>
+          </li>
+        </ul>
+
+        <h3>Repository Structure</h3>
+
+        <pre><code>UB-ANC-Emulator/
+├── engine/                 # Core emulator components
+├── qgc_gui/                # Ground-control GUI integration
+├── script/                 # Build, setup, startup, and Docker scripts
+├── README.md               # Project documentation
+├── UB-ANC-Emulator.pro     # Qt project configuration
+└── .gitignore</code></pre>
+
+        <h3>Where to Start in the Code</h3>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Directory or file</th>
+                <th>Purpose</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td><code>engine/</code></td>
+                <td>
+                  Core emulator logic, MAV Object management, inter-agent
+                  behavior, and system coordination.
+                </td>
+              </tr>
+
+              <tr>
+                <td><code>qgc_gui/</code></td>
+                <td>
+                  QGroundControl-derived graphical and ground-control
+                  components.
+                </td>
+              </tr>
+
+              <tr>
+                <td><code>script/build_emulator.sh</code></td>
+                <td>
+                  Downloads, builds, and configures the historical emulator
+                  environment.
+                </td>
+              </tr>
+
+              <tr>
+                <td><code>script/start_emulator.sh</code></td>
+                <td>
+                  Starts flight-controller instances, emulator components, and
+                  mission agents.
+                </td>
+              </tr>
+
+              <tr>
+                <td><code>script/setup_objects.sh</code></td>
+                <td>
+                  Creates the requested number of <code>mav_xxx</code>
+                  directories.
+                </td>
+              </tr>
+
+              <tr>
+                <td><code>UB-ANC-Emulator.pro</code></td>
+                <td>
+                  Qt project configuration used to build the emulator.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===================================================
+           Research papers
+           =================================================== -->
+
+      <section id="research-papers">
+        <h2>UB-ANC Research Papers</h2>
+
+        <div class="paper-list">
+          <article class="paper-card">
+            <h3>
+              <a
+                href="https://arxiv.org/abs/1509.08346"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                UB-ANC Drone: A Flexible Airborne Networking and
+                Communications Testbed
+              </a>
+            </h3>
+
+            <div class="paper-meta">
+              Jalil Modares and Nicholas Mastronarde
+            </div>
+
+            <p>
+              Introduces the physical UB-ANC platform, including autonomous
+              drones, onboard control, conventional networking, and SDR-based
+              communication.
+            </p>
+          </article>
+
+          <article class="paper-card">
+            <h3>
+              <a
+                href="https://doi.org/10.1109/SIMPAR.2016.7862404"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                UB-ANC Emulator: An Emulation Framework for Multi-Agent Drone
+                Networks
+              </a>
+            </h3>
+
+            <div class="paper-meta">
+              IEEE SIMPAR 2016
+            </div>
+
+            <p>
+              Presents the original emulator architecture, experimental
+              validation, scalability study, and transition from emulation to
+              physical drone systems.
+            </p>
+          </article>
+
+          <article class="paper-card">
+            <h3>
+              <a
+                href="https://doi.org/10.1109/INFCOMW.2017.8116354"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Realistic Network Simulation in the UB-ANC Aerial Vehicle
+                Network Emulator
+              </a>
+            </h3>
+
+            <div class="paper-meta">
+              IEEE INFOCOM Workshops 2017
+            </div>
+
+            <p>
+              Describes the ns-3 integration API and evaluates realistic
+              mobility, wireless links, routing, and end-to-end communication.
+            </p>
+          </article>
+
+          <article class="paper-card">
+            <h3>
+              <a
+                href="https://doi.org/10.1109/ICRA.2017.7989732"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                UB-ANC Planner: Energy Efficient Coverage Path Planning with
+                Multiple Drones
+              </a>
+            </h3>
+
+            <div class="paper-meta">
+              IEEE ICRA 2017
+            </div>
+
+            <p>
+              Presents drone energy measurements and an energy-aware
+              multi-drone coverage-path planning method.
+            </p>
+          </article>
+
+          <article class="paper-card">
+            <h3>
+              <a
+                href="https://doi.org/10.1177/1756829319837668"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Simulating Unmanned Aerial Vehicle Swarms with the UB-ANC
+                Emulator
+              </a>
+            </h3>
+
+            <div class="paper-meta">
+              International Journal of Micro Air Vehicles, 2019
+            </div>
+
+            <p>
+              Provides the most complete description of UB-ANC Emulator,
+              including architecture, real-drone validation, USRP integration,
+              ns-3 networking, sensed-parameter evaluation, and path planning.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- ===================================================
+           Citation
+           =================================================== -->
+
+      <section id="citation">
+        <h2>Citation</h2>
+
+        <p>
+          Cite the main UB-ANC Emulator publication:
+        </p>
+
+        <pre><code>@inproceedings{modares2016ubanc,
+  title     = {{UB-ANC Emulator}: An Emulation Framework for
+               Multi-Agent Drone Networks},
+  author    = {Jalil Modares and Nicholas Mastronarde and
+               Karthik Dantu},
+  booktitle = {Proceedings of the IEEE International Conference
+               on Simulation, Modeling, and Programming for
+               Autonomous Robots},
+  year      = {2016},
+  doi       = {10.1109/SIMPAR.2016.7862404}
+}</code></pre>
+
+        <h3>Additional Publications</h3>
+
+        <pre><code>@article{modares2019simulating,
+  title   = {Simulating Unmanned Aerial Vehicle Swarms with
+             the UB-ANC Emulator},
+  author  = {Jalil Modares and Nicholas Mastronarde and
+             Karthik Dantu},
+  journal = {International Journal of Micro Air Vehicles},
+  year    = {2019},
+  doi     = {10.1177/1756829319837668}
+}
+
+@inproceedings{modares2017realistic,
+  title     = {Realistic Network Simulation in the UB-ANC
+               Aerial Vehicle Network Emulator},
+  author    = {Jalil Modares and Nicholas Mastronarde and
+               Karthik Dantu},
+  booktitle = {IEEE INFOCOM Workshops},
+  year      = {2017},
+  doi       = {10.1109/INFCOMW.2017.8116354}
+}
+
+@inproceedings{modares2017planner,
+  title     = {{UB-ANC Planner}: Energy Efficient Coverage
+               Path Planning with Multiple Drones},
+  author    = {Jalil Modares and Farshad Ghanei and
+               Nicholas Mastronarde and Karthik Dantu},
+  booktitle = {IEEE International Conference on Robotics
+               and Automation},
+  year      = {2017},
+  doi       = {10.1109/ICRA.2017.7989732}
+}
+
+@misc{modares2015ubanc,
+  title  = {{UB-ANC Drone}: A Flexible Airborne Networking
+            and Communications Testbed},
+  author = {Jalil Modares and Nicholas Mastronarde},
+  year   = {2015},
+  note   = {arXiv:1509.08346}
+}</code></pre>
+      </section>
+
+      <!-- ===================================================
+           License and attribution
+           =================================================== -->
+
+      <section id="license">
+        <h2>License and Figure Attribution</h2>
+
+        <h3>Software License</h3>
+
+        <p>
+          UB-ANC Emulator is distributed under the
+          <strong>GNU General Public License, version 3 or later</strong>.
+          Refer to the repository license and source-code headers for the
+          complete software terms.
+        </p>
+
+        <h3>Research Figures</h3>
+
+        <p>
+          The images displayed on this page originate from UB-ANC research
+          publications and include an attribution block beneath every figure.
+          The UB-ANC software license does not automatically apply to figures
+          published in research papers.
+        </p>
+
+        <div class="warning">
+          <strong>Reuse notice:</strong>
+          The 2019 International Journal of Micro Air Vehicles article is
+          distributed under the Creative Commons Attribution-NonCommercial
+          4.0 license. Figures originating from IEEE publications may be
+          governed by separate IEEE reuse conditions. Confirm the applicable
+          rights before modifying, redistributing, or using those figures for
+          commercial purposes.
+        </div>
+      </section>
+
+      <footer>
+        <a href="index.html">WINGS Lab Open Source</a>
+        &nbsp;•&nbsp;
+        UB-ANC Emulator
+        <br />
+
+        Based on the public UB-ANC source repositories, README documentation,
+        and related research publications.
+      </footer>
+
+    </main>
+  </div>
+</body>
+</html>
