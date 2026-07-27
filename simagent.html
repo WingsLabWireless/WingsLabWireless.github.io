@@ -107,11 +107,10 @@
       <li><a href="#setup">Setup Guide</a></li>
 
       <li class="section-title">Architecture</li>
-      <li><a href="#codesign">HW/SW Co-Design</a></li>
-      <li><a href="#platform">Platform Architecture</a></li>
-      <li><a href="#protocols">Communication Protocols</a></li>
-      <li><a href="#frame-design">Frame Design</a></li>
+      <li><a href="#container">Default Container Network</a></li>
+      <li><a href="#channel">Shared Channel Abstraction</a></li>
 
+      
       <!--
       <li class="section-title">Transceiver Chain</li>
       <li><a href="#tx-chain">Transmitter Chain</a></li>
@@ -145,8 +144,8 @@
 
   <main>
     <header>
-      <h1>BenchLink</h1>
-      <p style="margin-top:-.2rem; color:#555; font-size:1.05rem;">An SoC-Based Benchmark for Resilient Communication Links in GPS-Denied Environments</p>
+      <h1>SimAgent</h1>
+      <p style="margin-top:-.2rem; color:#555; font-size:1.05rem;">An Emulation Sandbox for Software-defined Protocol Testing and Evaluation</p>
       <div>
         <span class="pill">Software-defined Networking</span>
         <span class="pill">Network Protocol Design</span>
@@ -165,9 +164,9 @@
 
     <section id="introduction"><h2>Introduction</h2>
       <p>
-        While most wireless network simulation frameworks offer configuration options, many lack a clear framework for integrating extant software-defined 
-        protocol stacks. This leaves evaluation of software-defined network toolchains to custom frameworks, which may be challenging to design or share
-        with members of the wireless research community.          
+        While most wireless network simulation frameworks offer configuration options, many lack a clear framework for integrating software-defined 
+        protocol stacks provided by users. This leaves evaluation of software-defined network toolchains to custom frameworks, which may be challenging 
+        to design or share with members of the wireless research community.          
       </p>
       <p>
         <strong>SimAgent</strong> is a lightweight software testbench designed to simplify behavioral evaluation of software-defined wireless network protocols 
@@ -245,7 +244,7 @@
   </li>
   <li>
     <strong>Anaconda</strong>: Python environment managment within Docker containers is handled using
-    <a href="https://www.anaconda.com/docs/main">Anaconda</a> by default, which allows users to install dependencies automatically as outlined below; 
+    <a target="_blank" rel="noopener noreferrer" href="https://www.anaconda.com/docs/main">Anaconda</a> by default, which allows users to install dependencies automatically as outlined below; 
     use of this feature is optional, but alternative environment management strategies will require manual configuration of the SimAgent source code 
   </li>
 </ul>
@@ -253,18 +252,18 @@
 <h3>Knowledge Prerequisites</h3>
   <p>
     Users must be familiar with Dockerfile composition, including syntax, execution, and file system interactions to enable network protocol integration 
-    (further reading <a href="https://docs.docker.com/get-started/docker-concepts/building-images/writing-a-dockerfile/">Dockerfile composition)</a>. We 
-    recommend familiarity with <a href="https://docs.docker.com/engine/network/">Docker Network</a> configuration to help troubleshoot configuration issues.  
+    (further reading on <a target="_blank" rel="noopener noreferrer" href="https://docs.docker.com/get-started/docker-concepts/building-images/writing-a-dockerfile/">Dockerfile composition)</a>. We 
+    recommend familiarity with <a target="_blank" rel="noopener noreferrer" href="https://docs.docker.com/engine/network/">Docker Network</a> configuration to help troubleshoot configuration issues.  
   </p>
   <p>  
-    Users must also be familiar with <a href="https://www.shellscript.sh/">Shell Command Language</a> to configure the automated network startup scripts.
+    Users must also be familiar with <a target="_blank" rel="noopener noreferrer" href="https://www.shellscript.sh/">Shell Command Language</a> to configure the automated network startup scripts.
   </p>
   <p>
     We recommend familiarity with Unix sockets, including addressing, general capabilities and limitations, and 
-    <a href="https://docs.python.org/3/library/socket.html">Python implementation</a> for general use beyond the scope of this documentation. 
+    <a target="_blank" rel="noopener noreferrer" href="https://docs.python.org/3/library/socket.html">Python implementation</a> for general use beyond the scope of this documentation. 
   </p>
   <p>
-    We recommend a basic understanding of <a href="https://web.stanford.edu/class/ee359/doc/WirelessComm_Chp1-16_March32020.pdf">wireless communications</a>,
+    We recommend a basic understanding of <a target="_blank" rel="noopener noreferrer" href="https://web.stanford.edu/class/ee359/doc/WirelessComm_Chp1-16_March32020.pdf">wireless communications</a>,
     such as channel properties and modeling, for extension or manipulation of the basic channel abstraction, which is also beyond the scope of this documentation. 
   </p>
 </section>
@@ -276,7 +275,7 @@
 <h3>Installation</h3>
   <p>
     Ensure Docker has been configured correctly on the host machine 
-    (see the <a href="https://docs.docker.com/engine/install/ubuntu/">Docker Installation guide</a> for more info). 
+    (see the <a target="_blank" rel="noopener noreferrer" href="https://docs.docker.com/engine/install/ubuntu/">Docker Installation guide</a> for more info). 
   </p>
 
   <p>
@@ -292,7 +291,7 @@
   </p>
 
   <p>
-    Clone the <a href="https://github.com/WingsLabWireless/SimAgent">repository</a>, e.g.: <code>git clone git@github.com:WingsLabWireless/SimAgent.git</code>
+    Clone the <a target="_blank" rel="noopener noreferrer" href="https://github.com/WingsLabWireless/SimAgent">repository</a>, e.g.: <code>git clone git@github.com:WingsLabWireless/SimAgent.git</code>
   </p>
 
 
@@ -328,6 +327,29 @@
 </section>
 
 
+
+
+
+<section id="container"><h2>Default Container Network</h2>
+<p>
+  Placeholder text.
+</p>
+  
+</section>
+
+
+
+
+    
+<section id="channel"><h2>Shared Channel Abstraction</h2>
+<p>
+  Placeholder text.
+</p>
+ 
+</section>
+
+    
+
 <!--
 <section id="citation"><h2>Citation</h2><p>If you use BenchLink in your research, please cite the following paper (<a href="https://arxiv.org/abs/2512.20942">arXiv</a>):</p><pre><code>@inproceedings{benchlink2026,
   title     = {{BenchLink}: An {SoC}-Based Benchmark for Resilient
@@ -346,7 +368,7 @@
 <section id="license"><h2>License</h2><p>BenchLink is released under the <strong>MIT License</strong>.</p><div class="note">Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files, to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software.</div></section>
 
 <footer style="margin-top:3rem; font-size:.8rem; color:#777;">
-  WINGS Lab Open Source &bull; SimAgent &bull; University of Minnesota Twin Cities
+  WINGS Lab Open Source &bull; SimAgent &bull; Virginia Polytechnic Institute and State University - State University of New York at Buffalo 
   <!-- 
   <br> Supported by NSF (SWIFT-2229563, CNS-2450418) and AFRL (FA8750-21-F-1012, FA8750-20-C1021, FA8750-25-1-1000)
   -->
