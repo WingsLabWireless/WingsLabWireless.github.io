@@ -1,0 +1,8 @@
+@inproceedings{wang2026ignite,
+  author    = {Yiding Wang and Zhaoxi Zhang and Chenzhi Zhao and Zhangyu Guan and Dong L. Wu and Leah Ding},
+  title     = {{IGNITE}: A Multimodal {UAV} Dataset for Wildland Fire Detection and Thermal-Anomaly Analysis},
+  booktitle = {Proceedings of the ACM/IEEE Workshop on Autonomous Drone Computing Systems and Applications (DroneSys)},
+  address   = {Santa Clara, CA, USA},
+  month     = oct,
+  year      = {2026}
+}

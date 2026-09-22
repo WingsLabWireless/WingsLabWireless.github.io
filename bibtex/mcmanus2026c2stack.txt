@@ -1,0 +1,11 @@
+@inproceedings{mcmanus2026c2stack,
+  author    = {Maxwell McManus and Zhaoxi (Josh) Zhang and Sidharth Santhinivas
+               and Yuqing Cui and Prem Sagar Pattanshetty Vasanth Kumar
+               and Chenzhi Zhao and Nicholas Mastronarde and George Sklivanitis
+               and Dimitris A. Pados and Elizabeth Serena Bentley and Zhangyu Guan},
+  title     = {Designing, Deployment and Field Testing of {C2Stack} for Networked Intelligent Software-Defined {UAVs}},
+  booktitle = {Proceedings of the ACM International Conference on Mobile Computing and Networking (MobiCom)},
+  address   = {Austin, TX, USA},
+  month     = oct,
+  year      = {2026}
+}
