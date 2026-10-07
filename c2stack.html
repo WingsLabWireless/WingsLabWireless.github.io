@@ -162,6 +162,12 @@
       </div>
     </header>
 
+
+      <!-- 
+      <div class="fig"><img src="images/fig1_architecture.png" alt="BenchLink software-hardware partitioning and co-design architecture"><div class="caption">Software-hardware partitioning and co-design architecture of BenchLink. Components marked with * are custom designed.</div></div>
+      <div class="fig"><img src="images/fig10_drone.png" alt="Heavy-duty drone with BenchLink module"><div class="caption">Heavy-duty drone with integrated BenchLink module for air-to-air communication experiments.</div></div>
+      -->
+    
     <section id="introduction"><h2>Introduction</h2>
       <p>
         <strong>C2Stack</strong> is a highly configurable and extensible protocol stack for communications and control in UAV networks, 
@@ -170,10 +176,59 @@
         and provides signaling interfaces between UAVs to enable autonomous swarm control and 
         wireless network self-configuration through data-driven control algorithms.
       </p>
-      <!-- 
-      <div class="fig"><img src="images/fig1_architecture.png" alt="BenchLink software-hardware partitioning and co-design architecture"><div class="caption">Software-hardware partitioning and co-design architecture of BenchLink. Components marked with * are custom designed.</div></div>
-      <div class="fig"><img src="images/fig10_drone.png" alt="Heavy-duty drone with BenchLink module"><div class="caption">Heavy-duty drone with integrated BenchLink module for air-to-air communication experiments.</div></div>
-      -->
+
+      <h3>Overview</h3>
+
+      <div class="fig"><img src="images/c2stack_software_arch.png" alt="software_architecture">
+        <div class="caption">C2Stack Software Architecture.</div>
+      </div>
+
+      The C2Stack framework is composed of two primary components: the Programmable Protocol Stack (PPS) data plane, and the C2Stack Network Operating System (CNOS) control plane. 
+
+      <h4>Data Plane: PPS</h4>
+      The PPS consists of 5 independent layer processes, each of which is intended to supply the features, services, and functionalities defined by the OSI model. Hardware-based threading is employed on PPS 
+      startup to improve timing constraints, improve performance, and avoid Python GIL restrictions. The specific properties and behaviors outlined below are subject to change based on continued maintenance and 
+      improvement of the C2Stack code base, and PPS service integration will depend on user configuration. YMMV. 
+      <ul>
+      <li><strong>APP</strong>: Data generation services and top-level rate management. The default peer-to-peer data generation service is a video streaming application, which provides a bufferless (best-effort) 
+          video stream with adaptive frame compression based on the discrete cosine transform (DCT). Video reconstruction at the receving node is implemented as in-place frame reconstruction, enabling continuous 
+          video playback in lossy channel conditions. 
+          </li>
+      <li><strong>TSPT</strong>: Application flow management and packet priority tagging. High-priority flows will be granted transmit resources before low-priority flows. Additional flow management protocols are left 
+          to user implementation.  
+          </li>
+      <li><strong>NET</strong>: Dynamic discovery, topology management, and routing. By default, node discovery is a toggled process and routing tables will be reset on activation. A two-level hierarchical association 
+          scheme is enforced, in which ``header'' nodes comprise the ad hoc network, ``member'' nodes register only with a single header, and a single ``ground'' node serves as the core network controller. No more than 
+          one ``ground'' node should be registered during network operation. 
+          </li>
+      <li><strong>MAC</strong>: Packet scheduling and logical channelization. By default, all control packets are granted maximum priority and will be transmitted before data signals in the case of strictly logical 
+          channelization. In the case of physical channelization, data and control packets will be queued separately. Channel coding is optionally implemented here. On the receive path, duplicate packet detection 
+          logic has been implemented to prevent redundant processing. 
+          </li>
+      <li><strong>PHY</strong>: Frame construction and hardware-level queueing, and software-defined protocol interface (SDPI). Due to hardware constraints, 8 PPS packets will be grouped together into one PHY frame. 
+          The associated FPGA design interleaves subframes with fine frequency synchronization sequences, so this design ensures that partial frame (i.e. packet-level) recovery is possible under lossy channel conditions. 
+          In the case of control packets, each control packet will be copied to fill a single subframe to ensure successful delivery under lossy channel conditions. Note that this layer does NOT provide standalone 
+          transmit and receive operation; over-the-air transmission is achieved by coupling this PHY layer with RF hardware via device-specific configuration of the SDPI. 
+          </li>
+    </ul>
+      
+    <h4>Control Plane: CNOS</h4>
+    CNOS provides a central overview of PPS metrics, state, and configuration options in addition to node- and network-level configuration options. The CNOS GUI provides node- and network-level monitoring and 
+    control, in both centralized and distributed scenarios. In both scenarios, we recommend continuous monitoring of all nodes via LAN using external remote desktop control software to ensure real-time performance - in our experience, 
+    the combination of aerial channel complexity and experimental waveform design can render distributed state/performance monitoring via in-band signaling unreliable. 
+      <ul>
+      <li><strong>CNOS Core</strong>: Central processing of CNOS tasks and services, including metrics aggregation, local cache management, and routing and delivery of inter-process communications. Peer-to-peer signaling among 
+          CNOS processes is achieved through a socket interface with the PPS, and intra-node process signaling is implemented as a system of GIL-dependent callbacks (Qt [signals/slots](https://doc.qt.io/qt-6/signalsandslots.html)). 
+          </li>
+      <li><strong>C2-App Suite</strong>: Logical repository of user-defined control applications. This serves as a broad sandbox for node- and network-level services supplied by the user, which rely on asynchronous 
+          pub/sub-type interaction with state data provided by the CNOS core. In general, C2-Apps should be designed to support parallel, non-exclusive execution and avoid direct interaction with PPS configuration.    
+          </li>
+      <li><strong>Autonomy Toolchain</strong>: Cross-layer networking services (CLNS), dataset generation and retrieval, and management service for user-defined data-driven algorithms. The CLNS hosts all modeling and control 
+          algorithms which require direct, synchronous interaction with the CNOS core. In general, CLNS services should be designed for exclusive operation to ensure stateful updates to the PPS configuration. 
+          </li>
+    </ul>
+
+      
 </section>
 
 <section id="prerequisites"><h2>Software &amp; Hardware Prerequisites</h2>
@@ -265,23 +320,32 @@
   </p>
   <p>
     This process will launch several new terminal windows, as well as the GUI. 
-      <li><code>MPSoC Write</code>: XX </li>
-      <li><code>MPSoC Read & Control</code>: XX </li>
-      <li><code>Lyr1: PHY MPSOC</code>: XX </li>
-      <li><code>Lyr1: CH EST</code>: XX </li>
-      <li><code>Lyr2: LNK</code>: XX </li>
-      <li><code>Lyr3: NET</code>: XX </li>
-      <li><code>Lyr4: TSPT</code>: XX </li>
-      <li><code>Lyr5: CMD</code>: XX </li>
-      <li><code>Lyr5: APP - Video Receiver</code>: XX </li>
-      <li><code>Lyr5: APP - Video Transmitter</code>: XX </li>
-      <li><code>ZTOS</code>: XX </li>
+      <li><code>MPSoC Write</code>: SDPI interface forwarding data from PPS to RF hardware system </li>
+      <li><code>MPSoC Read & Control</code>: SDPI interface retrieving data from RF hardware system, and facilitating control signaling via direct memory assignment </li>
+      <li><code>Lyr1: PHY MPSOC</code>: physical layer and SDPI (see above) </li>
+      <li><code>Lyr1: CH EST</code>: coarse channel estimation services, based on metrics forwarded from RF hardware system </li>
+      <li><code>Lyr2: LNK</code>: MAC layer (see above) </li>
+      <li><code>Lyr3: NET</code>: network layer (see above) </li>
+      <li><code>Lyr4: TSPT</code>: transport layer (see above) </li>
+      <li><code>Lyr5: CMD</code>: debug command interface for application layer </li>
+      <li><code>Lyr5: APP - Video Receiver</code>: video reception process for application layer </li>
+      <li><code>Lyr5: APP - Video Transmitter</code>: video transmission process for application layer </li>
+      <li><code>CNOS</code>: control plane process </li>
   </p>
 
   <p>
-    <strong>NOTE: documentation is ongoing - operating instructions will be provided ASAP</strong>. 
+    <strong>NOTE: documentation is ongoing - operating instructions will be provided ASAP - use with caution</strong>. 
   </p>
-          
+
+
+  <h3>User interface walkthrough</h3>
+  <div class="fig"><img src="images/c2stack_gui_control.png" alt="gui_control">
+    <div class="caption">GUI: primary control interface.</div>
+  </div>
+
+
+
+
   
 </section>
 
