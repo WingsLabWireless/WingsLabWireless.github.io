@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>World Map – U.S.-Centered</title>
+<style>
+:root {
+  --ocean:#f3f8fc;
+  --land:#c9d5df;
+  --us:#86aeca;
+}
+* { box-sizing:border-box; }
+body { margin:0; background:var(--ocean); font-family:Arial,Helvetica,sans-serif; }
+#world-map {
+  width:100%;
+  aspect-ratio:16/8;
+  min-height:300px;
+  position:relative;
+  overflow:hidden;
+  background:var(--ocean);
+}
+#world-map svg { display:block; width:100%; height:100%; }
+.region { stroke:#ffffff; stroke-width:.8; vector-effect:non-scaling-stroke; }
+.country { fill:var(--land); }
+.us-state { fill:var(--us); stroke:#f8fbff; stroke-width:1.05; }
+.region.selected { stroke-width:2.0; }
+.us-outline {
+  fill:none;
+  stroke:#476f8f;
+  stroke-width:2.2;
+  vector-effect:non-scaling-stroke;
+  pointer-events:none;
+}
+.message {
+  position:absolute;
+  top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  color:#40576c;
+  padding:20px;
+  text-align:center;
+}
+</style>
+</head>
+<body>
+<div id="world-map" role="img" aria-label="Single world map centered on the United States with selectable flashing U.S. states">
+  <div id="message" class="message">Loading map…</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+<script>
+/* ========================= USER SETTINGS ========================= */
+const selectedStates = ['MA', 'NY', 'VA', 'FL'];
+const flashSeconds = 5;
+const usScaleX = 1.75;
+const usScaleY = 1.45;
+const flashColor = '#ffff00';   // Bright yellow
+const flashStroke = '#b38f00';  // Dark gold outline
+/* ================================================================ */
+
+const stateAbbrevToName = {
+  AL:'Alabama', AK:'Alaska', AZ:'Arizona', AR:'Arkansas', CA:'California', CO:'Colorado', CT:'Connecticut', DE:'Delaware', FL:'Florida',
+  GA:'Georgia', HI:'Hawaii', ID:'Idaho', IL:'Illinois', IN:'Indiana', IA:'Iowa', KS:'Kansas', KY:'Kentucky', LA:'Louisiana',
+  ME:'Maine', MD:'Maryland', MA:'Massachusetts', MI:'Michigan', MN:'Minnesota', MS:'Mississippi', MO:'Missouri', MT:'Montana',
+  NE:'Nebraska', NV:'Nevada', NH:'New Hampshire', NJ:'New Jersey', NM:'New Mexico', NY:'New York', NC:'North Carolina', ND:'North Dakota',
+  OH:'Ohio', OK:'Oklahoma', OR:'Oregon', PA:'Pennsylvania', RI:'Rhode Island', SC:'South Carolina', SD:'South Dakota', TN:'Tennessee',
+  TX:'Texas', UT:'Utah', VT:'Vermont', VA:'Virginia', WA:'Washington', WV:'West Virginia', WI:'Wisconsin', WY:'Wyoming', DC:'District of Columbia'
+};
+
+const normalize = s => String(s || '').trim().toLowerCase();
+const normalizeStateInput = s => {
+  const t = String(s || '').trim();
+  const up = t.toUpperCase();
+  return normalize(stateAbbrevToName[up] || t);
+};
+
+let statesSet = new Set(selectedStates.map(normalizeStateInput));
+let stateShapes = [];
+let selectedShapes = [];
+const usColor = '#86aeca';
+
+function animateFlash(now) {
+  const duration = Math.max(0.5, Number(flashSeconds) || 5) * 1000;
+  const pulse = (1 - Math.cos(2 * Math.PI * (now % duration) / duration)) / 2;
+  for (const entry of selectedShapes) {
+    const fill = d3.interpolateRgb(entry.base, flashColor)(pulse);
+    const stroke = d3.interpolateRgb('#ffffff', flashStroke)(pulse);
+    entry.shape
+      .attr('fill', fill)
+      .attr('stroke', stroke)
+      .style('fill', fill)
+      .style('stroke', stroke);
+  }
+  requestAnimationFrame(animateFlash);
+}
+requestAnimationFrame(animateFlash);
+
+function updateMap({states} = {}) {
+  if (states !== undefined) statesSet = new Set(states.map(normalizeStateInput));
+  selectedShapes = [];
+  for (const item of stateShapes) {
+    const selected = statesSet.has(normalize(item.name));
+    item.shape.classed('selected', selected)
+      .attr('fill', item.base)
+      .attr('stroke', '#ffffff')
+      .style('fill', item.base)
+      .style('stroke', '#ffffff');
+    if (selected) selectedShapes.push(item);
+  }
+}
+window.updateMap = updateMap;
+
+Promise.all([
+  d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json'),
+  d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json')
+]).then(([world, usa]) => {
+  const W = 1200, H = 600;
+  const svg = d3.select('#world-map').append('svg')
+    .attr('viewBox', `0 0 ${W} ${H}`)
+    .attr('preserveAspectRatio', 'xMidYMid meet');
+
+  const countries = topojson.feature(world, world.objects.countries).features;
+  const states = topojson.feature(usa, usa.objects.states).features;
+  const usCountry = countries.find(d => String(d.id) === '840' || normalize(d.properties?.name) === 'united states of america');
+  const otherCountries = countries.filter(d => d !== usCountry);
+
+  // Rotate the world so the continental U.S. sits at the center of the map.
+  const projection = d3.geoNaturalEarth1()
+    .rotate([98, 0])
+    .fitExtent([[10, 10], [W - 10, H - 10]], { type: 'Sphere' });
+  const path = d3.geoPath(projection);
+
+  svg.append('g')
+    .attr('class', 'world-layer')
+    .selectAll('path.country')
+    .data(otherCountries)
+    .enter().append('path')
+    .attr('class', 'region country')
+    .attr('d', path)
+    .append('title')
+    .text(d => d.properties?.name || 'Country');
+
+  const usBounds = path.bounds(usCountry);
+  const cx = (usBounds[0][0] + usBounds[1][0]) / 2;
+  const cy = (usBounds[0][1] + usBounds[1][1]) / 2;
+
+  const usGroup = svg.append('g')
+    .attr('class', 'us-group')
+    .attr('transform', `translate(${cx},${cy}) scale(${usScaleX},${usScaleY}) translate(${-cx},${-cy})`);
+
+  usGroup.append('path')
+    .datum(usCountry)
+    .attr('d', path)
+    .attr('fill', usColor)
+    .attr('stroke', 'none');
+
+  usGroup.selectAll('path.state')
+    .data(states)
+    .enter().append('path')
+    .attr('class', 'region us-state')
+    .attr('d', path)
+    .each(function(d) {
+      stateShapes.push({ shape: d3.select(this), name: d.properties?.name, base: usColor });
+    })
+    .append('title')
+    .text(d => d.properties?.name || 'U.S. state');
+
+  usGroup.append('path')
+    .datum(usCountry)
+    .attr('class', 'us-outline')
+    .attr('d', path);
+
+  document.getElementById('message').remove();
+  updateMap();
+}).catch(error => {
+  document.getElementById('message').textContent = 'Unable to load map boundaries. Check your internet connection.';
+  console.error('Map data loading error:', error);
+});
+</script>
+</body>
+</html>
