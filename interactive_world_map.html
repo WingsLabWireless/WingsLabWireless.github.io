@@ -24,7 +24,9 @@ body { margin:0; background:var(--ocean); font-family:Arial,Helvetica,sans-serif
 .region { stroke:#ffffff; stroke-width:.8; vector-effect:non-scaling-stroke; }
 .country { fill:var(--land); }
 .us-state { fill:var(--us); stroke:#f8fbff; stroke-width:1.05; }
-.region.selected { stroke-width:2.0; }
+/* State boundaries remain unchanged when a location is selected. */
+.state-dot { stroke:#ffffff; stroke-width:1.8; pointer-events:all; }
+.state-dot-halo { pointer-events:none; }
 .us-outline {
   fill:none;
   stroke:#476f8f;
@@ -43,7 +45,7 @@ body { margin:0; background:var(--ocean); font-family:Arial,Helvetica,sans-serif
 </style>
 </head>
 <body>
-<div id="world-map" role="img" aria-label="Single world map centered on the United States with selectable flashing U.S. states">
+<div id="world-map" role="img" aria-label="Single world map centered on the United States with flashing location dots on selected U.S. states">
   <div id="message" class="message">Loading map…</div>
 </div>
 
@@ -55,8 +57,9 @@ const selectedStates = ['MA', 'NY', 'VA', 'FL'];
 const flashSeconds = 5;
 const usScaleX = 1.75;
 const usScaleY = 1.45;
-const flashColor = '#ffff00';   // Bright yellow
-const flashStroke = '#b38f00';  // Dark gold outline
+const dotRadius = 6;          // Dot radius in SVG pixels
+const dotColor = '#ffff00';    // Change this one value to set dot and halo color
+const dotMinOpacity = 0.25;  // How faint the dots become during flashing
 /* ================================================================ */
 
 const stateAbbrevToName = {
@@ -77,20 +80,15 @@ const normalizeStateInput = s => {
 
 let statesSet = new Set(selectedStates.map(normalizeStateInput));
 let stateShapes = [];
-let selectedShapes = [];
+let dotMarkers = [];
 const usColor = '#86aeca';
 
 function animateFlash(now) {
   const duration = Math.max(0.5, Number(flashSeconds) || 5) * 1000;
   const pulse = (1 - Math.cos(2 * Math.PI * (now % duration) / duration)) / 2;
-  for (const entry of selectedShapes) {
-    const fill = d3.interpolateRgb(entry.base, flashColor)(pulse);
-    const stroke = d3.interpolateRgb('#ffffff', flashStroke)(pulse);
-    entry.shape
-      .attr('fill', fill)
-      .attr('stroke', stroke)
-      .style('fill', fill)
-      .style('stroke', stroke);
+  for (const marker of dotMarkers) {
+    marker.dot.attr('opacity', dotMinOpacity + (1 - dotMinOpacity) * pulse);
+    marker.halo.attr('opacity', 0.14 * pulse).attr('r', dotRadius + 3 + 3 * pulse);
   }
   requestAnimationFrame(animateFlash);
 }
@@ -98,15 +96,9 @@ requestAnimationFrame(animateFlash);
 
 function updateMap({states} = {}) {
   if (states !== undefined) statesSet = new Set(states.map(normalizeStateInput));
-  selectedShapes = [];
-  for (const item of stateShapes) {
-    const selected = statesSet.has(normalize(item.name));
-    item.shape.classed('selected', selected)
-      .attr('fill', item.base)
-      .attr('stroke', '#ffffff')
-      .style('fill', item.base)
-      .style('stroke', '#ffffff');
-    if (selected) selectedShapes.push(item);
+  for (const marker of dotMarkers) {
+    const visible = statesSet.has(normalize(marker.name));
+    marker.group.style('display', visible ? null : 'none');
   }
 }
 window.updateMap = updateMap;
@@ -170,6 +162,30 @@ Promise.all([
     .datum(usCountry)
     .attr('class', 'us-outline')
     .attr('d', path);
+
+  // Position circular markers after the U.S. stretching transform,
+  // so each marker stays round rather than becoming an oval.
+  const dotsLayer = svg.append('g').attr('class', 'state-dots-layer');
+  states.forEach(state => {
+    const name = state.properties?.name;
+    const [px, py] = path.centroid(state);
+    if (!Number.isFinite(px) || !Number.isFinite(py)) return;
+    const x = cx + usScaleX * (px - cx);
+    const y = cy + usScaleY * (py - cy);
+    const group = dotsLayer.append('g')
+      .attr('transform', `translate(${x},${y})`);
+    const halo = group.append('circle')
+      .attr('class', 'state-dot-halo')
+      .attr('fill', dotColor)
+      .attr('r', dotRadius + 3)
+      .attr('opacity', 0);
+    const dot = group.append('circle')
+      .attr('class', 'state-dot')
+      .attr('r', dotRadius)
+      .attr('fill', dotColor);
+    dot.append('title').text(name);
+    dotMarkers.push({name, group, dot, halo});
+  });
 
   document.getElementById('message').remove();
   updateMap();
