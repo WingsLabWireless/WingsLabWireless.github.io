@@ -1,154 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>WINGS-4039 | WINGS Lab Open Source</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <style>
-    body { margin:0; font-family:Arial, Helvetica, sans-serif; line-height:1.55; color:#222; }
-    .layout { display:flex; min-height:100vh; }
-    nav {
-      width:260px; background:#f3f4f6; border-right:1px solid #ddd;
-      padding:1rem; box-sizing:border-box; position:sticky; top:0;
-      height:100vh; overflow-y:auto;
-    }
-    nav h1 { font-size:1.1rem; margin:0 0 .6rem 0; }
-    nav ul { list-style:none; padding:0; margin:0; font-size:.9rem; }
-    nav li.section-title { font-weight:bold; margin:.9rem 0 .3rem; }
-    nav li { margin-bottom:.35rem; }
-    nav a { color:#1f4f8b; text-decoration:none; }
-    nav a:hover { text-decoration:underline; }
-    main { flex:1; padding:1.6rem 2rem; box-sizing:border-box; max-width:980px; }
-    main h1 { font-size:1.9rem; margin-top:0; }
-    main h2 {
-      font-size:1.35rem; margin-top:2.1rem;
-      border-bottom:1px solid #eee; padding-bottom:.3rem;
-    }
-    p { margin:.45rem 0 .7rem; }
-    ul { margin:.4rem 0 .9rem; padding-left:1.4rem; }
-    .pill {
-      display:inline-block; font-size:.78rem; padding:.12rem .45rem;
-      border-radius:999px; background:#f5f5f5; border:1px solid #e6e6e6;
-      color:#444; margin-right:.35rem; margin-bottom:.25rem;
-    }
-    .note {
-      background:#eef6ff; border-left:4px solid #1f4f8b;
-      padding:.7rem .9rem; margin:1.2rem 0; font-size:.9rem;
-    }
-    @media (max-width:900px) {
-      .layout { flex-direction:column; }
-      nav { width:100%; height:auto; position:static; }
-      main { padding:1rem; }
-    }
-  </style>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="WINGS-4039 open-source heavy-lift UAV platform: hardware, software, assembly and reproducible field testing for wireless experimentation.">
+<title>WINGS-4039 | Open-Source UAV Research Platform</title>
+<style>
+:root{--bg:#f7f8fa;--panel:#fff;--ink:#202c36;--muted:#596875;--line:#dce2e6;--navy:#163b54;--accent:#bd582b;--light:#eaf0f3;--ok:#216449;--soon:#805f29;--shadow:0 9px 26px rgba(26,43,58,.06)}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:85px}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.64 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}a{color:#175978;text-underline-offset:3px}a:hover{color:var(--accent)}.wrap{max-width:1170px;margin:auto;padding:0 28px}.top{background:white;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}.topinner{display:flex;align-items:center;justify-content:space-between;min-height:69px;gap:20px}.brand{color:var(--navy);font-weight:800;letter-spacing:.03em;text-decoration:none;font-size:1.1rem}.brand b{color:var(--accent)}.top nav{display:flex;gap:19px;flex-wrap:wrap}.top nav a{text-decoration:none;font-size:.87rem;font-weight:650;color:#435766}.top nav a:hover{color:var(--accent)}.top nav a.back-link{background:var(--navy);color:#fff;padding:8px 12px;border-radius:5px;white-space:nowrap}.top nav a.back-link:hover{background:var(--accent);color:#fff}.hero{background:linear-gradient(120deg,#122e42,#22475f);color:white;padding:72px 0 65px}.eyebrow{text-transform:uppercase;letter-spacing:.17em;font-size:.76rem;font-weight:800;color:#ffbd96}.hero h1{font-size:clamp(2.6rem,5vw,4.3rem);line-height:1.13;margin:13px 0}.hero p{max-width:830px;font-size:1.16rem;color:#e0e8eb}.buttons{display:flex;flex-wrap:wrap;gap:12px;margin-top:25px}.btn{display:inline-block;padding:10px 19px;border-radius:5px;text-decoration:none;font-size:.91rem;font-weight:700;border:1px solid #bdd0db;background:#fff;color:#173e55}.btn.secondary{background:transparent;color:#fff;border-color:#7998a9}.btn:hover{opacity:.86}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-top:36px}.stat{border-top:1px solid #6e8b9d;padding-top:12px}.stat strong{display:block;font-size:1.55rem;color:#fff}.stat small{color:#ccdae2}.section{padding:65px 0 10px}.section h2{font-size:2rem;color:var(--navy);line-height:1.25;margin:0 0 12px}.sectionintro{max-width:850px;color:var(--muted);margin-bottom:27px}.kicker{font-size:.78rem;text-transform:uppercase;letter-spacing:.13em;font-weight:800;color:var(--accent);margin:0 0 7px}.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:23px;box-shadow:var(--shadow)}.card h3{font-size:1.1rem;color:var(--navy);margin:2px 0 8px}.card p{color:var(--muted);margin:0 0 12px;font-size:.94rem}.card .code{font-size:.82rem;background:#f1f4f5;border:1px solid var(--line);border-radius:4px;display:block;padding:8px 10px;overflow-wrap:anywhere}.tag{display:inline-block;border-radius:4px;font-size:.74rem;letter-spacing:.015em;padding:3px 8px;font-weight:750;margin-bottom:11px}.tag.planned{background:#f5eee0;color:var(--soon)}.tag.link{background:#e5f3ec;color:var(--ok)}.tag.ref{background:#e8eff5;color:#356079}.two{display:grid;grid-template-columns:1fr 1fr;gap:22px}.panel{background:#fff;border:1px solid var(--line);border-radius:8px;padding:23px 26px}.panel h3{margin:0 0 12px;color:var(--navy)}.panel ul,.panel ol{padding-left:21px;margin:8px 0}.panel li{margin:8px 0}.tablebox{overflow-x:auto;background:white;border:1px solid var(--line);border-radius:8px}table{border-collapse:collapse;width:100%;font-size:.93rem}th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--line);vertical-align:top}th{background:#eaf0f3;color:#27485e}tr:last-child td{border-bottom:0}.note{border-left:4px solid var(--accent);padding:16px 19px;background:#fff4ed;color:#563c30;margin:22px 0;border-radius:0 6px 6px 0}.step{display:grid;grid-template-columns:45px 1fr;gap:14px;padding:18px 0;border-bottom:1px solid var(--line)}.stepnum{width:34px;height:34px;background:var(--navy);color:white;border-radius:50%;display:grid;place-items:center;font-weight:800}.step h3{margin:0;color:var(--navy);font-size:1.02rem}.step p{margin:5px 0;color:var(--muted)}.foot{background:#122e42;color:#d2e1ea;padding:35px 0;margin-top:65px}.foot a{color:#c7e6f7}.foot p{margin:7px 0;font-size:.9rem}.bar{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}.search{border:1px solid #a9b8c2;padding:11px 14px;border-radius:5px;min-width:min(320px,100%);font:inherit}.hidden{display:none!important}.toc{display:flex;gap:9px;flex-wrap:wrap;margin-top:20px}.toc a{font-size:.81rem;text-decoration:none;color:#34576b;border:1px solid #a8becb;border-radius:30px;padding:5px 11px}.small{font-size:.86rem;color:var(--muted)}code{font-size:.9em}details{background:#fff;border:1px solid var(--line);margin:10px 0;border-radius:6px;padding:13px 17px}summary{cursor:pointer;font-weight:700;color:var(--navy)}details p{margin-bottom:3px}.footerline{border-top:1px solid #35546b;margin-top:20px;padding-top:16px}
+@media(max-width:800px){.cards{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:repeat(2,1fr)}.topinner{align-items:flex-start;flex-direction:column;padding-top:13px;padding-bottom:13px}.top nav{gap:12px}.two{grid-template-columns:1fr}.hero{padding:48px 0}}@media(max-width:560px){.cards{grid-template-columns:1fr}.wrap{padding:0 18px}.stats{gap:18px}.section{padding-top:48px}.hero h1{font-size:2.5rem}.top nav a{font-size:.78rem}}
+@media print{.top,.buttons,.search,.toc{display:none!important}.hero{color:#000;background:#fff;padding:20px 0}.hero p,.stat small,.stat strong{color:#000}.section{padding:20px 0}.card,.panel{break-inside:avoid}.foot{background:white;color:black}}
+</style>
 </head>
-
 <body>
-<div class="layout">
-  <nav>
-    <h1>WINGS-4039</h1>
-    <ul>
-      <li class="section-title">Contents</li>
-      <li><a href="#overview">Overview</a></li>
-      <li><a href="#hardware">Hardware</a></li>
-      <li><a href="#software">Software</a></li>
-      <li><a href="#testing">Testing</a></li>
-      <li><a href="#license">License</a></li>
-    </ul>
-  </nav>
-
-  <main>
-    <header>
-      <h1>WINGS-4039</h1>
-      <div>
-        <span class="pill">Open UAV platform</span>
-        <span class="pill">Modular payload</span>
-        <span class="pill">Research-grade</span>
-      </div>
-    </header>
-
-    <section id="overview">
-      <h2>Overview</h2>
-      <p>
-        WINGS-4039 is an open, modular UAV platform designed for research and field experimentation
-        across wireless communications, networking, autonomy, and edge AI. The platform emphasizes
-        payload capacity, integration flexibility, and repeatable test workflows, enabling evaluation
-        beyond simulation-only studies.
-      </p>
-      <p>
-        As part of the broader WINGS open UAV ecosystem, WINGS-4039 supports rapid payload swaps
-        (e.g., SDR + compute + sensors) and standardized interfaces for command, telemetry, and
-        experiment control.
-      </p>
-    </section>
-
-    <section id="hardware">
-      <h2>Hardware</h2>
-      <ul>
-        <li><strong>Airframe:</strong> modular structure designed to support multiple payload configurations</li>
-        <li><strong>Payload bay:</strong> mechanical and power interfaces for SDR/compute/sensing modules</li>
-        <li><strong>Compute:</strong> onboard compute options (x86/ARM/SoC-class), depending on mission needs</li>
-        <li><strong>RF payloads:</strong> support for SDR-class radios and external RF front-ends</li>
-        <li><strong>Power:</strong> battery and power-distribution design to accommodate research payload draw</li>
-      </ul>
-      <div class="note">
-        TODO: Replace the bullets above with the finalized WINGS-4039 specs (mass, payload, battery,
-        flight time, interfaces, mechanical drawings, etc.).
-      </div>
-    </section>
-
-    <section id="software">
-      <h2>Software</h2>
-      <ul>
-        <li>Flight-control stack integration (autopilot + safety/autonomy layer)</li>
-        <li>Experiment control and telemetry interfaces (logging, time sync, health monitoring)</li>
-        <li>Payload software hooks for radio/edge-AI applications</li>
-        <li>Optional integration with orchestration tooling (e.g., BenchLink) for repeatable campaigns</li>
-      </ul>
-      <p>
-        The software architecture prioritizes separation between safe flight operations and experimental payloads,
-        so failures in research code do not compromise flight safety.
-      </p>
-      <div class="note">
-        TODO: Add repository links, setup steps, and the exact artifacts you plan to open-source (e.g., avionics carrier,
-        logging agent, time-sync, bench scripts).
-      </div>
-    </section>
-
-    <section id="testing">
-      <h2>Testing</h2>
-      <ul>
-        <li>Bench validation of avionics, power, and payload integration</li>
-        <li>Ground and tether tests for safety checks and telemetry verification</li>
-        <li>Outdoor flight tests for end-to-end data collection and experiment repeatability</li>
-        <li>Campaign-style evaluation across different RF environments and mission profiles</li>
-      </ul>
-      <p>
-        WINGS-4039 is designed to support structured test campaigns with consistent configuration and logging,
-        enabling fair comparison across runs and experimental conditions.
-      </p>
-    </section>
-
-    <section id="license">
-      <h2>License</h2>
-      <p>
-        WINGS-4039 documentation and software artifacts will be released under the <strong>MIT License</strong>.
-      </p>
-      <div class="note">
-        Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
-        documentation files, to deal in the Software without restriction, including without limitation the rights to
-        use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software.
-      </div>
-      <p>
-        <strong>Note:</strong> If you later open-source hardware design files (CAD, PCB, mechanical drawings),
-        you can keep MIT for consistency or switch to a hardware-focused license on a per-artifact basis.
-      </p>
-    </section>
-
-    <footer style="margin-top:3rem; font-size:.8rem; color:#777;">
-      WINGS Lab Open Source • WINGS-4039
-    </footer>
-  </main>
-</div>
-</body>
-</html>
+<header class="top"><div class="wrap topinner"><a class="brand" href="#home">WINGS<b>–4039</b> <span style="font-weight:450;font-size:.76rem;color:#657786">OPEN PLATFORM</span></a><nav aria-label="Main navigation"><a href="#overview">Overview</a><a href="#hardware">Hardware</a><a href="#software">Software</a><a href="#build">Build Guide</a><a href="#testing">Testing</a><a href="#datasets">Datasets</a><a href="#downloads">Resources</a></nav></div></header>
+<main>
+<section class="hero" id="home"><div class="wrap"><div class="eyebrow">WINGS Lab · Open-source research infrastructure</div><h1>WINGS-4039</h1><p style="font-weight:650;color:white;margin:0">Modular Heavy-Lift UAV for Software-Defined Wireless Experimentation</p><p>Hardware designs, electrical interfaces, flight-control integration, SDR payloads, and practical testing methods—organized to help research teams reproduce and extend an aerial wireless testbed.</p><div class="buttons"><a class="btn" href="#downloads">Explore release resources ↗</a><a class="btn secondary" href="#build">Build &amp; test guide →</a><a class="btn secondary" href="https://github.com/WingsLabWireless/UAV-Action-State-Transition-and-Navigation-Dataset" target="_blank" rel="noopener">Dataset repository ↗</a><a class="btn secondary" href="https://wingslabwireless.github.io/opensource.html">← WINGS Lab Open Source</a></div><div class="stats"><div class="stat"><strong>39 in</strong><small>Propeller diameter</small></div><div class="stat"><strong>4</strong><small>Motors / quadcopter</small></div><div class="stat"><strong>12S / 14S</strong><small>Main-battery architecture</small></div><div class="stat"><strong>30+ GB</strong><small>Collected experimental data</small></div></div></div></section>
+<section class="section" id="overview"><div class="wrap"><div class="kicker">01 / Platform overview</div><h2>Built for wireless experimentation</h2><p class="sectionintro">WINGS-4039 integrates a heavy-lift flight platform with a physically detachable, electrically independent experimental payload. The platform separates flight-critical functions from SDR research software and supports a bidirectional interface for communication-aware mobility.</p><div class="cards"><article class="card"><h3>Aircraft platform</h3><p>Modular carbon-fiber/aluminum structure, high-current power distribution, CubePilot flight controller, and navigation sensors.</p></article><article class="card"><h3>Experimental payload</h3><p>Detachable rack for SDRs, computing hardware, RF front ends, antennas, and dedicated payload power management.</p></article><article class="card"><h3>Mobility-aware experiments</h3><p>Exchange UAV state and high-level position/heading requests while maintaining the distinction between research applications and flight control.</p></article></div><div class="note"><b>Release status:</b> This site is an open-source publication framework based on the WINGS-4039 paper. Links are only marked available when a specific public destination is known. CAD, PCB, firmware, and test artifacts below are identified as planned until the actual files and version identifiers are supplied.</div><div class="toc"><a href="#hardware">Hardware inventory</a><a href="#software">Software interfaces</a><a href="#build">Assembly procedure</a><a href="#testing">Validation protocols</a><a href="#datasets">Public data</a><a href="#downloads">Release index</a></div></div></section>
+<section class="section" id="hardware"><div class="wrap"><div class="kicker">02 / Hardware design</div><h2>Reproducible hardware modules</h2><p class="sectionintro">Each hardware package should include source design files, fabrication exports, drawings, an exact BOM, revision identifiers, and assembly notes. The modules below reflect the system architecture documented in the current paper.</p><div class="cards"><article class="card"><span class="tag planned">Planned release</span><h3>01. Airframe and structural CAD</h3><p>Central frame, carbon-fiber tubes, motor-arm joints, landing gear, battery support, fastening specifications, and dimensional drawings.</p><span class="code">hardware/mechanical/</span></article><article class="card"><span class="tag planned">Planned release</span><h3>02. Propulsion and distribution</h3><p>Motor/ESC integration, 39-inch propeller configuration, copper bus plates, 12S/14S battery interfaces, grounding, and protective devices.</p><span class="code">hardware/power-distribution/</span></article><article class="card"><span class="tag planned">Planned release</span><h3>03. Flight-control carrier PCB</h3><p>Carrier-board schematics, PCB layouts, pin maps, regulated power rails, input protection, sensing and flight-control wiring.</p><span class="code">hardware/carrier-board/</span></article><article class="card"><span class="tag planned">Planned release</span><h3>04. Navigation and sensors</h3><p>CubePilot Orange+, u-blox F9P / Here4 GNSS, HerePro RTK base station, telemetry, mounting, and calibration documentation.</p><span class="code">hardware/navigation/</span></article><article class="card"><span class="tag planned">Planned release</span><h3>05. Detachable SDR payload rack</h3><p>Payload tray, quick-release mechanism, antenna mounts, payload attachment geometry, vibration management, and mass/balance guidelines.</p><span class="code">hardware/payload-rack/</span></article><article class="card"><span class="tag planned">Planned release</span><h3>06. Payload electrical system</h3><p>Independent payload power, converters, DC connectors, cable routing, RF integration, and isolation from propulsion circuitry.</p><span class="code">hardware/payload-power/</span></article></div><h3 style="margin-top:33px;color:var(--navy)">Reference platform specifications</h3><div class="tablebox"><table><thead><tr><th>Component</th><th>Documented specification</th></tr></thead><tbody><tr><td>Airframe</td><td>Quadcopter; carbon fiber and aluminum</td></tr><tr><td>Propellers</td><td>39 in diameter</td></tr><tr><td>Primary structural tube</td><td>40 mm outer diameter; 3.1 mm wall thickness</td></tr><tr><td>Main energy source</td><td>12S / 14S smart battery</td></tr><tr><td>Maximum main-bus voltage</td><td>58.8 V (14S)</td></tr><tr><td>Flight controller</td><td>CubePilot Orange+</td></tr><tr><td>GNSS / RTK</td><td>u-blox F9P / Here4; HerePro base station</td></tr><tr><td>Carrier-board input</td><td>18–75 V DC</td></tr><tr><td>Primary power distribution</td><td>Copper bus plates</td></tr></tbody></table></div><p class="small">Specifications reflect the supplied paper draft; verify final part numbers, ratings, payload capacity, and hardware revisions against released engineering files before replication.</p></div></section>
+<section class="section" id="software"><div class="wrap"><div class="kicker">03 / Software and interfaces</div><h2>Flight software meets SDR experimentation</h2><p class="sectionintro">The open-source software package is intended to document the interface between the UAV's flight-critical subsystems and experimental onboard computing—without making the SDR application responsible for stabilization or emergency behavior.</p><div class="two"><div class="panel"><h3>Aircraft-side software</h3><ul><li>Flight-controller configuration and tested firmware version</li><li>Vehicle calibration and navigation settings</li><li>State telemetry, logging, and diagnostic messages</li><li>Failsafe configuration and high-level command acceptance</li><li>Interface-controller firmware and protocol definitions</li></ul><span class="tag planned">Firmware and configs: planned</span></div><div class="panel"><h3>Payload-side software</h3><ul><li>SDK / example client for UAV position and attitude</li><li>High-level position and heading request examples</li><li>SDR startup and data-logging templates</li><li>Timestamped synchronization of RF and vehicle state</li><li>Remote monitoring and experimental health reporting</li></ul><span class="tag planned">SDK and examples: planned</span></div></div><h3 style="margin-top:28px;color:var(--navy)">Interface concept</h3><div class="panel"><p style="margin:0;text-align:center;font-weight:700;color:var(--navy)">Wireless application / SDR payload <span style="color:var(--accent)">⇄</span> Interface controller <span style="color:var(--accent)">⇄</span> Aircraft flight controller</p><p class="small" style="margin-bottom:0;text-align:center">High-level requests and telemetry cross the interface; flight stabilization and critical safety remain on the aircraft side.</p></div><details><summary>Recommended protocol documentation</summary><p>Publish a versioned message schema, field names and units, reference frames, transport/baud settings, command acknowledgments, heartbeat/timeout behavior, and rejected-command behavior. Include real example logs and minimal client examples when available.</p></details><details><summary>Recommended version manifest</summary><p>Record airframe revision, carrier PCB revision, flight-controller firmware version, interface-controller firmware commit, SDR model, OS/image, payload application commit, and dataset format version for each experiment.</p></details></div></section>
+<section class="section" id="build"><div class="wrap"><div class="kicker">04 / Assembly and reproducibility</div><h2>Build, configure, and verify</h2><p class="sectionintro">A reproducible release should guide a new team from procurement through ground verification and supervised flight acceptance. The steps below are an outline—not a substitute for validated engineering drawings or a manufacturer-approved flight procedure.</p><div class="two"><div><div class="step"><div class="stepnum">1</div><div><h3>Source components and fabricate parts</h3><p>Use revision-controlled CAD, BOM, supplier references, fabrication tolerances, and part-inspection criteria.</p></div></div><div class="step"><div class="stepnum">2</div><div><h3>Assemble the mechanical structure</h3><p>Document arm geometry, load-bearing fasteners, propeller clearances, landing gear, center of gravity, and torque/inspection records.</p></div></div><div class="step"><div class="stepnum">3</div><div><h3>Integrate electrical subsystems</h3><p>Inspect polarity, connector ratings, wire routing, protective devices, grounding, and payload/aircraft power separation.</p></div></div><div class="step"><div class="stepnum">4</div><div><h3>Install firmware and calibrate sensors</h3><p>Record known-good configuration, IMU/compass calibration, positioning setup, and telemetry/failsafe validation.</p></div></div></div><div><div class="step"><div class="stepnum">5</div><div><h3>Configure the modular SDR payload</h3><p>Confirm mechanical retention, power limits, cooling, antennas, RF interconnects, and payload-specific mass balance.</p></div></div><div class="step"><div class="stepnum">6</div><div><h3>Complete ground acceptance tests</h3><p>Verify electrical stability, loss-of-link behavior, command limits, and logging before authorized flight operations.</p></div></div><div class="step"><div class="stepnum">7</div><div><h3>Perform controlled flight qualification</h3><p>Use approved test plans and incremental envelope expansion with an experienced team and emergency response arrangements.</p></div></div><div class="step"><div class="stepnum">8</div><div><h3>Archive a reproducibility bundle</h3><p>Preserve exact revisions, environmental context, setup photographs, test logs, configurations, and resulting datasets.</p></div></div></div></div></div></section>
+<section class="section" id="testing"><div class="wrap"><div class="kicker">05 / Experimental methodology</div><h2>Standardized testing approach</h2><p class="sectionintro">Testing should characterize both safe aircraft operation and the fidelity of wireless measurements. Publish methods, machine-readable logs, pass/fail criteria, and raw results so measurements can be reproduced—not merely headline performance claims.</p><div class="cards"><article class="card"><h3>A. Ground and electrical checks</h3><p>Static power measurements, voltage stability, payload-rail behavior, fault isolation, telemetry operation, and EMI/RF baseline with propulsion inactive and active where safely feasible.</p><span class="tag planned">Protocol + logs: planned</span></article><article class="card"><h3>B. Flight and load characterization</h3><p>Flight stability, payload mass and balance, endurance, commanded motion, position/heading tracking error, and operating conditions.</p><span class="tag planned">Protocol + logs: planned</span></article><article class="card"><h3>C. Wireless/RF characterization</h3><p>Signal quality, throughput, packet delivery, interference baseline, antenna orientation, RF hardware configuration, and repeatability across flight trajectories.</p><span class="tag planned">Protocol + logs: planned</span></article><article class="card"><h3>D. Communication-aware mobility</h3><p>Compare commanded and measured position/heading, command latency, antenna pointing, link metrics, and rejection/failsafe behavior.</p><span class="tag planned">Protocol + logs: planned</span></article><article class="card"><h3>E. End-to-end experiments</h3><p>Integrated SDR/networking applications under realistic mobility, documented experiment scripts, and synchronized communications/flight logs.</p><span class="tag planned">Protocol + logs: planned</span></article><article class="card"><h3>F. Data and reproducibility</h3><p>Publish configuration manifests, clock references, vehicle pose, RF measurements, environmental metadata, processing scripts, and limitations.</p><span class="tag planned">Data schema: planned</span></article></div><div class="note"><b>Operational safety:</b> Flight testing requires appropriate regulatory authorization, trained operators, a site-specific risk assessment, validated aircraft limits, and RF-spectrum compliance. No experimental payload software should bypass flight-critical safety checks.</div><div class="panel"><h3>Suggested test-record fields</h3><div class="tablebox"><table><thead><tr><th>Category</th><th>Minimum metadata</th></tr></thead><tbody><tr><td>Traceability</td><td>Run ID, UTC time, operator, platform serial, firmware and hardware revisions</td></tr><tr><td>Aircraft</td><td>Mass, payload configuration, battery state, pose, velocity, heading, control mode</td></tr><tr><td>RF system</td><td>SDR type, sample rate, center frequency, Tx power, antenna, waveform and gain settings</td></tr><tr><td>Environment</td><td>Test location/site descriptor, weather, GNSS/RTK status, RF conditions</td></tr><tr><td>Outcomes</td><td>Pass/fail, anomalies, waveform/packet traces, logs and processing script version</td></tr></tbody></table></div></div></div></section>
+<section class="section" id="datasets"><div class="wrap"><div class="kicker">06 / Experimental data</div><h2>Real-world UAV datasets</h2><p class="sectionintro">The WINGS-4039 effort has collected over 30 GB of experimental data from UAV flights and wireless experiments. Data resources support analysis of UAV mobility, action–state transitions, navigation, and wireless performance. Check the linked repository for which files are actually published.</p><div class="two"><div class="panel"><span class="tag link">Public repository link</span><h3>UAV Action-State Transition and Navigation Dataset</h3><p>Project dataset repository hosted by WINGS Lab. Its actual file inventory and download availability should be checked on GitHub.</p><p><a href="https://github.com/WingsLabWireless/UAV-Action-State-Transition-and-Navigation-Dataset" target="_blank" rel="noopener">Open GitHub dataset repository ↗</a></p></div><div class="panel"><span class="tag planned">Release organization proposed</span><h3>Dataset documentation package</h3><ul><li>README and usage examples</li><li>Recording formats, field units, and timestamp conventions</li><li>Flight/experiment manifests and configuration files</li><li>Data quality notes and known limitations</li><li>Processing and visualization scripts</li><li>License and recommended citation</li></ul></div></div></div></section>
+<section class="section" id="downloads"><div class="wrap"><div class="kicker">07 / Open-source release index</div><div class="bar"><div><h2>Design files and downloads</h2><p class="sectionintro" style="margin-bottom:0">Filter the publication checklist. Planned items are not active downloads; replace them with verified versioned GitHub or archive links upon release.</p></div><input class="search" type="search" id="filter" placeholder="Filter resources…" aria-label="Filter resources"></div><div class="tablebox" style="margin-top:23px"><table id="resources"><thead><tr><th>Release component</th><th>Package contents</th><th>Status</th><th>Link / destination</th></tr></thead><tbody>
+<tr><td>Mechanical design</td><td>CAD, drawings, assembly parts</td><td><span class="tag planned">Planned</span></td><td><code>hardware/mechanical/</code></td></tr>
+<tr><td>Power distribution</td><td>Bus design, schematics, wiring, BOM</td><td><span class="tag planned">Planned</span></td><td><code>hardware/power-distribution/</code></td></tr>
+<tr><td>Carrier board</td><td>PCB source, Gerbers, schematic, BOM</td><td><span class="tag planned">Planned</span></td><td><code>hardware/carrier-board/</code></td></tr>
+<tr><td>SDR payload</td><td>Rack CAD, quick-release interface, power PCB</td><td><span class="tag planned">Planned</span></td><td><code>hardware/payload-rack/</code></td></tr>
+<tr><td>Flight firmware</td><td>Tested versions, configuration, calibration notes</td><td><span class="tag planned">Planned</span></td><td><code>software/flight-control/</code></td></tr>
+<tr><td>Payload SDK</td><td>Messages, client examples, interface controller</td><td><span class="tag planned">Planned</span></td><td><code>software/payload-interface/</code></td></tr>
+<tr><td>Build instructions</td><td>BOM, assembly, wiring, deployment checks</td><td><span class="tag planned">Planned</span></td><td><code>docs/build/</code></td></tr>
+<tr><td>Testing protocols</td><td>Acceptance tests, flight evaluation, RF experiments</td><td><span class="tag planned">Planned</span></td><td><code>docs/testing/</code></td></tr>
+<tr><td>UAV dataset repository</td><td>Action-state transition and navigation dataset project</td><td><span class="tag link">Repository link</span></td><td><a href="https://github.com/WingsLabWireless/UAV-Action-State-Transition-and-Navigation-Dataset" target="_blank" rel="noopener">Open repository ↗</a></td></tr>
+</tbody></table></div><p class="small" id="resultCount" aria-live="polite"></p><div class="two" style="margin-top:23px"><div class="panel"><h3>Recommended repository layout</h3><pre style="font-size:.82rem;line-height:1.55;overflow:auto">WINGS-4039/
+├── hardware/
+│   ├── mechanical/
+│   ├── power-distribution/
+│   ├── carrier-board/
+│   ├── payload-rack/
+│   └── payload-power/
+├── software/
+│   ├── flight-control/
+│   └── payload-interface/
+├── docs/
+│   ├── build/
+│   └── testing/
+├── examples/
+├── datasets/       (links/manifests)
+├── LICENSE
+└── README.md</pre></div><div class="panel"><h3>How to contribute / cite</h3><p>Suggested initial release checklist: add a repository URL, project license, author and contributor information, citation metadata, tagged versions, test platform revisions, and issue templates.</p><p>Use tagged releases for files that have been validated. Identify prototype materials clearly, including board revision and expected compatibility.</p><p><a href="https://github.com/WingsLabWireless" target="_blank" rel="noopener">WINGS Lab on GitHub ↗</a></p></div></div></div></section>
+</main><footer class="foot"><div class="wrap"><strong style="font-size:1.14rem">WINGS-4039 · WINGS Lab</strong><p>Wireless Intelligent Networking and Security Laboratory · Virginia Tech</p><p>An open research platform for reproducible UAV-based wireless communication and networking experiments.</p><div class="footerline"><p>Project content and specifications should be validated against the final released hardware, firmware, and test records. Website template is ready for publication; listed engineering packages remain pending until linked.</p></div></div></footer>
+<script>
+const input=document.getElementById('filter'),rows=[...document.querySelectorAll('#resources tbody tr')],count=document.getElementById('resultCount');function filterResources(){const term=input.value.toLowerCase().trim();let visible=0;for(const row of rows){const matches=row.textContent.toLowerCase().includes(term);row.classList.toggle('hidden',!matches);visible+=Number(matches)}count.textContent=`Showing ${visible} of ${rows.length} resource entries`;}input.addEventListener('input',filterResources);filterResources();
+</script>
+</body></html>
