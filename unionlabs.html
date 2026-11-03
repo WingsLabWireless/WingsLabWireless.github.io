@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="UnionLabs: an open-source initiative for global federation of heterogeneous wireless testbeds." />
+  <title>UnionLabs | WINGS Lab Open Source</title>
+  <style>
+    :root { --ink:#222; --muted:#555; --blue:#1f4f8b; --line:#e5e8ed; --surface:#f5f7fa; --soft:#eef6ff; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; font-family:Arial,Helvetica,sans-serif; line-height:1.55; color:var(--ink); background:#fff; }
+    a { color:var(--blue); }
+    a:hover { text-decoration:underline; }
+    .layout { display:flex; min-height:100vh; }
+    nav { width:280px; flex:0 0 280px; background:#f3f4f6; border-right:1px solid #ddd; padding:1.1rem; position:sticky; top:0; height:100vh; overflow-y:auto; }
+    nav h1 { font-size:1.15rem; margin:0 0 .4rem; }
+    nav .subtitle { font-size:.85rem; color:var(--muted); margin-bottom:1.1rem; }
+    nav ul { list-style:none; padding:0; margin:0; font-size:.9rem; }
+    nav li { margin-bottom:.4rem; }
+    nav li.section-title { font-weight:bold; margin:1rem 0 .35rem; color:#333; }
+    nav a { text-decoration:none; }
+    nav a[aria-current="page"] { font-weight:bold; }
+    main { flex:1; max-width:1060px; padding:2rem 2.5rem 3.5rem; min-width:0; }
+    .eyebrow { font-size:.78rem; letter-spacing:.08em; text-transform:uppercase; font-weight:700; color:var(--blue); }
+    .hero { padding:1.7rem 1.8rem; border:1px solid #d8e5f5; border-radius:12px; background:linear-gradient(125deg,#f2f7fd,#fff 75%); }
+    .hero h1 { font-size:2.35rem; line-height:1.18; letter-spacing:-.025em; margin:.45rem 0 .7rem; }
+    .hero .lead { font-size:1.05rem; color:#394b5c; max-width:760px; margin:.3rem 0 1rem; }
+    .tags { display:flex; flex-wrap:wrap; gap:.35rem; margin:.8rem 0; }
+    .pill { display:inline-block; font-size:.78rem; border:1px solid #e2e6ed; color:#445; background:#fff; padding:.14rem .52rem; border-radius:999px; }
+    .actions { display:flex; flex-wrap:wrap; gap:.6rem; margin-top:1.2rem; }
+    .cta { display:inline-block; padding:.48rem .85rem; color:var(--blue); border:1px solid var(--blue); border-radius:5px; font-size:.87rem; font-weight:bold; text-decoration:none; }
+    .cta:hover { background:var(--blue); color:#fff; text-decoration:none; }
+    .cta.primary { background:var(--blue); color:#fff; }
+    .cta.primary:hover { background:#163c6d; }
+    section { scroll-margin-top:1.2rem; }
+    h2 { font-size:1.35rem; border-bottom:1px solid #eee; margin:2.1rem 0 .85rem; padding-bottom:.3rem; }
+    h3 { font-size:1.05rem; margin:.35rem 0 .4rem; }
+    p { margin:.45rem 0 .85rem; }
+    .grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.85rem; }
+    .card { padding:1rem 1.05rem; border:1px solid var(--line); border-radius:9px; background:#fff; box-shadow:0 1px 2px rgba(0,0,0,.025); }
+    .card p { font-size:.91rem; color:#444; margin-bottom:.2rem; }
+    .card .status { display:inline-block; font-size:.72rem; color:#546173; background:#f2f4f7; padding:.1rem .4rem; border-radius:3px; margin-bottom:.5rem; }
+    ul { margin:.55rem 0 .9rem; padding-left:1.35rem; }
+    li { margin:.3rem 0; }
+    .note { background:var(--soft); border-left:4px solid var(--blue); padding:.8rem 1rem; margin:1rem 0; font-size:.91rem; }
+    .steps { counter-reset:step; list-style:none; padding:0; }
+    .steps li { counter-increment:step; display:flex; gap:.75rem; margin:.85rem 0; }
+    .steps li::before { content:counter(step); flex:0 0 1.6rem; height:1.6rem; display:grid; place-items:center; background:#e9f1fb; color:var(--blue); border-radius:50%; font-weight:bold; font-size:.84rem; }
+    .steps strong { display:block; }
+    code { font-family:Consolas,Monaco,monospace; font-size:.9em; background:#f5f5f5; padding:.1rem .3rem; border-radius:3px; }
+    .muted { color:var(--muted); font-size:.9rem; }
+    footer { margin-top:2.8rem; color:#777; font-size:.8rem; border-top:1px solid #eee; padding-top:1rem; }
+    @media(max-width:900px) { .layout{display:block;} nav{position:static;height:auto;width:100%;border-right:0;border-bottom:1px solid #ddd;} nav ul{display:flex;flex-wrap:wrap;column-gap:1rem;} nav li.section-title{width:100%;} main{padding:1.2rem;} .hero{padding:1.2rem;} .hero h1{font-size:1.9rem;} }
+    @media(max-width:620px) { .grid{grid-template-columns:1fr;} }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <nav aria-label="Page navigation">
+      <h1>WINGS Lab Open Source</h1>
+      <div class="subtitle">Projects, code, datasets, and reusable research artifacts</div>
+      <ul>
+        <li><a href="opensource.html">&larr; All open-source projects</a></li>
+        <li class="section-title">UnionLabs</li>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#capabilities">Platform capabilities</a></li>
+        <li><a href="#opensource">Open-source components</a></li>
+        <li><a href="#apis">APIs &amp; extensibility</a></li>
+        <li><a href="#containers">Containers</a></li>
+        <li><a href="#contributing">Contributing</a></li>
+        <li><a href="#security">Security &amp; governance</a></li>
+        <li><a href="#roadmap">Release roadmap</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <header class="hero" id="overview">
+        <div class="eyebrow">Global wireless research infrastructure · Open-source initiative</div>
+        <h1>UnionLabs</h1>
+        <p class="lead"><strong>Federating wireless testbeds worldwide.</strong> UnionLabs is a global, collaborative effort to connect heterogeneous wireless research facilities through a scalable cloud-edge platform, enabling shared access, reproducible experimentation, and community-driven innovation.</p>
+        <div class="tags">
+          <span class="pill">Global Federation</span>
+          <span class="pill">Large-Scale Experimentation</span>
+          <span class="pill">Cloud–Edge Orchestration</span>
+          <span class="pill">Open APIs</span>
+          <span class="pill">AI-Assisted Automation</span>
+          <span class="pill">Secure Testbed Management</span>
+        </div>
+        <div class="actions">
+          <a class="cta primary" href="#opensource">Explore open-source components</a>
+          <a class="cta" href="#contributing">How to contribute</a>
+          <a class="cta" href="http://unionlabs.s3-website-us-east-1.amazonaws.com/login" target="_blank" rel="noopener noreferrer">UnionLabs Platform</a>
+          <a class="cta" href="https://wingslabwireless.github.io/UnionLabs2026.html" target="_blank" rel="noopener noreferrer">UnionLabs 2026 Workshop</a>
+        </div>
+      </header>
+
+      <section id="capabilities">
+        <h2>Platform capabilities</h2>
+        <p>UnionLabs aims to make geographically distributed testbeds easier to discover, operate, and share while preserving institutional ownership and control of local resources.</p>
+        <div class="grid">
+          <article class="card"><h3>Global testbed federation</h3><p>Connect heterogeneous wireless facilities across institutions and regions through unified resource discovery and access.</p></article>
+          <article class="card"><h3>Large-scale orchestration</h3><p>Coordinate cloud and edge resources, experiment sessions, and distributed deployments.</p></article>
+          <article class="card"><h3>Hardware-aware experimentation</h3><p>Support programmable radios, measurement instruments, computing systems, and other specialized devices using native and sidecar-based interfaces.</p></article>
+          <article class="card"><h3>AI-assisted workflows</h3><p>Build toward intelligent experiment setup, management, and automation using controlled tool interfaces.</p></article>
+        </div>
+      </section>
+
+      <section id="opensource">
+        <h2>What we plan to open-source</h2>
+        <p>UnionLabs will release reusable software and interfaces in stages. The components below describe the proposed publication scope; they should not be interpreted as an announcement that all code is currently public.</p>
+        <div class="grid">
+          <article class="card"><span class="status">Planned release</span><h3>Federation APIs &amp; SDKs</h3><p>Versioned API specifications, client libraries, command-line tools, and integration examples.</p></article>
+          <article class="card"><span class="status">Planned release</span><h3>Testbed &amp; device integrations</h3><p>Registration interfaces, device adapters, native access components, and reusable sidecar mechanisms.</p></article>
+          <article class="card"><span class="status">Planned release</span><h3>Edge &amp; orchestration software</h3><p>Reusable components for deployment, remote sessions, resource management, and monitoring.</p></article>
+          <article class="card"><span class="status">Planned release</span><h3>AI-agent extensions</h3><p>Documented tool interfaces and community-developed capabilities for authorized experiment automation.</p></article>
+          <article class="card"><span class="status">Planned release</span><h3>Example containers &amp; workflows</h3><p>Reproducible research environments, build definitions, manifests, and tested examples.</p></article>
+          <article class="card"><span class="status">Planned release</span><h3>Documentation &amp; deployment templates</h3><p>Architecture guides, developer tutorials, local testing environments, and sanitized infrastructure templates.</p></article>
+        </div>
+        <div class="note"><strong>Open software, protected infrastructure.</strong> Source code and extension interfaces can be public while live federation credentials, private user data, institution-specific configurations, and production access remain protected.</div>
+      </section>
+
+      <section id="apis">
+        <h2>Open APIs &amp; extensibility</h2>
+        <p>External researchers and institutions should be able to integrate new capabilities without modifying UnionLabs' internal services. Our proposed public extension surfaces are:</p>
+        <ul>
+          <li><strong>Federation API:</strong> discover resources, manage authorized access, and control experiment lifecycles.</li>
+          <li><strong>Testbed Provider API:</strong> onboard facilities and publish available capabilities and status.</li>
+          <li><strong>Device Plugin API:</strong> register device types and integrate new hardware with native or sidecar-based access.</li>
+          <li><strong>AI Tool API:</strong> enable permission-aware, auditable automation.</li>
+        </ul>
+        <p class="muted">OpenAPI specifications, SDK documentation, compatibility policies, and examples will be linked here as they are published.</p>
+      </section>
+
+      <section id="containers">
+        <h2>Open-source containers</h2>
+        <p>Containers make experiments portable and reproducible across heterogeneous testbeds. We envision two publication tracks:</p>
+        <div class="grid">
+          <article class="card"><h3>UnionLabs platform images</h3><p>Versioned container images and source/build instructions for approved platform components and edge services.</p></article>
+          <article class="card"><h3>Community experiment images</h3><p>Sample SDR, network measurement, remote instrument control, and AI experimentation environments submitted by contributors.</p></article>
+        </div>
+        <p>Community-submitted containers should undergo automated build validation, dependency and security scanning, compatibility tests, and maintainer review before inclusion in a trusted catalog. Each participating institution retains control over what may run on its own infrastructure.</p>
+      </section>
+
+      <section id="contributing">
+        <h2>Contributing to UnionLabs</h2>
+        <p>We welcome future contributions from researchers, testbed operators, software developers, and industry collaborators worldwide. Proposed contributions include new device adapters, APIs, experiment containers, documentation, and AI tools.</p>
+        <ol class="steps">
+          <li><div><strong>Discuss the improvement</strong>Open an issue or proposal describing the use case, expected behavior, and affected interfaces.</div></li>
+          <li><div><strong>Develop and test</strong>Work in a feature branch or fork and include appropriate tests, examples, and documentation.</div></li>
+          <li><div><strong>Submit a pull request</strong>Follow the repository contribution guidelines and complete automated checks.</div></li>
+          <li><div><strong>Review and integrate</strong>Component maintainers review compatibility, quality, and security before merging.</div></li>
+          <li><div><strong>Release through staging</strong>Approved changes are tested against a staging environment before controlled production deployment.</div></li>
+        </ol>
+        <div class="note"><strong>Repository links forthcoming.</strong> Public repositories, contribution guidelines, and issue trackers will be listed here once released.</div>
+      </section>
+
+      <section id="security">
+        <h2>Security &amp; governance</h2>
+        <p>Advanced cybersecurity mechanisms are integral to secure testbed access, resource management, and experiment orchestration across federated institutions.</p>
+        <ul>
+          <li>Strong authentication, fine-grained authorization, and institution-controlled resource policies.</li>
+          <li>Isolation of experiment workloads and controlled access to physical devices.</li>
+          <li>Automated code and container security checks, with reviewed and versioned releases.</li>
+          <li>Audit trails for resource access, deployments, and automation actions.</li>
+          <li>Private vulnerability reporting and a maintained security response process.</li>
+        </ul>
+        <p class="muted">These are design principles and planned open-source governance practices; individual controls and publication policies will be documented with each release.</p>
+      </section>
+
+      <section id="roadmap">
+        <h2>Open-source release roadmap</h2>
+        <p>We plan a phased release so that interfaces, documentation, and contribution workflows can mature before more sensitive platform components are published.</p>
+        <ol class="steps">
+          <li><div><strong>Phase 1 · Public interfaces and examples</strong>API specifications, SDKs, documentation, and initial example containers.</div></li>
+          <li><div><strong>Phase 2 · Testbed extensions</strong>Device-registration tooling, native and sidecar access components, and testbed-provider integrations.</div></li>
+          <li><div><strong>Phase 3 · Community ecosystem</strong>Plugin and container contribution workflows, AI tools, and expanded edge/orchestration releases.</div></li>
+          <li><div><strong>Phase 4 · Reusable federation deployment</strong>Reference deployment tooling and additional control-plane components after architectural and security review.</div></li>
+        </ol>
+      </section>
+
+      <footer>
+        UnionLabs · WINGS Lab · Virginia Tech<br />
+        <a href="opensource.html">Return to WINGS Lab Open Source</a>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
